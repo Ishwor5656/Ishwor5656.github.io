@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Study File</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the Inter font */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Basic styling for the content area */
+        .study-section {
+            background-color: #ffffff;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            padding: 1.5rem; /* p-6 */
+            margin-bottom: 1.5rem; /* mb-6 */
+        }
+        .reveal-button {
+            background-color: #6366f1; /* indigo-500 */
+            color: #ffffff;
+            padding: 0.75rem 1.5rem; /* py-3 px-6 */
+            border-radius: 0.5rem; /* rounded-lg */
+            font-weight: 600; /* font-semibold */
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        .reveal-button:hover {
+            background-color: #4f46e5; /* indigo-600 */
+        }
+        .hidden-content {
+            display: none;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background-color: #e0e7ff; /* indigo-100 */
+            border-left: 4px solid #6366f1; /* indigo-500 */
+            border-radius: 0.375rem; /* rounded-md */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-4 sm:p-6 lg:p-8">
+    <div class="max-w-4xl mx-auto">
+        <!-- Header Section -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-extrabold text-gray-800 mb-2">My Awesome Study Notes</h1>
+            <p class="text-lg text-gray-600">A quick reference for important concepts.</p>
+        </header>
+
+        <!-- Notes Section -->
+        <section class="study-section">
+            <h2 class="text-2xl font-bold text-gray-700 mb-4">Important Notes</h2>
+            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                <li>Remember to review concepts daily for better retention.</li>
+                <li>Active recall and spaced repetition are key study techniques.</li>
+                <li>Break down complex topics into smaller, manageable chunks.</li>
+                <li>Stay hydrated and take regular breaks to avoid burnout.</li>
+            </ul>
+        </section>
+
+        <!-- Key Terms Section -->
+        <section class="study-section">
+            <h2 class="text-2xl font-bold text-gray-700 mb-4">Key Terms & Definitions</h2>
+
+            <div class="mb-4 p-4 bg-gray-50 rounded-lg shadow-sm">
+                <p class="font-semibold text-lg text-gray-800">Term: <span class="text-indigo-600">Cognitive Load</span></p>
+                <button class="reveal-button mt-2" onclick="toggleDefinition('cognitiveLoadDef')">Reveal Definition</button>
+                <div id="cognitiveLoadDef" class="hidden-content text-gray-700">
+                    <p>The total amount of mental effort being used in the working memory. It's important to manage cognitive load to optimize learning.</p>
+                </div>
+            </div>
+
+            <div class="mb-4 p-4 bg-gray-50 rounded-lg shadow-sm">
+                <p class="font-semibold text-lg text-gray-800">Term: <span class="text-indigo-600">Spaced Repetition</span></p>
+                <button class="reveal-button mt-2" onclick="toggleDefinition('spacedRepetitionDef')">Reveal Definition</button>
+                <div id="spacedRepetitionDef" class="hidden-content text-gray-700">
+                    <p>A learning technique that incorporates increasing intervals of time between subsequent reviews of previously learned material to exploit the psychological spacing effect.</p>
+                </div>
+            </div>
+
+            <div class="p-4 bg-gray-50 rounded-lg shadow-sm">
+                <p class="font-semibold text-lg text-gray-800">Term: <span class="text-indigo-600">Active Recall</span></p>
+                <button class="reveal-button mt-2" onclick="toggleDefinition('activeRecallDef')">Reveal Definition</button>
+                <div id="activeRecallDef" class="hidden-content text-gray-700">
+                    <p>A principle of efficient learning which states that remembering a piece of information is easier if it is retrieved from memory rather than simply re-read.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Section -->
+        <footer class="text-center mt-8 text-gray-500 text-sm">
+            <p>&copy; 2025 My Study Website. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        /**
+         * Toggles the visibility of a definition section.
+         * @param {string} id The ID of the div containing the hidden content.
+         */
+        function toggleDefinition(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                // Toggle the display style to show/hide the content
+                if (element.style.display === 'block') {
+                    element.style.display = 'none';
+                } else {
+                    element.style.display = 'block';
+                }
+            } else {
+                console.error(`Element with ID '${id}' not found.`);
+            }
+        }
+    </script>
+</body>
+</html>
