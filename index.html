@@ -8,10 +8,10 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts: Inter for body, Orbitron for headings -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -23,11 +23,13 @@
             background-color: #111827; /* Gray-900 */
             color: #d1d5db; /* Gray-300 */
             cursor: none; /* Hide the default cursor */
-            /* New: Subtle background grid */
             background-image: 
                 linear-gradient(rgba(55, 65, 81, 0.2) 1px, transparent 1px),
                 linear-gradient(to right, rgba(55, 65, 81, 0.2) 1px, transparent 1px);
             background-size: 40px 40px;
+        }
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
         }
         #particle-canvas {
             position: fixed;
@@ -38,32 +40,33 @@
             z-index: 1; 
             pointer-events: none;
         }
-        /* Cyberpunk Cursor Style */
+        /* Cyberpunk Cursor Style - Optimized for smoothness */
         .custom-cursor {
             position: fixed;
-            width: 25px;
-            height: 25px;
+            width: 30px;
+            height: 30px;
             border: 2px solid #FBBF24; /* Amber-400 */
+            border-radius: 50%;
             pointer-events: none;
-            transform: translate(-50%, -50%) rotate(45deg);
-            transition: all 0.1s ease;
+            transform: translate(-50%, -50%);
+            transition: transform 0.2s ease, background-color 0.2s ease;
             z-index: 9999;
             box-shadow: 0 0 15px #FBBF24, 0 0 25px #FBBF24;
         }
         .custom-cursor::after {
             content: '';
             position: absolute;
-            width: 5px;
-            height: 5px;
+            width: 6px;
+            height: 6px;
             background: #FBBF24;
+            border-radius: 50%;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
         .custom-cursor.hover {
-            transform: translate(-50%, -50%) rotate(45deg) scale(1.5);
+            transform: translate(-50%, -50%) scale(1.5);
             background-color: rgba(251, 191, 36, 0.2);
-            box-shadow: 0 0 20px #FBBF24, 0 0 35px #FBBF24;
         }
         .glassmorphism {
             background: rgba(251, 191, 36, 0.05);
@@ -76,9 +79,6 @@
         }
         .bg-accent {
             background-color: #FBBF24;
-        }
-        .border-accent {
-            border-color: #FBBF24;
         }
         .btn {
             display: inline-block;
@@ -93,17 +93,17 @@
             box-shadow: 0 10px 20px rgba(251, 191, 36, 0.2);
         }
         .btn-primary {
-            background-color: #FBBF24; /* bg-accent */
+            background-color: #FBBF24;
         }
         .btn-primary:hover {
-            background-color: #FCD34D; /* hover:amber-300 */
+            background-color: #FCD34D;
         }
         .btn-secondary {
-            background-color: #374151; /* bg-gray-700 */
+            background-color: #374151;
             color: white;
         }
         .btn-secondary:hover {
-             background-color: #4b5563; /* hover:bg-gray-600 */
+             background-color: #4b5563;
         }
         .tag {
             display: inline-block;
@@ -117,33 +117,18 @@
             border-radius: 9999px;
         }
         
-        /* Animation: Fade-in on scroll */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .fade-in-section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         /* Animation: Typing cursor */
         .typed-cursor {
             opacity: 1;
             animation: blink 0.7s infinite;
         }
         @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0; }
-            100% { opacity: 1; }
+            0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; }
         }
         
         /* Animation: Nav link underline */
-        nav a {
-            position: relative;
-        }
-        nav a::after {
+        nav a:not(.btn) { position: relative; }
+        nav a:not(.btn)::after {
             content: '';
             position: absolute;
             width: 100%;
@@ -155,18 +140,14 @@
             transform-origin: bottom right;
             transition: transform 0.25s ease-out;
         }
-        nav a:hover::after {
+        nav a:not(.btn):hover::after {
             transform: scaleX(1);
             transform-origin: bottom left;
         }
 
-        /* New: Glitch effect on name hover */
-        .glitch {
-            position: relative;
-            display: inline-block;
-        }
-        .glitch:hover::before,
-        .glitch:hover::after {
+        /* Glitch effect on name hover */
+        .glitch { position: relative; display: inline-block; }
+        .glitch:hover::before, .glitch:hover::after {
             content: 'Ishwor';
             position: absolute;
             top: 0;
@@ -187,27 +168,14 @@
             animation: glitch-anim-2 2s linear infinite reverse;
         }
         @keyframes glitch-anim-1 {
-            0% { clip-path: inset(5% 0 90% 0); }
-            10% { clip-path: inset(70% 0 25% 0); }
-            20% { clip-path: inset(20% 0 50% 0); }
-            40% { clip-path: inset(90% 0 5% 0); }
-            60% { clip-path: inset(40% 0 45% 0); }
-            80% { clip-path: inset(80% 0 10% 0); }
-            100% { clip-path: inset(5% 0 90% 0); }
+            0% { clip-path: inset(5% 0 90% 0); } 10% { clip-path: inset(70% 0 25% 0); } 20% { clip-path: inset(20% 0 50% 0); } 40% { clip-path: inset(90% 0 5% 0); } 60% { clip-path: inset(40% 0 45% 0); } 80% { clip-path: inset(80% 0 10% 0); } 100% { clip-path: inset(5% 0 90% 0); }
         }
         @keyframes glitch-anim-2 {
-            0% { clip-path: inset(80% 0 5% 0); }
-            20% { clip-path: inset(5% 0 80% 0); }
-            40% { clip-path: inset(40% 0 30% 0); }
-            60% { clip-path: inset(75% 0 20% 0); }
-            80% { clip-path: inset(20% 0 75% 0); }
-            100% { clip-path: inset(80% 0 5% 0); }
+            0% { clip-path: inset(80% 0 5% 0); } 20% { clip-path: inset(5% 0 80% 0); } 40% { clip-path: inset(40% 0 30% 0); } 60% { clip-path: inset(75% 0 20% 0); } 80% { clip-path: inset(20% 0 75% 0); } 100% { clip-path: inset(80% 0 5% 0); }
         }
 
-        /* New: Animated borders on project cards */
-        .project-card {
-            position: relative;
-        }
+        /* Animated borders on project cards */
+        .project-card { position: relative; }
         .project-card::before, .project-card::after {
             content: '';
             position: absolute;
@@ -215,22 +183,24 @@
             box-shadow: 0 0 10px #FBBF24;
             transition: all 0.3s ease-in-out;
         }
-        .project-card::before {
-            width: 0; height: 2px; top: -2px; left: -2px;
-        }
-        .project-card::after {
-            width: 2px; height: 0; top: -2px; left: -2px;
-        }
+        .project-card::before { width: 0; height: 2px; top: -2px; left: -2px; }
+        .project-card::after { width: 2px; height: 0; top: -2px; left: -2px; }
         .project-card:hover::before { width: calc(100% + 4px); }
         .project-card:hover::after { height: calc(100% + 4px); }
 
-        /* New: Glowing social icons */
-        .social-icon {
-            transition: all 0.3s ease;
-        }
+        /* Glowing social icons */
+        .social-icon { transition: all 0.3s ease; }
         .social-icon:hover {
             color: #FBBF24;
             text-shadow: 0 0 15px #FBBF24;
+        }
+        
+        /* Project Modal Styles */
+        #project-modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        #project-modal-content {
+            transition: transform 0.3s ease;
         }
     </style>
 </head>
@@ -293,18 +263,14 @@
                         <a href="mailto:your-email@example.com" class="social-icon"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
-                <div class="hidden md:block">
-                    <div class="w-full h-96 rounded-lg flex items-center justify-center">
-                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-                          <path fill="#FBBF24" d="M48.4,-67.9C62.4,-58.9,73.4,-44.6,77.8,-28.8C82.2,-13,79.9,4.3,73.5,20.1C67.1,35.9,56.5,50.2,43.1,60.2C29.7,70.2,13.5,75.9,-3.3,78.1C-20.1,80.3,-40.2,79,-55.1,70.5C-70,62,-79.7,46.3,-83.2,29.1C-86.7,11.9,-84,-6.7,-77.3,-23.3C-70.6,-39.9,-59.9,-54.5,-46.5,-64.2C-33.1,-73.9,-16.5,-78.7,0.8,-79.5C18.2,-80.3,36.4,-76.9,48.4,-67.9Z" transform="translate(100 100) scale(1.1)" />
-                        </svg>
-                    </div>
+                <div id="hero-3d-container" class="hidden md:block w-full h-96 cursor-pointer">
+                    <!-- Three.js canvas will be inserted here -->
                 </div>
             </div>
         </section>
 
         <!-- About Section -->
-        <section id="about" class="py-24 fade-in-section">
+        <section id="about" class="py-24">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">About <span class="accent-color">Me</span></h2>
             <div class="grid md:grid-cols-5 gap-12 items-center">
                 <div class="md:col-span-2">
@@ -325,120 +291,110 @@
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" class="py-24 fade-in-section">
+        <section id="projects" class="py-24">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">My <span class="accent-color">Projects</span></h2>
             <p class="text-center text-gray-400 -mt-8 mb-12 max-w-2xl mx-auto">
-                Here are some of the projects I've worked on. Feel free to explore them.
+                Here are some of the projects I've worked on. Click on a card to see more details.
             </p>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Project Card 1 -->
-                <div class="project-card bg-gray-800 rounded-lg p-6 flex flex-col justify-between border-2 border-transparent hover:-translate-y-2 transition-transform duration-300">
+                <div class="project-card bg-gray-800 rounded-lg p-6 flex flex-col justify-between border-2 border-transparent hover:-translate-y-2 transition-transform duration-300 cursor-pointer" 
+                    data-title="E-commerce Platform"
+                    data-image="https://placehold.co/600x400/111827/FBBF24?text=E-commerce"
+                    data-description="This is a full-featured e-commerce platform built from the ground up. It includes user authentication with JWT, a product catalog with search and filtering, a persistent shopping cart, and an admin dashboard for managing products and orders. The frontend is built with React for a fast, responsive user experience, and the backend is a robust Node.js API connected to a MongoDB database."
+                    data-tags="React,Node.js,MongoDB,JWT,Tailwind CSS"
+                    data-github="https://github.com"
+                    data-live="https://example.com">
                     <div>
                         <div class="flex justify-between items-start mb-4">
                             <h3 class="text-xl font-bold text-white">E-commerce Platform</h3>
-                            <a href="#" target="_blank" class="text-gray-400 hover:accent-color text-xl"><i class="fab fa-github"></i></a>
+                            <i class="fas fa-expand-alt text-gray-500"></i>
                         </div>
                         <p class="text-gray-400 text-sm mb-4 h-16">A full-stack e-commerce website with features like product catalog, user authentication, and a shopping cart.</p>
                         <div class="mb-4">
-                            <span class="tag">React</span>
-                            <span class="tag">Node.js</span>
-                            <span class="tag">MongoDB</span>
+                            <span class="tag">React</span><span class="tag">Node.js</span><span class="tag">MongoDB</span>
                         </div>
-                    </div>
-                    <div class="flex justify-between items-center text-sm text-gray-500 mt-auto">
-                        <span><i class="fas fa-star mr-1"></i> 120</span>
-                        <span><i class="fas fa-code-branch mr-1"></i> 45</span>
-                        <a href="#" target="_blank" class="text-amber-400 hover:underline">Live Demo <i class="fas fa-external-link-alt ml-1"></i></a>
                     </div>
                 </div>
 
                 <!-- Project Card 2 -->
-                <div class="project-card bg-gray-800 rounded-lg p-6 flex flex-col justify-between border-2 border-transparent hover:-translate-y-2 transition-transform duration-300">
+                <div class="project-card bg-gray-800 rounded-lg p-6 flex flex-col justify-between border-2 border-transparent hover:-translate-y-2 transition-transform duration-300 cursor-pointer"
+                    data-title="Data Visualizer"
+                    data-image="https://placehold.co/600x400/111827/FBBF24?text=Data+Viz"
+                    data-description="A web application that allows users to upload CSV files and generate a variety of interactive charts and graphs. Built with D3.js, it provides a powerful and intuitive way to visualize data directly in the browser. The application supports bar charts, line graphs, and scatter plots, with options for customization."
+                    data-tags="JavaScript,D3.js,HTML5,CSS3"
+                    data-github="https://github.com"
+                    data-live="https://example.com">
                     <div>
                         <div class="flex justify-between items-start mb-4">
                             <h3 class="text-xl font-bold text-white">Data Visualizer</h3>
-                            <a href="#" target="_blank" class="text-gray-400 hover:accent-color text-xl"><i class="fab fa-github"></i></a>
+                            <i class="fas fa-expand-alt text-gray-500"></i>
                         </div>
                         <p class="text-gray-400 text-sm mb-4 h-16">A web application for creating interactive charts and graphs from CSV data, built with D3.js.</p>
                         <div class="mb-4">
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">D3.js</span>
-                            <span class="tag">HTML5</span>
+                            <span class="tag">JavaScript</span><span class="tag">D3.js</span><span class="tag">HTML5</span>
                         </div>
-                    </div>
-                    <div class="flex justify-between items-center text-sm text-gray-500 mt-auto">
-                        <span><i class="fas fa-star mr-1"></i> 88</span>
-                        <span><i class="fas fa-code-branch mr-1"></i> 19</span>
-                        <a href="#" target="_blank" class="text-amber-400 hover:underline">Live Demo <i class="fas fa-external-link-alt ml-1"></i></a>
                     </div>
                 </div>
 
                 <!-- Project Card 3 -->
-                <div class="project-card bg-gray-800 rounded-lg p-6 flex flex-col justify-between border-2 border-transparent hover:-translate-y-2 transition-transform duration-300">
+                <div class="project-card bg-gray-800 rounded-lg p-6 flex flex-col justify-between border-2 border-transparent hover:-translate-y-2 transition-transform duration-300 cursor-pointer"
+                    data-title="Task Management API"
+                    data-image="https://placehold.co/600x400/111827/FBBF24?text=API"
+                    data-description="A secure and scalable RESTful API for a to-do list application. It features token-based authentication using JWT, password hashing with bcrypt, and comprehensive data validation. The API is built with Python and Flask, connected to a PostgreSQL database, and is fully documented using Swagger/OpenAPI."
+                    data-tags="Python,Flask,PostgreSQL,JWT,REST API"
+                    data-github="https://github.com"
+                    data-live="">
                     <div>
                         <div class="flex justify-between items-start mb-4">
                             <h3 class="text-xl font-bold text-white">Task Management API</h3>
-                            <a href="#" target="_blank" class="text-gray-400 hover:accent-color text-xl"><i class="fab fa-github"></i></a>
+                            <i class="fas fa-expand-alt text-gray-500"></i>
                         </div>
                         <p class="text-gray-400 text-sm mb-4 h-16">A RESTful API for a to-do list application, including JWT authentication and data validation.</p>
                         <div class="mb-4">
-                            <span class="tag">Python</span>
-                            <span class="tag">Flask</span>
-                            <span class="tag">PostgreSQL</span>
+                            <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">PostgreSQL</span>
                         </div>
-                    </div>
-                    <div class="flex justify-between items-center text-sm text-gray-500 mt-auto">
-                        <span><i class="fas fa-star mr-1"></i> 250</span>
-                        <span><i class="fas fa-code-branch mr-1"></i> 76</span>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Skills Section -->
-        <section id="skills" class="py-24 fade-in-section">
+        <section id="skills" class="py-24">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Technical <span class="accent-color">Skills</span></h2>
             <div class="max-w-4xl mx-auto">
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 text-center">
                     <div class="skill-item flex flex-col items-center p-4 glassmorphism rounded-lg transition-transform duration-300 hover:-translate-y-2">
-                        <i class="fab fa-python text-5xl mb-3 accent-color"></i>
-                        <span class="font-semibold">Python</span>
+                        <i class="fab fa-python text-5xl mb-3 accent-color"></i><span class="font-semibold">Python</span>
                     </div>
                     <div class="skill-item flex flex-col items-center p-4 glassmorphism rounded-lg transition-transform duration-300 hover:-translate-y-2">
-                        <i class="fab fa-js-square text-5xl mb-3 accent-color"></i>
-                        <span class="font-semibold">JavaScript</span>
+                        <i class="fab fa-js-square text-5xl mb-3 accent-color"></i><span class="font-semibold">JavaScript</span>
                     </div>
                     <div class="skill-item flex flex-col items-center p-4 glassmorphism rounded-lg transition-transform duration-300 hover:-translate-y-2">
-                        <i class="fab fa-react text-5xl mb-3 accent-color"></i>
-                        <span class="font-semibold">React</span>
+                        <i class="fab fa-react text-5xl mb-3 accent-color"></i><span class="font-semibold">React</span>
                     </div>
                     <div class="skill-item flex flex-col items-center p-4 glassmorphism rounded-lg transition-transform duration-300 hover:-translate-y-2">
-                        <i class="fab fa-node-js text-5xl mb-3 accent-color"></i>
-                        <span class="font-semibold">Node.js</span>
+                        <i class="fab fa-node-js text-5xl mb-3 accent-color"></i><span class="font-semibold">Node.js</span>
                     </div>
                     <div class="skill-item flex flex-col items-center p-4 glassmorphism rounded-lg transition-transform duration-300 hover:-translate-y-2">
-                        <i class="fas fa-database text-5xl mb-3 accent-color"></i>
-                        <span class="font-semibold">SQL & NoSQL</span>
+                        <i class="fas fa-database text-5xl mb-3 accent-color"></i><span class="font-semibold">SQL & NoSQL</span>
                     </div>
                     <div class="skill-item flex flex-col items-center p-4 glassmorphism rounded-lg transition-transform duration-300 hover:-translate-y-2">
-                        <i class="fab fa-git-alt text-5xl mb-3 accent-color"></i>
-                        <span class="font-semibold">Git & GitHub</span>
+                        <i class="fab fa-git-alt text-5xl mb-3 accent-color"></i><span class="font-semibold">Git & GitHub</span>
                     </div>
                     <div class="skill-item flex flex-col items-center p-4 glassmorphism rounded-lg transition-transform duration-300 hover:-translate-y-2">
-                        <i class="fab fa-docker text-5xl mb-3 accent-color"></i>
-                        <span class="font-semibold">Docker</span>
+                        <i class="fab fa-docker text-5xl mb-3 accent-color"></i><span class="font-semibold">Docker</span>
                     </div>
                     <div class="skill-item flex flex-col items-center p-4 glassmorphism rounded-lg transition-transform duration-300 hover:-translate-y-2">
-                        <i class="fab fa-aws text-5xl mb-3 accent-color"></i>
-                        <span class="font-semibold">AWS</span>
+                        <i class="fab fa-aws text-5xl mb-3 accent-color"></i><span class="font-semibold">AWS</span>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-24 fade-in-section">
+        <section id="contact" class="py-24">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Get In <span class="accent-color">Touch</span></h2>
             <div class="max-w-xl mx-auto text-center">
                 <p class="text-gray-400 mb-8">
@@ -456,89 +412,86 @@
     <footer class="bg-gray-800 border-t border-gray-700 mt-16 relative z-10">
         <div class="container mx-auto px-4 py-6 text-center text-gray-500">
             <p>&copy; <span id="year"></span> Ishwor. All Rights Reserved.</p>
-            <p class="text-sm mt-2">Built with <i class="fas fa-heart text-red-500"></i> and Tailwind CSS</p>
+            <p class="text-sm mt-2">Built with <i class="fas fa-heart text-red-500"></i> and a lot of <i class="fas fa-coffee"></i></p>
         </div>
     </footer>
 
+    <!-- Project Modal -->
+    <div id="project-modal" class="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm z-[100] flex items-center justify-center p-4 opacity-0 invisible">
+        <div id="project-modal-content" class="bg-gray-800 border border-amber-400/20 rounded-lg max-w-3xl w-full p-8 relative shadow-2xl shadow-amber-500/10 transform scale-95">
+            <button id="modal-close-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
+            <img id="modal-image" src="" alt="Project Image" class="w-full h-64 object-cover rounded-lg mb-6">
+            <h2 id="modal-title" class="text-3xl font-bold mb-4 accent-color"></h2>
+            <div id="modal-tags" class="mb-6"></div>
+            <p id="modal-description" class="text-gray-300 leading-relaxed mb-6"></p>
+            <div id="modal-links" class="flex space-x-4"></div>
+        </div>
+    </div>
+
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // --- Basic Setup ---
             const header = document.getElementById('header');
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // --- Mobile Menu Toggle ---
+            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            mobileMenuLinks.forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
 
             // --- Header Scroll Effect ---
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('bg-gray-900/80', 'backdrop-blur-sm', 'shadow-lg');
-                } else {
-                    header.classList.remove('bg-gray-900/80', 'backdrop-blur-sm', 'shadow-lg');
-                }
+                header.classList.toggle('bg-gray-900/80', window.scrollY > 50);
+                header.classList.toggle('backdrop-blur-sm', window.scrollY > 50);
             });
-
-            // --- Mobile Menu Toggle ---
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-
-            mobileMenuLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                });
-            });
-
-            // --- Set current year in footer ---
-            document.getElementById('year').textContent = new Date().getFullYear();
 
             // --- Typing Animation ---
             const typedTextSpan = document.getElementById("typed-text");
-            const textArray = ["Passionate Developer", "Problem Solver", "Tech Enthusiast", "CS Student"];
-            const typingDelay = 100;
-            const erasingDelay = 50;
-            const newTextDelay = 2000; // Delay between current and next text
-            let textArrayIndex = 0;
-            let charIndex = 0;
-
-            function type() {
-                if (charIndex < textArray[textArrayIndex].length) {
-                    typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
-                    charIndex++;
-                    setTimeout(type, typingDelay);
-                } else {
-                    setTimeout(erase, newTextDelay);
+            if (typedTextSpan) {
+                const textArray = ["Passionate Developer", "Problem Solver", "Tech Enthusiast", "CS Student"];
+                let textArrayIndex = 0, charIndex = 0;
+                const type = () => {
+                    if (charIndex < textArray[textArrayIndex].length) {
+                        typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex++);
+                        setTimeout(type, 100);
+                    } else {
+                        setTimeout(erase, 2000);
+                    }
                 }
-            }
-
-            function erase() {
-                if (charIndex > 0) {
-                    typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
-                    charIndex--;
-                    setTimeout(erase, erasingDelay);
-                } else {
-                    textArrayIndex++;
-                    if (textArrayIndex >= textArray.length) textArrayIndex = 0;
-                    setTimeout(type, typingDelay + 1100);
+                const erase = () => {
+                    if (charIndex > 0) {
+                        typedTextSpan.textContent = textArray[textArrayIndex].substring(0, --charIndex);
+                        setTimeout(erase, 50);
+                    } else {
+                        textArrayIndex = (textArrayIndex + 1) % textArray.length;
+                        setTimeout(type, 1200);
+                    }
                 }
-            }
-            
-            if(typedTextSpan) {
-                setTimeout(type, newTextDelay + 250);
+                setTimeout(type, 2250);
             }
 
-            // --- Fade-in on Scroll Animation ---
-            const sections = document.querySelectorAll('.fade-in-section');
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
+            // --- GSAP Scroll Animations ---
+            gsap.registerPlugin(ScrollTrigger);
+            document.querySelectorAll('section').forEach(section => {
+                gsap.from(section.children, {
+                    y: 50,
+                    opacity: 0,
+                    stagger: 0.2,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 80%',
+                        toggleActions: 'play none none none'
                     }
                 });
-            }, {
-                threshold: 0.1
-            });
-
-            sections.forEach(section => {
-                observer.observe(section);
             });
 
             // --- Cursor and Particle Animation ---
@@ -551,17 +504,15 @@
 
             class Particle {
                 constructor(x, y) {
-                    this.x = x;
-                    this.y = y;
+                    this.x = x; this.y = y;
                     this.size = Math.random() * 2 + 1;
                     this.speedX = Math.random() * 2.5 - 1.25;
                     this.speedY = Math.random() * 2.5 - 1.25;
-                    this.color = '#FBBF24'; // Goldish color
+                    this.color = '#FBBF24';
                     this.opacity = 1;
                 }
                 update() {
-                    this.x += this.speedX;
-                    this.y += this.speedY;
+                    this.x += this.speedX; this.y += this.speedY;
                     this.opacity -= 0.02;
                     if (this.size > 0.2) this.size -= 0.04;
                 }
@@ -574,18 +525,11 @@
                 }
             }
 
-            function handleParticles(x, y) {
-                for (let i = 0; i < 2; i++) {
-                    particles.push(new Particle(x, y));
-                }
-            }
-
-            function animateParticles() {
+            const animateParticles = () => {
                 pctx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
                 for (let i = 0; i < particles.length; i++) {
                     particles[i].update();
                     particles[i].draw();
-                    
                     if (particles[i].opacity <= 0 || particles[i].size <= 0.2) {
                         particles.splice(i, 1);
                         i--;
@@ -597,24 +541,128 @@
             window.addEventListener('mousemove', (e) => {
                 customCursor.style.left = e.clientX + 'px';
                 customCursor.style.top = e.clientY + 'px';
-                handleParticles(e.clientX, e.clientY);
+                for (let i = 0; i < 2; i++) particles.push(new Particle(e.clientX, e.clientY));
             });
 
-            const interactiveElements = document.querySelectorAll('a, button, .btn, .skill-item, .project-card');
-            interactiveElements.forEach(el => {
+            document.querySelectorAll('a, button, .project-card, .skill-item').forEach(el => {
                 el.addEventListener('mouseenter', () => customCursor.classList.add('hover'));
                 el.addEventListener('mouseleave', () => customCursor.classList.remove('hover'));
             });
-
             window.addEventListener('resize', () => {
                 particleCanvas.width = window.innerWidth;
                 particleCanvas.height = window.innerHeight;
             });
-
             animateParticles();
+
+            // --- Three.js Hero Animation ---
+            const container = document.getElementById('hero-3d-container');
+            if(container) {
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+                renderer.setSize(container.clientWidth, container.clientHeight);
+                container.appendChild(renderer.domElement);
+
+                const geometry = new THREE.IcosahedronGeometry(2, 0);
+                const material = new THREE.MeshStandardMaterial({
+                    color: 0xfbbf24,
+                    wireframe: true,
+                    roughness: 0.5,
+                    metalness: 0.7
+                });
+                const crystal = new THREE.Mesh(geometry, material);
+                scene.add(crystal);
+
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+                scene.add(ambientLight);
+                const pointLight = new THREE.PointLight(0xfbbf24, 1, 100);
+                pointLight.position.set(5, 5, 5);
+                scene.add(pointLight);
+
+                camera.position.z = 5;
+
+                let mouseX = 0, mouseY = 0;
+                let targetRotationX = 0, targetRotationY = 0;
+
+                document.addEventListener('mousemove', (event) => {
+                    mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+                    mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+                    targetRotationX = mouseY * 0.5; 
+                    targetRotationY = mouseX * 0.5;
+                });
+
+                container.addEventListener('click', () => {
+                    gsap.to(crystal.scale, {
+                        duration: 0.2,
+                        x: 1.2, y: 1.2, z: 1.2,
+                        ease: 'power2.out',
+                        onComplete: () => {
+                            gsap.to(crystal.scale, {
+                                duration: 0.5,
+                                x: 1, y: 1, z: 1,
+                                ease: 'elastic.out(1, 0.3)'
+                            });
+                        }
+                    });
+                });
+
+                const animate3D = () => {
+                    requestAnimationFrame(animate3D);
+                    crystal.rotation.x += (targetRotationX - crystal.rotation.x) * 0.05;
+                    crystal.rotation.y += (targetRotationY - crystal.rotation.y) * 0.05;
+                    crystal.rotation.z += 0.001;
+                    renderer.render(scene, camera);
+                };
+                animate3D();
+
+                window.addEventListener('resize', () => {
+                    camera.aspect = container.clientWidth / container.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(container.clientWidth, container.clientHeight);
+                });
+            }
+
+            // --- Project Modal Logic ---
+            const modal = document.getElementById('project-modal');
+            const modalContent = document.getElementById('project-modal-content');
+            const closeBtn = document.getElementById('modal-close-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            projectCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const data = card.dataset;
+                    document.getElementById('modal-image').src = data.image;
+                    document.getElementById('modal-title').textContent = data.title;
+                    document.getElementById('modal-description').textContent = data.description;
+                    
+                    const tagsContainer = document.getElementById('modal-tags');
+                    tagsContainer.innerHTML = data.tags.split(',').map(tag => `<span class="tag">${tag}</span>`).join('');
+                    
+                    const linksContainer = document.getElementById('modal-links');
+                    linksContainer.innerHTML = '';
+                    if (data.github) {
+                        linksContainer.innerHTML += `<a href="${data.github}" target="_blank" class="btn btn-secondary"><i class="fab fa-github mr-2"></i>View Code</a>`;
+                    }
+                    if (data.live) {
+                        linksContainer.innerHTML += `<a href="${data.live}" target="_blank" class="btn btn-primary"><i class="fas fa-external-link-alt mr-2"></i>Live Demo</a>`;
+                    }
+                    
+                    modal.classList.remove('invisible', 'opacity-0');
+                    modalContent.classList.remove('scale-95');
+                });
+            });
+
+            const closeModal = () => {
+                modal.classList.add('invisible', 'opacity-0');
+                modalContent.classList.add('scale-95');
+            };
+
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
         });
     </script>
 
 </body>
 </html>
-
