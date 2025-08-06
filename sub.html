@@ -24,142 +24,90 @@
             backdrop-filter: blur(10px);
             border: 1px solid #334155;
         }
-        .subject-card {
+        .subject-section {
             background-color: #1e293b;
             border: 1px solid #334155;
             transition: all 0.3s ease-in-out;
-            position: relative;
-            overflow: hidden;
         }
-        .subject-card:hover {
-            transform: translateY(-8px) scale(1.02);
+        .subject-section:hover {
             border-color: #f59e0b;
-            box-shadow: 0 15px 30px rgba(245, 158, 11, 0.1);
+            background-color: #334155;
         }
         .btn {
             background-color: #f59e0b;
             color: #1e293b;
             transition: all 0.2s ease-in-out;
             font-family: 'Orbitron', sans-serif;
-            display: inline-block; /* Ensure the <a> tag behaves like a button */
+            display: inline-block;
         }
         .btn:hover {
             background-color: #fbbf24;
             box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
         }
-        .card-glow {
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0) 70%);
-            transition: opacity 0.5s ease;
-            opacity: 0;
-        }
-        .subject-card:hover .card-glow {
-            opacity: 1;
-        }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4">
 
-    <div class="main-container w-full max-w-5xl mx-auto rounded-2xl shadow-2xl p-8 md:p-12">
+    <div class="main-container w-full max-w-3xl mx-auto rounded-2xl shadow-2xl p-8 md:p-12">
 
         <header class="text-center mb-12">
             <h1 class="text-5xl md:text-6xl font-bold text-amber-400">Subjects</h1>
             <p class="text-slate-400 mt-4 text-lg">Choose a subject to start your learning journey.</p>
         </header>
 
-        <main>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                
-                <!-- Physics Card -->
-                <div class="subject-card p-8 rounded-lg text-center flex flex-col items-center justify-between">
-                    <div>
-                        <div class="card-glow"></div>
-                        <i class="fas fa-atom text-5xl text-amber-400 mb-4"></i>
-                        <h2 class="text-2xl font-bold mb-6">Physics</h2>
-                    </div>
-                    <a href="physics.html" class="btn font-bold py-2 px-8 rounded-lg mt-auto">Get In</a>
-                </div>
+        <main class="space-y-4">
+            
+            <!-- Physics Section -->
+            <section class="subject-section p-6 rounded-lg flex justify-between items-center">
+                <h2 class="text-2xl font-bold">Physics</h2>
+                <a href="physics.html" class="btn font-bold py-2 px-8 rounded-lg">Get In</a>
+            </section>
 
-                <!-- Chemistry Card -->
-                <div class="subject-card p-8 rounded-lg text-center flex flex-col items-center justify-between">
-                    <div>
-                        <div class="card-glow"></div>
-                        <i class="fas fa-flask text-5xl text-amber-400 mb-4"></i>
-                        <h2 class="text-2xl font-bold mb-6">Chemistry</h2>
-                    </div>
-                    <a href="https://ishworsilwal.me/chemi.html" class="btn font-bold py-2 px-8 rounded-lg mt-auto">Get In</a>
-                </div>
+            <!-- Chemistry Section -->
+            <section class="subject-section p-6 rounded-lg flex justify-between items-center">
+                <h2 class="text-2xl font-bold">Chemistry</h2>
+                <a href="https://ishworsilwal.me/chemi.html" class="btn font-bold py-2 px-8 rounded-lg">Get In</a>
+            </section>
 
-                <!-- Maths Card -->
-                <div class="subject-card p-8 rounded-lg text-center flex flex-col items-center justify-between">
-                    <div>
-                        <div class="card-glow"></div>
-                        <i class="fas fa-calculator text-5xl text-amber-400 mb-4"></i>
-                        <h2 class="text-2xl font-bold mb-6">Maths</h2>
-                    </div>
-                    <a href="maths.html" class="btn font-bold py-2 px-8 rounded-lg mt-auto">Get In</a>
-                </div>
+            <!-- Maths Section -->
+            <section class="subject-section p-6 rounded-lg flex justify-between items-center">
+                <h2 class="text-2xl font-bold">Maths</h2>
+                <a href="maths.html" class="btn font-bold py-2 px-8 rounded-lg">Get In</a>
+            </section>
 
-                <!-- Biology Card -->
-                <div class="subject-card p-8 rounded-lg text-center flex flex-col items-center justify-between">
-                    <div>
-                        <div class="card-glow"></div>
-                        <i class="fas fa-dna text-5xl text-amber-400 mb-4"></i>
-                        <h2 class="text-2xl font-bold mb-6">Biology</h2>
-                    </div>
-                    <a href="biology.html" class="btn font-bold py-2 px-8 rounded-lg mt-auto">Get In</a>
-                </div>
+            <!-- Biology Section -->
+            <section class="subject-section p-6 rounded-lg flex justify-between items-center">
+                <h2 class="text-2xl font-bold">Biology</h2>
+                <a href="biology.html" class="btn font-bold py-2 px-8 rounded-lg">Get In</a>
+            </section>
 
-                <!-- Computer Card -->
-                <div class="subject-card p-8 rounded-lg text-center flex flex-col items-center justify-between">
-                    <div>
-                        <div class="card-glow"></div>
-                        <i class="fas fa-laptop-code text-5xl text-amber-400 mb-4"></i>
-                        <h2 class="text-2xl font-bold mb-6">Computer</h2>
-                    </div>
-                    <a href="computer.html" class="btn font-bold py-2 px-8 rounded-lg mt-auto">Get In</a>
-                </div>
+            <!-- Computer Section -->
+            <section class="subject-section p-6 rounded-lg flex justify-between items-center">
+                <h2 class="text-2xl font-bold">Computer</h2>
+                <a href="computer.html" class="btn font-bold py-2 px-8 rounded-lg">Get In</a>
+            </section>
 
-                <!-- Social Card -->
-                <div class="subject-card p-8 rounded-lg text-center flex flex-col items-center justify-between">
-                    <div>
-                        <div class="card-glow"></div>
-                        <i class="fas fa-users text-5xl text-amber-400 mb-4"></i>
-                        <h2 class="text-2xl font-bold mb-6">Social</h2>
-                    </div>
-                    <a href="social.html" class="btn font-bold py-2 px-8 rounded-lg mt-auto">Get In</a>
-                </div>
+            <!-- Social Section -->
+            <section class="subject-section p-6 rounded-lg flex justify-between items-center">
+                <h2 class="text-2xl font-bold">Social</h2>
+                <a href="social.html" class="btn font-bold py-2 px-8 rounded-lg">Get In</a>
+            </section>
 
-                <!-- English Card -->
-                <div class="subject-card p-8 rounded-lg text-center flex flex-col items-center justify-between">
-                    <div>
-                        <div class="card-glow"></div>
-                        <i class="fas fa-book-open text-5xl text-amber-400 mb-4"></i>
-                        <h2 class="text-2xl font-bold mb-6">English</h2>
-                    </div>
-                    <a href="english.html" class="btn font-bold py-2 px-8 rounded-lg mt-auto">Get In</a>
-                </div>
+            <!-- English Section -->
+            <section class="subject-section p-6 rounded-lg flex justify-between items-center">
+                <h2 class="text-2xl font-bold">English</h2>
+                <a href="english.html" class="btn font-bold py-2 px-8 rounded-lg">Get In</a>
+            </section>
 
-                <!-- Nepali Card -->
-                <div class="subject-card p-8 rounded-lg text-center flex flex-col items-center justify-between">
-                    <div>
-                        <div class="card-glow"></div>
-                        <i class="fas fa-feather-alt text-5xl text-amber-400 mb-4"></i>
-                        <h2 class="text-2xl font-bold mb-6">Nepali</h2>
-                    </div>
-                    <a href="nepali.html" class="btn font-bold py-2 px-8 rounded-lg mt-auto">Get In</a>
-                </div>
+            <!-- Nepali Section -->
+            <section class="subject-section p-6 rounded-lg flex justify-between items-center">
+                <h2 class="text-2xl font-bold">Nepali</h2>
+                <a href="nepali.html" class="btn font-bold py-2 px-8 rounded-lg">Get In</a>
+            </section>
 
-            </div>
         </main>
 
     </div>
 
-    <!-- Font Awesome for icons -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
 </body>
 </html>
