@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -15,6 +17,11 @@
             color: #e2e8f0;
             background-image: radial-gradient(#334155 1px, transparent 1px);
             background-size: 40px 40px;
+            animation: background-pan 60s linear infinite;
+        }
+        @keyframes background-pan {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
         }
         h1, h2, h3, h4 {
             font-family: 'Orbitron', sans-serif;
@@ -33,18 +40,23 @@
         }
         .option-card:hover {
             transform: translateY(-8px) scale(1.02);
-            border-color: #f59e0b; /* Changed back to amber */
-            box-shadow: 0 15px 30px rgba(245, 158, 11, 0.1); /* Changed back to amber */
+            border-color: #f59e0b;
+            box-shadow: 0 15px 30px rgba(245, 158, 11, 0.1);
         }
         .btn {
-            background-color: #f59e0b; /* Changed back to amber */
+            background-color: #f59e0b;
             color: #1e293b;
             transition: all 0.2s ease-in-out;
             font-family: 'Orbitron', sans-serif;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
         }
         .btn:hover {
-            background-color: #fbbf24; /* Changed back to lighter amber */
-            box-shadow: 0 0 20px rgba(251, 191, 36, 0.4); /* Changed back to amber */
+            background-color: #fbbf24;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+            border-color: #fbbf24;
         }
         .card-glow {
             position: absolute;
@@ -52,7 +64,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0) 70%); /* Changed back to amber */
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0) 70%);
             transition: opacity 0.5s ease;
             opacity: 0;
         }
@@ -71,7 +83,7 @@
         </header>
 
         <main>
-            <div id="options-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div id="options-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <!-- Option cards will be dynamically inserted here -->
             </div>
         </main>
@@ -83,44 +95,37 @@
             const optionsGrid = document.getElementById('options-grid');
             const options = [
                 { name: 'Contents', icon: 'fa-book-open', link: 'study.html' },
-                { name: 'Quiz', icon: 'fa-question-circle', link: 'index.html' },
-                { name: 'Conceptual Qs', icon: 'fa-brain', link: '#' },
-                { name: 'Numericals', icon: 'fa-calculator', link: '#' },
-                { name: 'Model Sets', icon: 'fa-file-alt', link: '#' }
+                { name: 'Quiz', icon: 'fa-question-circle', link: 'quiz.html' },
+                { name: 'Conceptual Qs', icon: 'fa-brain', link: 'conceptual.html' },
+                { name: 'Numericals', icon: 'fa-calculator', link: 'numericals.html' },
+                { name: 'Model Sets', icon: 'fa-file-alt', link: 'model-sets.html' }
             ];
 
-            // Adjust grid for 5 items: make the last one centered on large screens
-            if (options.length === 5) {
-                optionsGrid.classList.remove('lg:grid-cols-3');
-                optionsGrid.classList.add('lg:grid-cols-5');
-            }
-
-
             options.forEach((option, index) => {
-                const card = document.createElement('div');
-                card.className = 'option-card p-8 rounded-lg text-center flex flex-col items-center justify-center';
-                
-                // For 5 items, make the middle one span 2 columns on sm screens, and all items take their space on lg
-                if (options.length === 5) {
-                    card.classList.add('lg:col-span-1');
-                    if (index === 2) {
-                        card.classList.add('sm:col-span-2');
-                    }
+                const cardWrapper = document.createElement('div');
+                cardWrapper.className = 'flex justify-center';
+
+                // Make the middle card (index 2) span the full width on sm screens and up for the 2-1-2 layout
+                if (options.length === 5 && index === 2) {
+                    cardWrapper.classList.add('sm:col-span-2');
                 }
 
+                const card = document.createElement('div');
+                card.className = 'option-card p-8 rounded-lg text-center flex flex-col items-center justify-between h-full w-full max-w-xs sm:max-w-none';
 
                 card.innerHTML = `
-                    <div class="card-glow"></div>
-                    <i class="fas ${option.icon} text-5xl text-amber-400 mb-4"></i>
-                    <h2 class="text-2xl font-bold mb-6">${option.name}</h2>
+                    <div>
+                        <div class="card-glow"></div>
+                        <i class="fas ${option.icon} text-5xl text-amber-400 mb-4"></i>
+                        <h2 class="text-2xl font-bold mb-6">${option.name}</h2>
+                    </div>
                     <a href="${option.link}" class="btn font-bold py-2 px-8 rounded-lg mt-auto">Get In</a>
                 `;
                 
-                optionsGrid.appendChild(card);
+                cardWrapper.appendChild(card);
+                optionsGrid.appendChild(cardWrapper);
             });
         });
     </script>
-    <!-- Font Awesome for icons -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
 </body>
 </html>
