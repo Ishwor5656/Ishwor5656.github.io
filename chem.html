@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemistry Study Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #cbd5e1;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .sidebar {
+            background-color: #1e293b;
+            border-right: 1px solid #334155;
+        }
+        .sidebar a {
+            transition: all 0.2s ease-in-out;
+        }
+        .sidebar a:hover, .sidebar a.active {
+            background-color: #334155;
+            color: #f59e0b;
+            transform: translateX(5px);
+        }
+        .highlight {
+            color: #f59e0b;
+            font-weight: bold;
+        }
+        .formula {
+            background-color: #1a2332;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-family: monospace;
+            color: #93c5fd;
+            border: 1px solid #334155;
+            white-space: pre-wrap;
+        }
+        #loader {
+            border-color: #f59e0b;
+            border-top-color: transparent;
+        }
+        .ai-feature-box {
+            background-color: rgba(15, 23, 42, 0.5);
+            border: 1px dashed #475569;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+        }
+        #chat-bot-container {
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        #chat-messages {
+            height: 300px;
+        }
+    </style>
+</head>
+<body class="flex h-screen">
+
+    <!-- Sidebar -->
+    <aside class="sidebar w-1/4 h-full overflow-y-auto p-6 flex flex-col">
+        <h1 class="text-2xl font-bold text-amber-400 mb-6">Study Guide</h1>
+        <nav id="toc" class="space-y-2 flex-grow">
+            <!-- Topics will be dynamically inserted here -->
+        </nav>
+        <div class="mt-8">
+            <a href="index.html" class="w-full text-center inline-block bg-amber-500 text-slate-900 font-bold py-3 px-4 rounded-lg transition hover:bg-amber-400">Back to Quiz</a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main id="main-content" class="w-3/4 h-full overflow-y-auto p-8 md:p-12">
+        <div id="content-display">
+            <h2 id="chapter-title" class="text-4xl font-bold text-amber-400 mb-6">Select a Chapter</h2>
+            <div id="chapter-summary" class="space-y-6 text-lg leading-relaxed">
+                <!-- Preloaded content will be injected here -->
+            </div>
+            <div id="ai-tools" class="mt-8 hidden">
+                <button id="summarize-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg">✨ AI Summarize Key Points</button>
+                <div id="ai-summary-box" class="ai-feature-box hidden"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- AI Chat Bot -->
+    <div id="chat-bot-container" class="fixed bottom-0 right-0 m-8 opacity-0 transform translate-y-10 pointer-events-none">
+        <div id="chat-widget" class="w-96 bg-gray-800 rounded-lg shadow-2xl border border-slate-700 hidden flex-col">
+            <div class="bg-slate-900 p-4 rounded-t-lg flex justify-between items-center">
+                <h3 class="text-lg font-bold text-amber-400">Study Bot</h3>
+                <button id="close-chat-btn" class="text-slate-400 hover:text-white">&times;</button>
+            </div>
+            <div id="chat-messages" class="p-4 overflow-y-auto"></div>
+            <div class="p-4 border-t border-slate-700">
+                <div class="flex">
+                    <input type="text" id="chat-input" class="w-full bg-slate-700 rounded-l-lg p-2 focus:outline-none" placeholder="Ask about this chapter...">
+                    <button id="send-chat-btn" class="bg-amber-500 text-slate-900 font-bold px-4 rounded-r-lg">Send</button>
+                </div>
+            </div>
+        </div>
+        <button id="open-chat-btn" class="bg-amber-500 text-slate-900 rounded-full w-16 h-16 flex items-center justify-center text-3xl shadow-lg">🤖</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toc = document.getElementById('toc');
+            const chapterTitle = document.getElementById('chapter-title');
+            const chapterSummary = document.getElementById('chapter-summary');
+            const aiTools = document.getElementById('ai-tools');
+            const summarizeBtn = document.getElementById('summarize-btn');
+            const aiSummaryBox = document.getElementById('ai-summary-box');
+
+            const openChatBtn = document.getElementById('open-chat-btn');
+            const closeChatBtn = document.getElementById('close-chat-btn');
+            const chatWidget = document.getElementById('chat-widget');
+            const chatBotContainer = document.getElementById('chat-bot-container');
+            const chatMessages = document.getElementById('chat-messages');
+            const chatInput = document.getElementById('chat-input');
+            const sendChatBtn = document.getElementById('send-chat-btn');
+
+            const API_KEY = 'AIzaSyC572-2603BN6SzCLYud9G9az99hNk-yzc';
+            const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${API_KEY}`;
+
+            const topics = [
+                "Volumetric Analysis", "Ionic Equilibrium", "Chemical Kinetics",
+                "Thermodynamics", "Electrochemistry", "Transition Elements",
+                "Studies of Heavy Metals", "Haloalkanes", "Haloarenes", "Alcohols"
+            ];
+            
+            let currentChapterContext = "";
+
+            const preloadedContent = {
+                "Volumetric Analysis": `<h3 class='text-2xl font-bold text-amber-400'>Introduction to Volumetric Analysis</h3><p>Volumetric analysis is a quantitative analytical method used to determine the concentration of a substance (analyte) by reacting it with a solution of a known concentration (titrant). This process, known as <span class='highlight'>titration</span>, involves the gradual addition of the titrant to the analyte until the reaction is complete, which is typically indicated by a color change from an indicator.</p><h3 class='text-2xl font-bold text-amber-400 mt-4'>Equivalent Mass</h3><p>A key concept in volumetric analysis is <span class='highlight'>equivalent mass</span>. It is the mass of a substance that can combine with or displace 1.008 parts by mass of hydrogen, 8 parts by mass of oxygen, or 35.5 parts by mass of chlorine.</p><ul class='list-disc list-inside space-y-2 mt-2'><li><strong>For an acid:</strong> It's the molecular mass divided by its basicity.</li><li><strong>For a base:</strong> It's the molecular mass divided by its acidity.</li><li><strong>For a salt:</strong> It's the formula mass divided by the total positive or negative charge.</li><li><strong>For an oxidizing/reducing agent:</strong> It's the molecular mass divided by the number of electrons gained or lost.</li></ul><h3 class='text-2xl font-bold text-amber-400 mt-4'>Concentration of Solutions</h3><p>Concentration can be expressed in several units:</p><ul class='list-disc list-inside space-y-2 mt-2'><li><span class='highlight'>Molarity (M):</span> Moles of solute per liter of solution.</li><li><span class='highlight'>Normality (N):</span> Gram equivalents of solute per liter of solution.</li></ul><h3 class='text-2xl font-bold text-amber-400 mt-4'>Titration and Law of Equivalence</h3><p>The point at which the reaction is stoichiometrically complete is the <span class='highlight'>equivalence point</span>. The law of chemical equivalence states that at this point, the number of gram equivalents of the titrant equals the number of gram equivalents of the analyte.</p><p class='formula'>N₁V₁ = N₂V₂</p>`,
+                "Ionic Equilibrium": `<h3 class='text-2xl font-bold text-amber-400'>Electrolytes and Nonelectrolytes</h3><p>Ionic equilibrium deals with the balance between ions and unionized molecules in solution. <span class='highlight'>Electrolytes</span> are substances that produce ions when dissolved in water, conducting electricity. <span class='highlight'>Nonelectrolytes</span> do not produce ions and do not conduct electricity. Electrolytes can be strong (complete ionization) or weak (partial ionization).</p><h3 class='text-2xl font-bold text-amber-400 mt-4'>Acids and Bases</h3><p>Several theories define acids and bases:</p><ul class='list-disc list-inside space-y-2 mt-2'><li><strong>Arrhenius Theory:</strong> Acids produce H⁺ ions in water; bases produce OH⁻ ions.</li><li><strong>Brønsted-Lowry Theory:</strong> Acids are proton (H⁺) donors; bases are proton acceptors. This introduces the concept of <span class='highlight'>conjugate acid-base pairs</span>.</li><li><strong>Lewis Theory:</strong> Acids are electron-pair acceptors; bases are electron-pair donors. This is the most general definition.</li></ul><h3 class='text-2xl font-bold text-amber-400 mt-4'>pH and Ionic Product of Water</h3><p>Water undergoes autoionization: 2H₂O ⇌ H₃O⁺ + OH⁻. The ionic product of water, <span class='highlight'>Kw</span>, is [H₃O⁺][OH⁻] = 1.0 x 10⁻¹⁴ at 25°C. The <span class='highlight'>pH scale</span> is a logarithmic measure of acidity: pH = -log[H₃O⁺].</p><ul class='list-disc list-inside space-y-2 mt-2'><li>pH < 7 is acidic.</li><li>pH > 7 is basic.</li><li>pH = 7 is neutral.</li></ul><h3 class='text-2xl font-bold text-amber-400 mt-4'>Buffer Solutions and Solubility</h3><p><span class='highlight'>Buffer solutions</span> resist changes in pH upon the addition of small amounts of acid or base. They consist of a weak acid and its conjugate base, or a weak base and its conjugate acid. The <span class='highlight'>solubility product (Ksp)</span> describes the equilibrium between a solid ionic solute and its ions in a saturated solution. The <span class='highlight'>common ion effect</span> describes the decrease in solubility of an ionic precipitate when a solution of a soluble compound with an ion in common with the precipitate is added.</p>`,
+                "Chemical Kinetics": `<h3 class='text-2xl font-bold text-amber-400'>Rate of Reaction</h3><p>Chemical kinetics is the study of reaction rates and the factors that affect them. The <span class='highlight'>rate of a reaction</span> is the change in concentration of a reactant or product per unit of time. It can be influenced by concentration, temperature, physical state, and the presence of a catalyst.</p><h3 class='text-2xl font-bold text-amber-400 mt-4'>Rate Law and Order of Reaction</h3><p>The <span class='highlight'>rate law</span> is an equation that relates the reaction rate to the concentrations of reactants. For a reaction aA + bB → products, the rate law is typically Rate = k[A]ˣ[B]ʸ. The exponents x and y are the <span class='highlight'>orders of reaction</span> with respect to A and B, and must be determined experimentally. The overall order is x + y. 'k' is the rate constant.</p><h3 class='text-2xl font-bold text-amber-400 mt-4'>Integrated Rate Laws and Half-Life</h3><p>Integrated rate laws relate concentration to time. Key examples include:</p><ul class='list-disc list-inside space-y-2 mt-2'><li><strong>Zero-Order:</strong> Rate = k. [A] = -kt + [A]₀. Half-life (t₁/₂) = [A]₀ / 2k.</li><li><strong>First-Order:</strong> Rate = k[A]. ln[A] = -kt + ln[A]₀. Half-life (t₁/₂) = 0.693 / k.</li></ul><h3 class='text-2xl font-bold text-amber-400 mt-4'>Collision Theory and Activation Energy</h3><p>The <span class='highlight'>collision theory</span> states that for a reaction to occur, particles must collide with sufficient energy and proper orientation. The minimum energy required for a reaction is the <span class='highlight'>activation energy (Ea)</span>. A <span class='highlight'>catalyst</span> increases the reaction rate by providing an alternative reaction pathway with a lower activation energy.</p>`,
+                "Thermodynamics": `<h3 class='text-2xl font-bold text-amber-400'>First Law of Thermodynamics</h3><p>Thermodynamics is the study of energy transformations. The <span class='highlight'>First Law of Thermodynamics</span> is the law of conservation of energy, stating that energy cannot be created or destroyed. The change in internal energy (ΔE) of a system is the sum of the heat (q) transferred and the work (w) done: <p class='formula'>ΔE = q + w</p></p><h3 class='text-2xl font-bold text-amber-400 mt-4'>Enthalpy</h3><p><span class='highlight'>Enthalpy (H)</span> is a measure of the total heat content of a system. The change in enthalpy (ΔH) is the heat absorbed or released in a reaction at constant pressure. If ΔH is negative, the reaction is <span class='highlight'>exothermic</span> (releases heat). If ΔH is positive, it is <span class='highlight'>endothermic</span> (absorbs heat).</p><h3 class='text-2xl font-bold text-amber-400 mt-4'>Entropy and Second Law of Thermodynamics</h3><p><span class='highlight'>Entropy (S)</span> is a measure of the disorder or randomness of a system. The <span class='highlight'>Second Law of Thermodynamics</span> states that for any spontaneous process, the total entropy of the universe (system + surroundings) increases.</p><h3 class='text-2xl font-bold text-amber-400 mt-4'>Gibbs Free Energy</h3><p><span class='highlight'>Gibbs Free Energy (G)</span> combines enthalpy and entropy to predict the spontaneity of a reaction under constant temperature and pressure. The change in free energy is given by the equation:</p><p class='formula'>ΔG = ΔH - TΔS</p><ul class='list-disc list-inside space-y-2 mt-2'><li>If ΔG < 0, the reaction is <span class='highlight'>spontaneous</span>.</li><li>If ΔG > 0, the reaction is non-spontaneous.</li><li>If ΔG = 0, the system is at equilibrium.</li></ul>`,
+                "Electrochemistry": `<h3 class='text-2xl font-bold text-amber-400'>Electrochemical Cells</h3><p>Electrochemistry studies the relationship between chemical reactions and electrical energy. It involves two main types of cells:</p><ul class='list-disc list-inside space-y-2 mt-2'><li><span class='highlight'>Voltaic (Galvanic) Cells:</span> These use a spontaneous chemical reaction to generate electrical energy. They consist of two half-cells, an anode (oxidation) and a cathode (reduction), connected by a salt bridge.</li><li><span class='highlight'>Electrolytic Cells:</span> These use electrical energy to drive a non-spontaneous chemical reaction.</li></ul><h3 class='text-2xl font-bold text-amber-400 mt-4'>Standard Electrode Potentials</h3><p>The <span class='highlight'>electrode potential</span> is the tendency of an electrode to gain or lose electrons. The <span class='highlight'>Standard Hydrogen Electrode (SHE)</span> is the reference electrode with a potential of 0 V. By comparing other half-cells to the SHE, we can determine their standard reduction potentials. A more positive potential indicates a greater tendency to be reduced.</p><h3 class='text-2xl font-bold text-amber-400 mt-4'>Cell Potential and Free Energy</h3><p>The standard cell potential (E°cell) is the difference between the standard reduction potentials of the cathode and anode:</p><p class='formula'>E°cell = E°cathode - E°anode</p><p>A positive E°cell indicates a spontaneous reaction. The relationship between cell potential and Gibbs free energy is:</p><p class='formula'>ΔG° = -nFE°cell</p><p>Where 'n' is the number of moles of electrons transferred and 'F' is the Faraday constant (96,485 C/mol).</p>`,
+                "Transition Elements": `<h3 class='text-2xl font-bold text-amber-400'>Properties of Transition Metals</h3><p>The <span class='highlight'>transition elements</span> are the elements in the d-block of the periodic table. They exhibit a range of characteristic properties due to their partially filled d-orbitals.</p><ul class='list-disc list-inside space-y-2 mt-2'><li><strong>Variable Oxidation States:</strong> They can lose a variable number of d-electrons, leading to multiple stable oxidation states (e.g., Fe²⁺ and Fe³⁺).</li><li><strong>Formation of Colored Ions:</strong> Many transition metal compounds are colored because the d-orbitals split into different energy levels in the presence of ligands. Electrons can absorb visible light to jump between these levels, and the transmitted light appears colored.</li><li><strong>Catalytic Activity:</strong> They are excellent catalysts due to their ability to change oxidation states and form intermediate complexes.</li><li><strong>Formation of Complex Ions:</strong> They readily form <span class='highlight'>complex ions</span> (or coordination compounds) with ligands (Lewis bases).</li></ul><h3 class='text-2xl font-bold text-amber-400 mt-4'>Complex Ions and Coordination Compounds</h3><p>A complex ion consists of a central metal ion bonded to one or more ligands. The <span class='highlight'>coordination number</span> is the number of donor atoms bonded to the central metal. The geometry of the complex (e.g., tetrahedral, square planar, octahedral) depends on this number.</p>`,
+                "Studies of Heavy Metals": `<h3 class='text-2xl font-bold text-amber-400'>Copper (Cu)</h3><p>Copper is a reddish-brown metal extracted primarily from <span class='highlight'>copper pyrite (CuFeS₂)</span>. Its chemistry is dominated by the +1 (cuprous) and +2 (cupric) oxidation states. A key compound is copper(II) sulfate pentahydrate (<span class='highlight'>CuSO₄·5H₂O</span>), also known as blue vitriol.</p><h3 class='text-2xl font-bold text-amber-400 mt-4'>Zinc (Zn)</h3><p>Zinc is a bluish-white metal extracted from <span class='highlight'>zinc blende (ZnS)</span>. It typically exhibits a +2 oxidation state. Zinc sulfate heptahydrate (<span class='highlight'>ZnSO₄·7H₂O</span>), or white vitriol, is an important compound.</p><h3 class='text-2xl font-bold text-amber-400 mt-4'>Iron (Fe)</h3><p>Iron is the most important heavy metal, extracted from <span class='highlight'>hematite (Fe₂O₃)</span> in a blast furnace. It forms +2 (ferrous) and +3 (ferric) ions. The corrosion of iron, or <span class='highlight'>rusting</span>, is an electrochemical process that requires both oxygen and water.</p><h3 class='text-2xl font-bold text-amber-400 mt-4'>Mercury (Hg)</h3><p>Mercury is the only metal that is liquid at room temperature. It is extracted from <span class='highlight'>cinnabar (HgS)</span>. It forms mercurous (Hg₂²⁺) and mercuric (Hg²⁺) ions. Compounds like calomel (Hg₂Cl₂) and corrosive sublimate (HgCl₂) are notable.</p><h3 class='text-2xl font-bold text-amber-400 mt-4'>Silver (Ag)</h3><p>Silver is a precious metal extracted from its ore using the <span class='highlight'>MacArthur-Forrest cyanide process</span>. It typically has a +1 oxidation state. Silver nitrate (AgNO₃) is a highly useful compound.</p>`,
+                "Haloalkanes": `<h3 class='text-2xl font-bold text-amber-400'>Introduction and Classification</h3><p>Haloalkanes (or alkyl halides) are organic compounds where one or more hydrogen atoms in an alkane have been replaced by a halogen (F, Cl, Br, I). They are classified as <span class='highlight'>primary (1°), secondary (2°), or tertiary (3°)</span> based on the number of carbon atoms attached to the carbon bearing the halogen.</p><h3 class='text-2xl font-bold text-amber-400 mt-4'>Nucleophilic Substitution Reactions</h3><p>The most characteristic reaction of haloalkanes is <span class='highlight'>nucleophilic substitution</span>, where a nucleophile (an electron-rich species) replaces the halogen atom. There are two main mechanisms:</p><ul class='list-disc list-inside space-y-2 mt-2'><li><strong>SN2 (Substitution Nucleophilic Bimolecular):</strong> A one-step process where the nucleophile attacks at the same time the leaving group leaves. It is favored by primary haloalkanes and strong nucleophiles.</li><li><strong>SN1 (Substitution Nucleophilic Unimolecular):</strong> A two-step process involving the formation of a carbocation intermediate. It is favored by tertiary haloalkanes and polar protic solvents.</li></ul><h3 class='text-2xl font-bold text-amber-400 mt-4'>Elimination Reactions</h3><p>Haloalkanes can also undergo <span class='highlight'>elimination reactions</span> in the presence of a strong base (like alcoholic KOH) to form alkenes. This reaction competes with substitution. Higher temperatures and sterically hindered bases favor elimination.</p>`,
+                "Haloarenes": `<h3 class='text-2xl font-bold text-amber-400'>Structure and Reactivity</h3><p>Haloarenes (or aryl halides) are compounds where a halogen is directly attached to a benzene ring. Due to resonance, the carbon-halogen bond has partial double-bond character, making it <span class='highlight'>stronger and less reactive</span> towards nucleophilic substitution than in haloalkanes.</p><h3 class='text-2xl font-bold text-amber-400 mt-4'>Nucleophilic Aromatic Substitution</h3><p>Nucleophilic substitution on haloarenes is difficult and requires <span class='highlight'>harsh conditions</span> (high temperature and pressure). However, the reaction is facilitated if strong electron-withdrawing groups (like -NO₂) are present at the ortho and para positions to the halogen.</p><h3 class='text-2xl font-bold text-amber-400 mt-4'>Electrophilic Substitution Reactions</h3><p>The halogen atom is <span class='highlight'>deactivating</span> (makes the ring less reactive than benzene) but <span class='highlight'>ortho, para-directing</span>. This means that incoming electrophiles will primarily substitute at the positions ortho and para to the halogen. Common reactions include halogenation, nitration, sulfonation, and Friedel-Crafts reactions.</p>`,
+                "Alcohols": `<h3 class='text-2xl font-bold text-amber-400'>Classification and Properties</h3><p>Alcohols are organic compounds containing a hydroxyl (-OH) group. Like haloalkanes, they are classified as <span class='highlight'>primary (1°), secondary (2°), or tertiary (3°)</span>. The -OH group allows alcohols to form <span class='highlight'>hydrogen bonds</span>, which gives them higher boiling points and better water solubility compared to alkanes of similar mass.</p><h3 class='text-2xl font-bold text-amber-400 mt-4'>Key Reactions of Alcohols</h3><p>Alcohols undergo several important reactions:</p><ul class='list-disc list-inside space-y-2 mt-2'><li><strong>Oxidation:</strong> Primary alcohols can be oxidized to aldehydes and then to carboxylic acids. Secondary alcohols are oxidized to ketones. Tertiary alcohols are resistant to oxidation.</li><li><strong>Dehydration:</strong> In the presence of a strong acid catalyst (like H₂SO₄), alcohols can be dehydrated to form alkenes.</li><li><strong>Esterification:</strong> Alcohols react with carboxylic acids in the presence of an acid catalyst to form <span class='highlight'>esters</span>, in a reaction known as Fischer esterification.</li><li><strong>Reaction with Sodium:</strong> The acidic nature of the -OH proton allows alcohols to react with active metals like sodium to produce sodium alkoxides and hydrogen gas.</li></ul><h3 class='text-2xl font-bold text-amber-400 mt-4'>Distinction of Alcohols</h3><p>The <span class='highlight'>Victor Meyer's test</span> is a classic method to distinguish between primary, secondary, and tertiary alcohols based on the different colored products they form after a series of reactions.</p>`
+            };
+            
+
+            function init() {
+                toc.innerHTML = '';
+                topics.forEach((topic, index) => {
+                    const link = document.createElement('a');
+                    link.href = `#chapter-${index + 1}`;
+                    link.className = 'block p-3 rounded-lg';
+                    link.textContent = topic;
+                    link.onclick = (e) => {
+                        e.preventDefault();
+                        loadChapter(topic, link);
+                    };
+                    toc.appendChild(link);
+                });
+                const firstLink = toc.querySelector('a');
+                loadChapter(topics[0], firstLink);
+            }
+
+            function loadChapter(topic, clickedLink) {
+                document.querySelectorAll('#toc a').forEach(link => link.classList.remove('active'));
+                clickedLink.classList.add('active');
+                
+                chapterTitle.textContent = topic;
+                chapterSummary.innerHTML = preloadedContent[topic] || `<p>Content for ${topic} is not available.</p>`;
+                currentChapterContext = chapterSummary.innerText; // Set context for AI chat
+                
+                aiTools.classList.remove('hidden');
+                aiSummaryBox.classList.add('hidden');
+                aiSummaryBox.innerHTML = '';
+            }
+
+            async function generateApiContent(prompt) {
+                const payload = { contents: [{ parts: [{ text: prompt }] }] };
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
+                const result = await response.json();
+                return result.candidates[0].content.parts[0].text;
+            }
+
+            summarizeBtn.addEventListener('click', async () => {
+                aiSummaryBox.classList.remove('hidden');
+                aiSummaryBox.innerHTML = '<p>Generating key points with Gemini...</p>';
+                const prompt = `Summarize the key takeaways from the following chemistry text in a concise bulleted list: \n\n${currentChapterContext}`;
+                try {
+                    const summary = await generateApiContent(prompt);
+                    aiSummaryBox.innerHTML = summary.replace(/\n/g, '<br>');
+                } catch (error) {
+                    aiSummaryBox.textContent = 'Sorry, could not generate a summary at this time.';
+                }
+            });
+
+            // Chat Bot Logic
+            openChatBtn.addEventListener('click', () => {
+                chatWidget.classList.remove('hidden');
+                chatWidget.classList.add('flex');
+                openChatBtn.classList.add('hidden');
+                chatBotContainer.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+                addMessageToChat('bot', `Hello! How can I help you with the "${chapterTitle.textContent}" chapter?`);
+            });
+
+            closeChatBtn.addEventListener('click', () => {
+                chatWidget.classList.add('hidden');
+                chatWidget.classList.remove('flex');
+                openChatBtn.classList.remove('hidden');
+                chatBotContainer.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+                chatMessages.innerHTML = '';
+            });
+
+            sendChatBtn.addEventListener('click', handleChatSubmit);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleChatSubmit();
+            });
+
+            async function handleChatSubmit() {
+                const userMessage = chatInput.value.trim();
+                if (!userMessage) return;
+
+                addMessageToChat('user', userMessage);
+                chatInput.value = '';
+                addMessageToChat('bot', 'Thinking...');
+
+                const prompt = `You are a helpful chemistry tutor. Based on the following chapter context, answer the user's question. Context: "${currentChapterContext}". Question: "${userMessage}"`;
+                try {
+                    const response = await generateApiContent(prompt);
+                    updateLastBotMessage(response);
+                } catch (error) {
+                    updateLastBotMessage('Sorry, I encountered an error. Please try again.');
+                }
+            }
+
+            function addMessageToChat(sender, message) {
+                const messageElement = document.createElement('div');
+                messageElement.className = `mb-4 ${sender === 'user' ? 'text-right' : 'text-left'}`;
+                messageElement.innerHTML = `<div class="inline-block p-2 rounded-lg ${sender === 'user' ? 'bg-amber-500 text-slate-900' : 'bg-slate-700'}">${message.replace(/\n/g, '<br>')}</div>`;
+                chatMessages.appendChild(messageElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            function updateLastBotMessage(message) {
+                const lastMessage = chatMessages.lastChild.querySelector('div');
+                if (lastMessage) {
+                    lastMessage.innerHTML = message.replace(/\n/g, '<br>');
+                }
+            }
+
+            init();
+        });
+    </script>
+</body>
+</html>
