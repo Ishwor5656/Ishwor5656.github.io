@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -15,6 +17,11 @@
             color: #e2e8f0;
             background-image: radial-gradient(#334155 1px, transparent 1px);
             background-size: 40px 40px;
+            animation: background-pan 60s linear infinite;
+        }
+        @keyframes background-pan {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
         }
         h1, h2, h3, h4 {
             font-family: 'Orbitron', sans-serif;
@@ -28,10 +35,13 @@
             background-color: #1e293b;
             border: 1px solid #334155;
             transition: all 0.3s ease-in-out;
+            position: relative;
+            background-image: linear-gradient(to right, #1e293b, #1e293b);
         }
         .subject-section:hover {
             border-color: #f59e0b;
-            background-color: #334155;
+            transform: scale(1.02);
+            background-image: linear-gradient(to right, #334155, #1e293b);
         }
         .btn {
             background-color: #f59e0b;
@@ -39,10 +49,14 @@
             transition: all 0.2s ease-in-out;
             font-family: 'Orbitron', sans-serif;
             display: inline-block;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
         }
         .btn:hover {
             background-color: #fbbf24;
             box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+            border-color: #fbbf24;
         }
     </style>
 </head>
@@ -59,49 +73,73 @@
             
             <!-- Physics Section -->
             <section class="subject-section p-6 rounded-lg flex justify-between items-center">
-                <h2 class="text-2xl font-bold">Physics</h2>
+                <div class="flex items-center">
+                    <i class="fas fa-atom text-2xl text-amber-400 mr-4"></i>
+                    <h2 class="text-2xl font-bold">Physics</h2>
+                </div>
                 <a href="physics.html" class="btn font-bold py-2 px-8 rounded-lg">Get In</a>
             </section>
 
             <!-- Chemistry Section -->
             <section class="subject-section p-6 rounded-lg flex justify-between items-center">
-                <h2 class="text-2xl font-bold">Chemistry</h2>
+                <div class="flex items-center">
+                    <i class="fas fa-flask text-2xl text-amber-400 mr-4"></i>
+                    <h2 class="text-2xl font-bold">Chemistry</h2>
+                </div>
                 <a href="https://ishworsilwal.me/chemi.html" class="btn font-bold py-2 px-8 rounded-lg">Get In</a>
             </section>
 
             <!-- Maths Section -->
             <section class="subject-section p-6 rounded-lg flex justify-between items-center">
-                <h2 class="text-2xl font-bold">Maths</h2>
+                <div class="flex items-center">
+                    <i class="fas fa-calculator text-2xl text-amber-400 mr-4"></i>
+                    <h2 class="text-2xl font-bold">Maths</h2>
+                </div>
                 <a href="maths.html" class="btn font-bold py-2 px-8 rounded-lg">Get In</a>
             </section>
 
             <!-- Biology Section -->
             <section class="subject-section p-6 rounded-lg flex justify-between items-center">
-                <h2 class="text-2xl font-bold">Biology</h2>
+                <div class="flex items-center">
+                    <i class="fas fa-dna text-2xl text-amber-400 mr-4"></i>
+                    <h2 class="text-2xl font-bold">Biology</h2>
+                </div>
                 <a href="biology.html" class="btn font-bold py-2 px-8 rounded-lg">Get In</a>
             </section>
 
             <!-- Computer Section -->
             <section class="subject-section p-6 rounded-lg flex justify-between items-center">
-                <h2 class="text-2xl font-bold">Computer</h2>
+                <div class="flex items-center">
+                    <i class="fas fa-laptop-code text-2xl text-amber-400 mr-4"></i>
+                    <h2 class="text-2xl font-bold">Computer</h2>
+                </div>
                 <a href="computer.html" class="btn font-bold py-2 px-8 rounded-lg">Get In</a>
             </section>
 
             <!-- Social Section -->
             <section class="subject-section p-6 rounded-lg flex justify-between items-center">
-                <h2 class="text-2xl font-bold">Social</h2>
+                <div class="flex items-center">
+                    <i class="fas fa-users text-2xl text-amber-400 mr-4"></i>
+                    <h2 class="text-2xl font-bold">Social</h2>
+                </div>
                 <a href="social.html" class="btn font-bold py-2 px-8 rounded-lg">Get In</a>
             </section>
 
             <!-- English Section -->
             <section class="subject-section p-6 rounded-lg flex justify-between items-center">
-                <h2 class="text-2xl font-bold">English</h2>
+                <div class="flex items-center">
+                    <i class="fas fa-book-open text-2xl text-amber-400 mr-4"></i>
+                    <h2 class="text-2xl font-bold">English</h2>
+                </div>
                 <a href="english.html" class="btn font-bold py-2 px-8 rounded-lg">Get In</a>
             </section>
 
             <!-- Nepali Section -->
             <section class="subject-section p-6 rounded-lg flex justify-between items-center">
-                <h2 class="text-2xl font-bold">Nepali</h2>
+                <div class="flex items-center">
+                    <i class="fas fa-feather-alt text-2xl text-amber-400 mr-4"></i>
+                    <h2 class="text-2xl font-bold">Nepali</h2>
+                </div>
                 <a href="nepali.html" class="btn font-bold py-2 px-8 rounded-lg">Get In</a>
             </section>
 
