@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamics - Physics Universe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827;
+            color: #f3f4f6;
+        }
+        .concept-card {
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .concept-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            border: 2px solid transparent;
+        }
+        .tab-button.active {
+            background-color: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+        .tab-button:not(.active) {
+            background-color: #374151;
+            color: #d1d5db;
+        }
+        .tab-button:not(.active):hover {
+            background-color: #4b5563;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .answer-toggle {
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .mcq-option {
+            border: 2px solid #4b5563;
+            transition: all 0.2s ease-in-out;
+        }
+        .mcq-option:hover {
+            border-color: #3b82f6;
+            background-color: #1f2937;
+        }
+        .mcq-option.selected {
+            border-color: #3b82f6;
+        }
+        .mcq-option.correct {
+            background-color: #166534; /* Green-700 */
+            border-color: #22c55e; /* Green-500 */
+        }
+        .mcq-option.incorrect {
+            background-color: #991b1b; /* Red-700 */
+            border-color: #ef4444; /* Red-500 */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-gray-900/80 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="text-2xl font-bold text-white">
+                <a href="#" class="text-blue-400 hover:text-blue-500 transition">Physics</a> Universe
+            </div>
+            <a href="#" class="text-gray-300 hover:text-blue-400 transition">&larr; Back to Classical Mechanics</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Page Header -->
+        <section class="bg-gray-900 py-20 sm:py-24">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4">Dynamics</h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">The study of why objects move the way they do, focusing on the forces that cause changes in motion.</p>
+            </div>
+        </section>
+
+        <!-- Core Concepts Section -->
+        <section class="py-20">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">The Causes of Motion</h2>
+                    <p class="text-gray-400 mt-2">While kinematics describes motion, dynamics explains it.</p>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div class="concept-card lg:col-span-2">
+                        <h3 class="text-2xl font-bold text-blue-400 mb-4">The Heart of Dynamics: F_net = ma</h3>
+                        <p class="text-gray-300">Dynamics is built upon Newton's Second Law. It states that the acceleration (a) of an object is directly proportional to the net force (F_net) acting on it and inversely proportional to its mass (m). This simple equation is the bridge between the cause (force) and the effect (acceleration). If the net force on an object is zero, it will not accelerate, which is the essence of Newton's First Law.</p>
+                    </div>
+                    <div class="concept-card">
+                        <h3 class="text-2xl font-bold text-green-400 mb-4">Common Forces</h3>
+                        <ul class="space-y-3 text-gray-300">
+                            <li><strong class="text-white">Gravity (Weight):</strong> The force of attraction between two objects with mass. On Earth, your weight is the force of gravity pulling you down (W = mg).</li>
+                            <li><strong class="text-white">Normal Force:</strong> The support force exerted by a surface on an object in contact with it. It's always perpendicular to the surface.</li>
+                            <li><strong class="text-white">Friction:</strong> A force that opposes motion between surfaces in contact. It can be static (when at rest) or kinetic (when moving).</li>
+                            <li><strong class="text-white">Tension:</strong> The pulling force transmitted through a string, rope, cable, or wire.</li>
+                        </ul>
+                    </div>
+                    <div class="concept-card">
+                        <h3 class="text-2xl font-bold text-purple-400 mb-4">Free-Body Diagrams</h3>
+                        <p class="text-gray-300">The single most important tool in solving dynamics problems. A free-body diagram is a simplified drawing of an object showing all the forces acting *on* it. By isolating the object and representing forces as arrows, we can easily apply F_net = ma in different directions (e.g., x and y axes) to analyze its motion.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Practice Section -->
+        <section class="bg-gray-900 py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Test Your Knowledge</h2>
+                    <p class="text-gray-400 mt-2">Analyze forces and solve for motion.</p>
+                </div>
+
+                <!-- Tabs -->
+                <div class="flex justify-center space-x-2 md:space-x-4 mb-8" id="tab-buttons">
+                    <button class="tab-button active" data-tab="conceptual">Conceptual Questions</button>
+                    <button class="tab-button" data-tab="numericals">Numerical Problems</button>
+                    <button class="tab-button" data-tab="mcqs">MCQs</button>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="max-w-4xl mx-auto">
+                    <!-- Conceptual Questions -->
+                    <div id="conceptual" class="tab-content active space-y-6">
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">1. A heavy truck and a small car have a head-on collision. Which vehicle experiences the greater force of impact? Which experiences the greater acceleration?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: According to Newton's Third Law, the forces are equal in magnitude and opposite in direction. However, due to F=ma, the car (with its much smaller mass) will experience a much greater acceleration (change in velocity).</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">2. If you are standing in an elevator that is accelerating upwards, do you feel heavier or lighter? Why?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: You feel heavier. The floor must not only support your weight (mg) but also provide an additional upward force to accelerate you upwards. This larger normal force is what you perceive as your apparent weight.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">3. Why is it harder to start pushing a heavy box from rest than it is to keep it sliding?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: The coefficient of static friction (for objects at rest) is typically greater than the coefficient of kinetic friction (for moving objects). Therefore, a larger force is required to overcome static friction and get the box moving.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">4. A book rests on a table. The table exerts an upward normal force on the book. What is the "reaction" force to this normal force according to Newton's Third Law?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: The reaction force is the book exerting an equal and opposite downward force on the table. Action-reaction pairs always act on different objects.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">5. Can the normal force on an object ever be greater than its weight?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: Yes. For example, if you push down on a book resting on a table, the table must exert a normal force equal to the book's weight PLUS your downward push. Also, in an upward-accelerating elevator, the normal force is greater than weight.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">6. If an object is moving at a constant velocity, what can you say about the net force acting on it?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: The net force is zero. Constant velocity means zero acceleration. According to F_net = ma, if 'a' is zero, then 'F_net' must also be zero. The forces acting on it are balanced.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">7. Imagine you are pulling a sled across snow. If you pull the rope at an upward angle, how does this affect the friction force between the sled and the snow?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: It reduces the friction force. The upward component of your pulling force supports some of the sled's weight, which reduces the downward force on the snow. This, in turn, reduces the normal force, and since friction depends on the normal force, friction is also reduced.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">8. Can an object be in motion and have no forces acting on it?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: In a perfect scenario, yes. According to Newton's First Law, an object in motion stays in motion with constant velocity if the net force is zero. An asteroid moving through deep space far from any gravitational sources is a good example.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">9. You tie a rock to a string and swing it in a vertical circle. At which point in the circle is the tension in the string the greatest?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: At the bottom of the circle. At this point, the tension must not only counteract the rock's weight (gravity) but also provide the necessary upward centripetal force to keep it moving in a circle. The forces add together.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">10. Does the mass of an object affect how fast it falls in a vacuum?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: No. The force of gravity (weight) is greater on a more massive object, but its inertia (resistance to acceleration) is also greater. These two effects cancel out perfectly (a = F/m = mg/m = g), so all objects fall with the same acceleration 'g' in a vacuum.</p>
+                        </div>
+                    </div>
+
+                    <!-- Numerical Problems -->
+                    <div id="numericals" class="tab-content space-y-6">
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">1. A net force of 50 N is applied to a 10 kg box. What is the acceleration of the box?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 5 m/s². Use F_net = ma. a = F_net / m = 50 N / 10 kg.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">2. A 70 kg person stands on a scale in an elevator accelerating downwards at 1.5 m/s². What does the scale read? (Use g = 9.8 m/s²)</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 581 N. The net force is F_net = W - N = ma. So the normal force (scale reading) is N = W - ma = mg - ma = m(g - a) = 70 kg * (9.8 - 1.5) m/s².</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">3. A 20 kg crate is pushed with a horizontal force of 100 N. If the coefficient of kinetic friction is 0.2, what is the acceleration of the crate? (Use g = 10 m/s²)</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 3 m/s². First, find the friction force: f = μN = μ(mg) = 0.2 * (20 kg * 10 m/s²) = 40 N. Then, F_net = F_push - f = 100 N - 40 N = 60 N. Finally, a = F_net / m = 60 N / 20 kg.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">4. A car's engine provides a forward thrust of 5000 N. The car has a mass of 1200 kg and experiences a drag force of 800 N. What is the car's acceleration?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 3.5 m/s². The net force is F_net = F_thrust - F_drag = 5000 N - 800 N = 4200 N. Then, a = F_net / m = 4200 N / 1200 kg.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">5. What is the weight of an 80 kg astronaut on Mars, where the gravitational acceleration is 3.7 m/s²?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 296 N. Weight is the force of gravity, W = mg = 80 kg * 3.7 m/s².</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">6. A force of 10 N is required to pull a 5 kg block at a constant velocity over a horizontal surface. What is the coefficient of kinetic friction?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 0.204. Constant velocity means F_net = 0. So, F_pull = f = 10 N. We also know f = μN = μ(mg). Therefore, μ = f / (mg) = 10 N / (5 kg * 9.8 m/s²).</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">7. Two masses, 5 kg and 3 kg, are connected by a string over a frictionless pulley (Atwood machine). What is the acceleration of the system?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 2.45 m/s². The net force is the difference in weights: F_net = (5kg*g) - (3kg*g). The total mass being accelerated is M_total = 5kg + 3kg. So, a = F_net / M_total = (2kg * 9.8m/s²) / 8kg.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">8. A 1500 kg car accelerates from 10 m/s to 30 m/s in 5 seconds. What is the net force on the car?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 6000 N. First find acceleration: a = (v - v₀) / t = (30 - 10) / 5 = 4 m/s². Then use F_net = ma = 1500 kg * 4 m/s².</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">9. A 2 kg book is pushed against a vertical wall with a horizontal force of 40 N. If the coefficient of static friction is 0.6, will the book slide down?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: No. The normal force is equal to the push, N = 40 N. The maximum static friction is f_max = μN = 0.6 * 40 N = 24 N. The book's weight is W = mg = 2 kg * 9.8 m/s² = 19.6 N. Since the max friction (24 N) is greater than the weight (19.6 N), the book will not slide.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">10. What is the tension in the string for the Atwood machine in question 7?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 36.75 N. Look at the 3 kg mass: F_net = T - m₂g = m₂a. So, T = m₂(g + a) = 3 kg * (9.8 + 2.45) m/s². (You get the same answer analyzing the 5 kg mass).</p>
+                        </div>
+                    </div>
+
+                    <!-- MCQs -->
+                    <div id="mcqs" class="tab-content space-y-8">
+                        <!-- Questions will be populated here -->
+                        <div id="mcq-summary" class="text-center mt-10 hidden">
+                             <button id="check-score-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition-transform transform hover:scale-105">Check My Score</button>
+                             <div id="score-display" class="mt-6 text-2xl font-bold"></div>
+                             <p id="score-feedback" class="text-gray-400 mt-2"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips Section -->
+        <section class="py-20">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="text-3xl font-bold text-white mb-6 text-center">Key Tips for Dynamics</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg text-blue-400 mb-2">1. Draw the Free-Body Diagram!</h3>
+                        <p class="text-gray-400">This is not optional. Always start by drawing the object and all the forces acting on it as arrows pointing away from the center. This visual tool is essential for correctly identifying and summing forces.</p>
+                    </div>
+                     <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg text-blue-400 mb-2">2. Net Force is the Goal</h3>
+                        <p class="text-gray-400">Your first step in any calculation is to find the net force along the direction of motion. Sum up all the forces, making sure to get the signs right based on your chosen coordinate system. Remember: F_net = ma, not just any single force.</p>
+                    </div>
+                     <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg text-blue-400 mb-2">3. Choose Axes Wisely</h3>
+                        <p class="text-gray-400">For problems on an incline, it's almost always easiest to tilt your x-y coordinate system so that the x-axis is parallel to the slope and the y-axis is perpendicular to it. This simplifies the forces and acceleration.</p>
+                    </div>
+                     <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg text-blue-400 mb-2">4. Action-Reaction Pairs Act on Different Bodies</h3>
+                        <p class="text-gray-400">Never put an action-reaction pair on the same free-body diagram. The force of a box on a table and the force of the table on the box act on two different objects (the table and the box, respectively).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-400">
+            <p>&copy; 2024 Physics Universe. All rights reserved.</p>
+        </div>
+    </footer>
+
+<script>
+    // --- Tab Functionality ---
+    const tabButtons = document.getElementById('tab-buttons');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.addEventListener('click', (e) => {
+        if (e.target.classList.contains('tab-button')) {
+            const tabId = e.target.getAttribute('data-tab');
+            tabButtons.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            e.target.classList.add('active');
+            tabContents.forEach(content => {
+                content.id === tabId ? content.classList.add('active') : content.classList.remove('active');
+            });
+        }
+    });
+
+    // --- Answer Toggle for Conceptual and Numerical Problems ---
+    document.querySelectorAll('.answer-toggle').forEach(button => {
+        button.addEventListener('click', () => {
+            const answer = button.nextElementSibling;
+            const isHidden = answer.classList.contains('hidden');
+            if (isHidden) {
+                answer.classList.remove('hidden');
+                button.textContent = 'Hide Answer';
+            } else {
+                answer.classList.add('hidden');
+                button.textContent = 'Show Answer';
+            }
+        });
+    });
+
+    // --- MCQ Data and Functionality ---
+    const mcqData = [
+        { q: "1. The measure of an object's inertia is its:", a: 1, o: ["Weight", "Mass", "Force"] },
+        { q: "2. An object is moving at a constant velocity. The net force on the object is:", a: 0, o: ["Zero", "Pointing forward", "Equal to its weight"] },
+        { q: "3. If you double the net force on an object while keeping its mass constant, its acceleration will:", a: 1, o: ["Be halved", "Double", "Remain the same"] },
+        { q: "4. The force that is always perpendicular to a surface is the:", a: 2, o: ["Friction force", "Weight", "Normal force"] },
+        { q: "5. A 10 kg object has a weight of approximately:", a: 1, o: ["10 N", "98 N", "1 N"] },
+        { q: "6. Static friction is usually ______ kinetic friction.", a: 0, o: ["Greater than", "Less than", "Equal to"] },
+        { q: "7. According to Newton's Third Law, if you push on a wall, the wall...", a: 2, o: ["Doesn't push back", "Pushes back with less force", "Pushes back with an equal force"] },
+        { q: "8. In an elevator accelerating downwards, your apparent weight is:", a: 1, o: ["Greater than your true weight", "Less than your true weight", "Equal to your true weight"] },
+        { q: "9. The unit of force, the Newton (N), is equivalent to:", a: 0, o: ["kg⋅m/s²", "kg⋅m/s", "kg⋅m²"] },
+        { q: "10. A free-body diagram shows all the forces acting ____ an object.", a: 0, o: ["on", "by", "near"] },
+        { q: "11. To find the net force, you must perform a ______ sum of all forces.", a: 2, o: ["Scalar", "Algebraic", "Vector"] },
+        { q: "12. A car is parked on a hill. The force preventing it from sliding down is:", a: 1, o: ["Kinetic friction", "Static friction", "Normal force"] },
+        { q: "13. If an object has a net force of 20 N and an acceleration of 4 m/s², its mass is:", a: 1, o: ["80 kg", "5 kg", "0.2 kg"] },
+        { q: "14. Tension is a ______ force.", a: 0, o: ["Pulling", "Pushing", "Contact"] },
+        { q: "15. An object in equilibrium has:", a: 2, o: ["Constant acceleration", "Non-zero net force", "Zero acceleration"] },
+        { q: "16. The force of friction always ______ motion.", a: 1, o: ["Aids", "Opposes", "Is perpendicular to"] },
+        { q: "17. The 'action' and 'reaction' forces described by Newton's Third Law act on:", a: 1, o: ["The same object", "Different objects", "The center of mass"] },
+        { q: "18. If a box is being pushed across the floor at a constant velocity, the pushing force is equal to:", a: 2, o: ["The weight of the box", "The net force", "The force of kinetic friction"] },
+        { q: "19. The normal force is not always equal to an object's weight. This is true when:", a: 2, o: ["The object is on an incline", "There are other vertical forces", "All of the above"] },
+        { q: "20. A 2 kg object is in free fall. The net force on it is:", a: 1, o: ["0 N", "19.6 N", "2 N"] },
+    ];
+
+    const mcqContainer = document.getElementById('mcqs');
+    const mcqSummary = document.getElementById('mcq-summary');
+    let score = 0;
+
+    mcqData.forEach((mcq, index) => {
+        const questionBlock = document.createElement('div');
+        questionBlock.className = 'bg-gray-800 p-6 rounded-lg';
+        
+        const questionText = document.createElement('p');
+        questionText.className = 'font-semibold text-gray-200 mb-4';
+        questionText.textContent = mcq.q;
+        questionBlock.appendChild(questionText);
+
+        const optionsContainer = document.createElement('div');
+        optionsContainer.className = 'space-y-3';
+        optionsContainer.dataset.answer = mcq.a;
+        
+        mcq.o.forEach((option, optionIndex) => {
+            const optionDiv = document.createElement('div');
+            optionDiv.className = 'mcq-option p-3 rounded-md cursor-pointer';
+            optionDiv.textContent = option;
+            optionDiv.dataset.index = optionIndex;
+            optionsContainer.appendChild(optionDiv);
+        });
+
+        questionBlock.appendChild(optionsContainer);
+        mcqContainer.insertBefore(questionBlock, mcqSummary);
+    });
+    
+    mcqSummary.classList.remove('hidden');
+
+    mcqContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('mcq-option')) {
+            const optionsDiv = e.target.parentElement;
+            if (optionsDiv.classList.contains('answered')) return;
+            
+            optionsDiv.classList.add('answered');
+            const selectedIndex = parseInt(e.target.dataset.index);
+            const correctIndex = parseInt(optionsDiv.dataset.answer);
+
+            if (selectedIndex === correctIndex) {
+                score++;
+            }
+
+            const allOptions = optionsDiv.querySelectorAll('.mcq-option');
+            allOptions.forEach((opt, idx) => {
+                if (idx === correctIndex) {
+                    opt.classList.add('correct');
+                } else if (idx === selectedIndex) {
+                    opt.classList.add('incorrect');
+                }
+            });
+        }
+    });
+
+    document.getElementById('check-score-btn').addEventListener('click', () => {
+        const scoreDisplay = document.getElementById('score-display');
+        const scoreFeedback = document.getElementById('score-feedback');
+        const totalQuestions = mcqData.length;
+        
+        scoreDisplay.textContent = `You scored ${score} out of ${totalQuestions}!`;
+        
+        const percentage = (score / totalQuestions) * 100;
+        if (percentage >= 90) {
+            scoreFeedback.textContent = "Fantastic! You have a deep understanding of dynamics.";
+            scoreDisplay.style.color = '#4ade80'; // green-400
+        } else if (percentage >= 70) {
+            scoreFeedback.textContent = "Excellent job! You're very comfortable with analyzing forces.";
+            scoreDisplay.style.color = '#60a5fa'; // blue-400
+        } else if (percentage >= 50) {
+            scoreFeedback.textContent = "Good work. Practice drawing free-body diagrams to improve further.";
+            scoreDisplay.style.color = '#facc15'; // yellow-400
+        } else {
+            scoreFeedback.textContent = "Keep at it! Reviewing the common forces and F=ma will build a stronger foundation.";
+            scoreDisplay.style.color = '#f87171'; // red-400
+        }
+    });
+
+</script>
+
+</body>
+</html>
