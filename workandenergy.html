@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work and Energy - Physics Universe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827;
+            color: #f3f4f6;
+        }
+        .concept-card {
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .concept-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            border: 2px solid transparent;
+        }
+        .tab-button.active {
+            background-color: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+        .tab-button:not(.active) {
+            background-color: #374151;
+            color: #d1d5db;
+        }
+        .tab-button:not(.active):hover {
+            background-color: #4b5563;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .answer-toggle {
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .mcq-option {
+            border: 2px solid #4b5563;
+            transition: all 0.2s ease-in-out;
+        }
+        .mcq-option:hover {
+            border-color: #3b82f6;
+            background-color: #1f2937;
+        }
+        .mcq-option.selected {
+            border-color: #3b82f6;
+        }
+        .mcq-option.correct {
+            background-color: #166534; /* Green-700 */
+            border-color: #22c55e; /* Green-500 */
+        }
+        .mcq-option.incorrect {
+            background-color: #991b1b; /* Red-700 */
+            border-color: #ef4444; /* Red-500 */
+        }
+        .equation-box {
+            background-color: #1e293b;
+            border-left: 4px solid #3b82f6;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            color: #e2e8f0;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-gray-900/80 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="text-2xl font-bold text-white">
+                <a href="#" class="text-blue-400 hover:text-blue-500 transition">Physics</a> Universe
+            </div>
+            <a href="#" class="text-gray-300 hover:text-blue-400 transition">&larr; Back to Classical Mechanics</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Page Header -->
+        <section class="bg-gray-900 py-20 sm:py-24">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4">Work and Energy</h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">A powerful alternative approach to mechanics that deals with the currency of the universe: energy.</p>
+            </div>
+        </section>
+
+        <!-- Core Concepts Section -->
+        <section class="py-20">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">The Language of Energy</h2>
+                    <p class="text-gray-400 mt-2">Understanding how energy is transferred and transformed.</p>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div class="concept-card">
+                        <h3 class="text-2xl font-bold text-blue-400 mb-4">Work</h3>
+                        <p class="text-gray-300 mb-3">In physics, <strong class="text-white">work</strong> is done on an object when a force causes a displacement. It is the transfer of energy. For a constant force, work is calculated as <strong class="text-white">W = Fd cos(θ)</strong>, where θ is the angle between the force and displacement vectors.</p>
+                        <ul class="text-gray-400 space-y-2 mt-4">
+                           <li><strong>Positive Work:</strong> Force has a component in the direction of motion (speeds up).</li>
+                           <li><strong>Negative Work:</strong> Force has a component opposite the direction of motion (slows down).</li>
+                           <li><strong>Zero Work:</strong> Force is perpendicular to motion (e.g., carrying a box horizontally).</li>
+                        </ul>
+                    </div>
+                    <div class="concept-card">
+                        <h3 class="text-2xl font-bold text-green-400 mb-4">Kinetic Energy (KE)</h3>
+                        <p class="text-gray-300">This is the energy of motion. Any object that is moving has kinetic energy. It depends on both the mass of the object and the square of its speed, meaning speed has a much larger impact on KE.</p>
+                        <div class="equation-box mt-4">KE = ½mv²</div>
+                    </div>
+                    <div class="concept-card">
+                        <h3 class="text-2xl font-bold text-purple-400 mb-4">Potential Energy (PE)</h3>
+                        <p class="text-gray-300">This is stored energy due to an object's position or configuration. The most common type is <strong class="text-white">Gravitational Potential Energy</strong>, which depends on an object's mass, height, and the strength of gravity.</p>
+                        <div class="equation-box mt-4">PE_gravity = mgh</div>
+                    </div>
+                     <div class="concept-card">
+                        <h3 class="text-2xl font-bold text-yellow-400 mb-4">Work-Energy Theorem & Conservation</h3>
+                        <p class="text-gray-300 mb-3">The <strong class="text-white">Work-Energy Theorem</strong> states that the net work done on an object equals the change in its kinetic energy (W_net = ΔKE).</p>
+                        <p class="text-gray-300">The <strong class="text-white">Law of Conservation of Energy</strong> is one of the most fundamental principles in physics. It states that in an isolated system, the total mechanical energy (KE + PE) remains constant if only conservative forces (like gravity) are doing work.</p>
+                    </div>
+                    <div class="concept-card lg:col-span-2">
+                        <h3 class="text-2xl font-bold text-red-400 mb-4">Power</h3>
+                        <p class="text-gray-300">Power is the rate at which work is done or energy is transferred. It tells you how quickly work is being performed. The SI unit for power is the Watt (W), which is one Joule per second.</p>
+                        <div class="equation-box mt-4">P = Work / time = W / t</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Practice Section -->
+        <section class="bg-gray-900 py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Test Your Knowledge</h2>
+                    <p class="text-gray-400 mt-2">Apply the principles of work and energy.</p>
+                </div>
+
+                <!-- Tabs -->
+                <div class="flex justify-center space-x-2 md:space-x-4 mb-8" id="tab-buttons">
+                    <button class="tab-button active" data-tab="conceptual">Conceptual Questions</button>
+                    <button class="tab-button" data-tab="numericals">Numerical Problems</button>
+                    <button class="tab-button" data-tab="mcqs">MCQs</button>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="max-w-4xl mx-auto">
+                    <!-- Conceptual Questions -->
+                    <div id="conceptual" class="tab-content active space-y-6">
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">1. A waiter carries a heavy tray of food horizontally across a room at a constant velocity. Is he doing any work on the tray?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: No. In physics, for work to be done, the force must cause a displacement. The waiter applies an upward force to counteract gravity, but the displacement is horizontal. Since the force is perpendicular (90 degrees) to the displacement, cos(90°) = 0, so no work is done.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">2. Two cars, one twice as heavy as the other, are driving at the same speed. Which car has more kinetic energy?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: The heavier car. Kinetic energy (KE = ½mv²) is directly proportional to mass. If the speed is the same, the car with twice the mass will have twice the kinetic energy.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">3. A satellite is in a perfectly circular orbit around the Earth. Does the Earth's gravity do any work on the satellite?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: No. The force of gravity is always directed towards the center of the Earth, while the satellite's instantaneous velocity (and displacement) is tangent to the orbit. The force is always perpendicular to the displacement, so no work is done by gravity.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">4. Can kinetic energy ever be negative? Can potential energy ever be negative?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: Kinetic energy (½mv²) can never be negative because mass and v² are always non-negative. Potential energy can be negative. It depends on where you define the zero-point (h=0). If an object is below this reference point, its gravitational potential energy is negative.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">5. A person runs up a flight of stairs. A second person walks up the same stairs. Who does more work? Who uses more power?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: They both do the same amount of work, as they have the same mass (assuming they are identical) and move through the same vertical displacement (W = mgh). However, the runner uses more power because they do the work in less time (P = W/t).</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">6. What happens to the total mechanical energy of a system if only conservative forces are acting?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: It remains constant. This is the principle of conservation of mechanical energy. Energy can transform between kinetic and potential forms (like a pendulum swinging), but the total amount (KE + PE) does not change.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">7. How does friction affect the total mechanical energy of a system?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: Friction is a non-conservative force. It does negative work, converting mechanical energy into thermal energy (heat). Therefore, friction causes the total mechanical energy of a system to decrease.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">8. If you push a box twice as far while applying the same force, how much more work do you do?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: You do twice as much work. Work (W = Fd) is directly proportional to the distance. If you double the distance, you double the work.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">9. A simple pendulum is swinging back and forth. At which point in its swing is its kinetic energy maximum? At which point is its potential energy maximum?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: Kinetic energy is maximum at the lowest point of the swing, where the pendulum is moving fastest. Potential energy is maximum at the highest points of the swing (the endpoints), where it momentarily stops before changing direction.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">10. According to the Work-Energy Theorem, what must be true for an object's speed to increase?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: The net work done on the object must be positive. A positive net work leads to a positive change in kinetic energy (ΔKE), which means the final kinetic energy is greater than the initial, and therefore the speed has increased.</p>
+                        </div>
+                    </div>
+
+                    <!-- Numerical Problems -->
+                    <div id="numericals" class="tab-content space-y-6">
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">1. A 10 kg box is lifted 2 meters straight up. How much work is done? (Use g = 9.8 m/s²)</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 196 Joules. The force required is the box's weight, F = mg = 10 kg * 9.8 m/s² = 98 N. Work W = Fd = 98 N * 2 m.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">2. A 1500 kg car is traveling at 20 m/s. What is its kinetic energy?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 300,000 Joules (or 300 kJ). Use KE = ½mv² = 0.5 * 1500 kg * (20 m/s)².</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">3. A 5 kg ball is on a shelf 3 meters above the ground. What is its gravitational potential energy relative to the ground?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 147 Joules. Use PE = mgh = 5 kg * 9.8 m/s² * 3 m.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">4. A net force of 1000 N acts on a 500 kg car, initially at rest, over a distance of 50 m. What is the car's final kinetic energy?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 50,000 Joules. By the Work-Energy Theorem, W_net = ΔKE. W_net = Fd = 1000 N * 50 m = 50,000 J. Since it started from rest, KE_initial = 0, so ΔKE = KE_final.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">5. A 2 kg rock is dropped from a height of 10 m. What is its speed just before it hits the ground (ignoring air resistance)?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 14 m/s. Use conservation of energy: PE_initial + KE_initial = PE_final + KE_final. mgh + 0 = 0 + ½mv². The mass cancels out. gh = ½v². v = sqrt(2gh) = sqrt(2 * 9.8 * 10).</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">6. An engine does 2400 J of work in 8 seconds. What is its power output?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 300 Watts. Use P = W / t = 2400 J / 8 s.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">7. A person pushes a 40 kg crate 5 m along a horizontal floor with a force of 150 N. A friction force of 70 N opposes the motion. What is the net work done on the crate?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 400 Joules. The net force is F_net = F_push - f = 150 N - 70 N = 80 N. The net work is W_net = F_net * d = 80 N * 5 m.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">8. Using the result from the previous question, if the crate started from rest, what is its final speed?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 4.47 m/s. W_net = ΔKE = ½mv_f² - 0. So, 400 J = 0.5 * 40 kg * v_f². v_f = sqrt(400 / 20).</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">9. A 60 kg skateboarder starts from rest at the top of a 5 m high ramp. What is her speed at the bottom, assuming no friction?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 9.9 m/s. Use conservation of energy: PE_top = KE_bottom. mgh = ½mv². The mass cancels. v = sqrt(2gh) = sqrt(2 * 9.8 * 5).</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">10. A 100 Watt light bulb is left on for 1 hour (3600 s). How much energy does it consume?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 360,000 Joules (or 360 kJ). Energy (Work) = Power * time = 100 W * 3600 s.</p>
+                        </div>
+                    </div>
+
+                    <!-- MCQs -->
+                    <div id="mcqs" class="tab-content space-y-8">
+                        <!-- Questions will be populated here -->
+                        <div id="mcq-summary" class="text-center mt-10 hidden">
+                             <button id="check-score-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition-transform transform hover:scale-105">Check My Score</button>
+                             <div id="score-display" class="mt-6 text-2xl font-bold"></div>
+                             <p id="score-feedback" class="text-gray-400 mt-2"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips Section -->
+        <section class="py-20">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="text-3xl font-bold text-white mb-6 text-center">Key Tips for Work and Energy</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg text-blue-400 mb-2">1. Is Energy Conserved?</h3>
+                        <p class="text-gray-400">This is the first question to ask. If there are no non-conservative forces (like friction, air resistance, or an applied push/pull), then you can use the powerful conservation of energy equation (KEi + PEi = KEf + PEf).</p>
+                    </div>
+                     <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg text-blue-400 mb-2">2. Use the Work-Energy Theorem</h3>
+                        <p class="text-gray-400">If energy is NOT conserved, the Work-Energy theorem is your best tool. The net work done (including work by friction) is equal to the change in kinetic energy. W_net = ΔKE.</p>
+                    </div>
+                     <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg text-blue-400 mb-2">3. Set Your Zero Point</h3>
+                        <p class="text-gray-400">For potential energy problems, you can choose where h=0. A smart choice (like the lowest point in the problem) can simplify your calculations by making one of the PE terms zero.</p>
+                    </div>
+                     <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg text-blue-400 mb-2">4. Watch the Angle in Work</h3>
+                        <p class="text-gray-400">Remember that work depends on the angle between force and displacement (W = Fd cos(θ)). A force perpendicular to motion does no work. A force opposite to motion does negative work.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-400">
+            <p>&copy; 2024 Physics Universe. All rights reserved.</p>
+        </div>
+    </footer>
+
+<script>
+    // --- Tab Functionality ---
+    const tabButtons = document.getElementById('tab-buttons');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.addEventListener('click', (e) => {
+        if (e.target.classList.contains('tab-button')) {
+            const tabId = e.target.getAttribute('data-tab');
+            tabButtons.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            e.target.classList.add('active');
+            tabContents.forEach(content => {
+                content.id === tabId ? content.classList.add('active') : content.classList.remove('active');
+            });
+        }
+    });
+
+    // --- Answer Toggle for Conceptual and Numerical Problems ---
+    document.querySelectorAll('.answer-toggle').forEach(button => {
+        button.addEventListener('click', () => {
+            const answer = button.nextElementSibling;
+            const isHidden = answer.classList.contains('hidden');
+            if (isHidden) {
+                answer.classList.remove('hidden');
+                button.textContent = 'Hide Answer';
+            } else {
+                answer.classList.add('hidden');
+                button.textContent = 'Show Answer';
+            }
+        });
+    });
+
+    // --- MCQ Data and Functionality ---
+    const mcqData = [
+        { q: "1. The SI unit of work and energy is the:", a: 1, o: ["Watt", "Joule", "Newton"] },
+        { q: "2. If you push against a stationary wall, you do ____ work.", a: 0, o: ["Zero", "Positive", "Negative"] },
+        { q: "3. Kinetic energy depends on an object's:", a: 2, o: ["Position and speed", "Mass and position", "Mass and speed"] },
+        { q: "4. A car doubles its speed. Its kinetic energy increases by a factor of:", a: 2, o: ["2", "8", "4"] },
+        { q: "5. Gravitational potential energy depends on an object's:", a: 1, o: ["Speed", "Height", "Velocity"] },
+        { q: "6. The Work-Energy Theorem states that net work equals the change in:", a: 0, o: ["Kinetic Energy", "Potential Energy", "Total Energy"] },
+        { q: "7. Which of the following is a non-conservative force?", a: 2, o: ["Gravity", "Spring force", "Friction"] },
+        { q: "8. Power is defined as:", a: 1, o: ["Force times distance", "The rate of doing work", "The capacity to do work"] },
+        { q: "9. Lifting a 10 N box to a height of 2 m requires ____ of work.", a: 1, o: ["5 J", "20 J", "12 J"] },
+        { q: "10. In a closed system with only conservative forces, the total mechanical energy is:", a: 2, o: ["Always increasing", "Always decreasing", "Constant"] },
+        { q: "11. A force is applied at a 90-degree angle to the direction of motion. The work done is:", a: 0, o: ["Zero", "Maximum", "Negative"] },
+        { q: "12. A pendulum's energy at its highest point is:", a: 1, o: ["All kinetic", "All potential", "Half kinetic, half potential"] },
+        { q: "13. A 2 kg object moving at 3 m/s has a kinetic energy of:", a: 2, o: ["6 J", "18 J", "9 J"] },
+        { q: "14. The unit of Power, the Watt, is equivalent to:", a: 0, o: ["Joule / second", "Joule ⋅ second", "Newton / second"] },
+        { q: "15. If friction does -100 J of work on an object, its mechanical energy:", a: 1, o: ["Increases by 100 J", "Decreases by 100 J", "Stays the same"] },
+        { q: "16. Two people with the same mass climb the same stairs. The one who climbs faster produces more:", a: 2, o: ["Work", "Energy", "Power"] },
+        { q: "17. An object's potential energy can be negative.", a: 0, o: ["True", "False", "Only on other planets"] },
+        { q: "18. A roller coaster car is at rest at the top of a hill. Its energy is:", a: 1, o: ["Mostly kinetic", "Mostly potential", "Zero"] },
+        { q: "19. The work done by a force is positive if the force and displacement are in ____ directions.", a: 0, o: ["The same", "Opposite", "Perpendicular"] },
+        { q: "20. A 1000 W microwave runs for 60 seconds. It uses ____ of energy.", a: 2, o: ["1000 J", "60 J", "60,000 J"] },
+    ];
+
+    const mcqContainer = document.getElementById('mcqs');
+    const mcqSummary = document.getElementById('mcq-summary');
+    let score = 0;
+
+    mcqData.forEach((mcq, index) => {
+        const questionBlock = document.createElement('div');
+        questionBlock.className = 'bg-gray-800 p-6 rounded-lg';
+        
+        const questionText = document.createElement('p');
+        questionText.className = 'font-semibold text-gray-200 mb-4';
+        questionText.textContent = mcq.q;
+        questionBlock.appendChild(questionText);
+
+        const optionsContainer = document.createElement('div');
+        optionsContainer.className = 'space-y-3';
+        optionsContainer.dataset.answer = mcq.a;
+        
+        mcq.o.forEach((option, optionIndex) => {
+            const optionDiv = document.createElement('div');
+            optionDiv.className = 'mcq-option p-3 rounded-md cursor-pointer';
+            optionDiv.textContent = option;
+            optionDiv.dataset.index = optionIndex;
+            optionsContainer.appendChild(optionDiv);
+        });
+
+        questionBlock.appendChild(optionsContainer);
+        mcqContainer.insertBefore(questionBlock, mcqSummary);
+    });
+    
+    mcqSummary.classList.remove('hidden');
+
+    mcqContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('mcq-option')) {
+            const optionsDiv = e.target.parentElement;
+            if (optionsDiv.classList.contains('answered')) return;
+            
+            optionsDiv.classList.add('answered');
+            const selectedIndex = parseInt(e.target.dataset.index);
+            const correctIndex = parseInt(optionsDiv.dataset.answer);
+
+            if (selectedIndex === correctIndex) {
+                score++;
+            }
+
+            const allOptions = optionsDiv.querySelectorAll('.mcq-option');
+            allOptions.forEach((opt, idx) => {
+                if (idx === correctIndex) {
+                    opt.classList.add('correct');
+                } else if (idx === selectedIndex) {
+                    opt.classList.add('incorrect');
+                }
+            });
+        }
+    });
+
+    document.getElementById('check-score-btn').addEventListener('click', () => {
+        const scoreDisplay = document.getElementById('score-display');
+        const scoreFeedback = document.getElementById('score-feedback');
+        const totalQuestions = mcqData.length;
+        
+        scoreDisplay.textContent = `You scored ${score} out of ${totalQuestions}!`;
+        
+        const percentage = (score / totalQuestions) * 100;
+        if (percentage >= 90) {
+            scoreFeedback.textContent = "Excellent! You have a powerful understanding of work and energy.";
+            scoreDisplay.style.color = '#4ade80'; // green-400
+        } else if (percentage >= 70) {
+            scoreFeedback.textContent = "Great job! You're applying the energy principles correctly.";
+            scoreDisplay.style.color = '#60a5fa'; // blue-400
+        } else if (percentage >= 50) {
+            scoreFeedback.textContent = "Good effort. Focus on the difference between conservative and non-conservative forces.";
+            scoreDisplay.style.color = '#facc15'; // yellow-400
+        } else {
+            scoreFeedback.textContent = "Keep trying! Reviewing the core definitions of work, KE, and PE will help a lot.";
+            scoreDisplay.style.color = '#f87171'; // red-400
+        }
+    });
+
+</script>
+
+</body>
+</html>
