@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinematics - Physics Universe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827;
+            color: #f3f4f6;
+        }
+        .concept-card {
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .concept-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            border: 2px solid transparent;
+        }
+        .tab-button.active {
+            background-color: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+        .tab-button:not(.active) {
+            background-color: #374151;
+            color: #d1d5db;
+        }
+        .tab-button:not(.active):hover {
+            background-color: #4b5563;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .answer-toggle {
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .mcq-option {
+            border: 2px solid #4b5563;
+            transition: all 0.2s ease-in-out;
+        }
+        .mcq-option:hover {
+            border-color: #3b82f6;
+            background-color: #1f2937;
+        }
+        .mcq-option.selected {
+            border-color: #3b82f6;
+        }
+        .mcq-option.correct {
+            background-color: #166534; /* Green-700 */
+            border-color: #22c55e; /* Green-500 */
+        }
+        .mcq-option.incorrect {
+            background-color: #991b1b; /* Red-700 */
+            border-color: #ef4444; /* Red-500 */
+        }
+        .equation-box {
+            background-color: #1e293b;
+            border-left: 4px solid #3b82f6;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            color: #e2e8f0;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-gray-900/80 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="text-2xl font-bold text-white">
+                <a href="#" class="text-blue-400 hover:text-blue-500 transition">Physics</a> Universe
+            </div>
+            <a href="#" class="text-gray-300 hover:text-blue-400 transition">&larr; Back to Classical Mechanics</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Page Header -->
+        <section class="bg-gray-900 py-20 sm:py-24">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4">Kinematics</h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">The branch of mechanics concerned with the motion of objects without reference to the forces which cause the motion.</p>
+            </div>
+        </section>
+
+        <!-- Core Concepts Section -->
+        <section class="py-20">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Core Concepts of Motion</h2>
+                    <p class="text-gray-400 mt-2">Understanding the language used to describe how things move.</p>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Distance vs Displacement -->
+                    <div class="concept-card">
+                        <h3 class="text-2xl font-bold text-blue-400 mb-4">Distance vs. Displacement</h3>
+                        <p class="text-gray-300 mb-3"><strong class="text-white">Distance</strong> is a scalar quantity that refers to "how much ground an object has covered" during its motion.</p>
+                        <p class="text-gray-300"><strong class="text-white">Displacement</strong> is a vector quantity that refers to "how far out of place an object is"; it is the object's overall change in position.</p>
+                        <p class="text-gray-400 mt-4"><strong>Example:</strong> If you walk 5 meters east and then 5 meters west, your distance traveled is 10 meters, but your displacement is 0 meters because you ended up where you started.</p>
+                    </div>
+                    <!-- Speed vs Velocity -->
+                    <div class="concept-card">
+                        <h3 class="text-2xl font-bold text-green-400 mb-4">Speed vs. Velocity</h3>
+                        <p class="text-gray-300 mb-3"><strong class="text-white">Speed</strong> is a scalar quantity that refers to "how fast an object is moving."</p>
+                        <p class="text-gray-300"><strong class="text-white">Velocity</strong> is a vector quantity that refers to "the rate at which an object changes its position." It includes direction.</p>
+                        <p class="text-gray-400 mt-4"><strong>Example:</strong> A car traveling at 60 km/h has a speed. A car traveling at 60 km/h due north has a velocity. You can have a constant speed while changing velocity (e.g., going in a circle).</p>
+                    </div>
+                    <!-- Acceleration -->
+                    <div class="concept-card">
+                        <h3 class="text-2xl font-bold text-purple-400 mb-4">Acceleration</h3>
+                        <p class="text-gray-300 mb-3"><strong class="text-white">Acceleration</strong> is a vector quantity defined as the rate at which an object changes its velocity. An object is accelerating if it is changing its velocity.</p>
+                        <p class="text-gray-400 mt-4">This can mean speeding up, slowing down (deceleration), or changing direction. A car turning a corner at a constant speed is still accelerating because its direction (and thus velocity) is changing.</p>
+                    </div>
+                    <!-- Kinematic Equations -->
+                    <div class="concept-card">
+                        <h3 class="text-2xl font-bold text-yellow-400 mb-4">The Kinematic Equations</h3>
+                        <p class="text-gray-300 mb-4">For motion with constant acceleration, a set of powerful equations allows us to relate displacement (Δx), time (t), initial velocity (v₀), final velocity (v), and acceleration (a).</p>
+                        <div class="space-y-4">
+                            <div class="equation-box">v = v₀ + at</div>
+                            <div class="equation-box">Δx = v₀t + ½at²</div>
+                            <div class="equation-box">v² = v₀² + 2aΔx</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Practice Section -->
+        <section class="bg-gray-900 py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Test Your Knowledge</h2>
+                    <p class="text-gray-400 mt-2">Apply the concepts to solidify your understanding.</p>
+                </div>
+
+                <!-- Tabs -->
+                <div class="flex justify-center space-x-2 md:space-x-4 mb-8" id="tab-buttons">
+                    <button class="tab-button active" data-tab="conceptual">Conceptual Questions</button>
+                    <button class="tab-button" data-tab="numericals">Numerical Problems</button>
+                    <button class="tab-button" data-tab="mcqs">MCQs</button>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="max-w-4xl mx-auto">
+                    <!-- Conceptual Questions -->
+                    <div id="conceptual" class="tab-content active space-y-6">
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">1. Is it possible to have a constant speed but a changing velocity? Explain.</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: Yes. Velocity is a vector with both magnitude (speed) and direction. If you are moving in a circle at a constant speed, your direction is constantly changing, which means your velocity is changing, and you are accelerating.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">2. A ball is thrown straight up into the air. What is its velocity and acceleration at the very top of its path?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: At the peak of its path, the ball's instantaneous velocity is zero for a moment as it changes direction. However, its acceleration is constant throughout the flight: 9.8 m/s² downwards (due to gravity).</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">3. Can an object have a northward velocity and a southward acceleration? If so, what is happening to the object?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: Yes. This means the object is moving north but slowing down. The acceleration is in the opposite direction to the velocity, causing deceleration.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">4. If you drop a feather and a hammer on the Moon (which has no air resistance), which one hits the ground first?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: They hit the ground at the same time. In the absence of air resistance, all objects fall with the same constant acceleration, regardless of their mass.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">5. What does the slope of a position-time graph represent?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: The slope of a position-time graph represents the object's velocity. A steep slope means a high velocity, and a horizontal line means the object is at rest (zero velocity).</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">6. What does the area under a velocity-time graph represent?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: The area under a velocity-time graph represents the object's displacement. If the graph is below the x-axis, the area is negative, representing displacement in the negative direction.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">7. Can an object have zero velocity but non-zero acceleration?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: Yes. This occurs at the exact moment an object changes direction. For example, the ball thrown upwards has zero velocity at its highest point but still has an acceleration of 9.8 m/s² downwards.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">8. A car is traveling west and rounds a curve to travel south. Does it accelerate?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: Yes. Even if the car's speed is constant, its direction of motion changes, which means its velocity changes. A change in velocity is acceleration.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">9. If an object has a constant, non-zero acceleration, is its velocity ever constant?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: No. By definition, acceleration is the rate of change of velocity. If acceleration is non-zero, the velocity must be changing.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">10. Imagine you are running in a straight line at a constant speed. Is your acceleration zero?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: Yes. If both your speed and direction are constant, your velocity is constant. If your velocity is not changing, your acceleration is zero.</p>
+                        </div>
+                    </div>
+
+                    <!-- Numerical Problems -->
+                    <div id="numericals" class="tab-content space-y-6">
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">1. A car accelerates from rest to 30 m/s in 6 seconds. What is its acceleration?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 5 m/s². Use a = (v - v₀) / t. a = (30 m/s - 0 m/s) / 6 s.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">2. A stone is dropped from a tall cliff. How far has it fallen after 4 seconds? (Use g = 9.8 m/s²)</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 78.4 meters. Use Δx = v₀t + ½at². Since it's dropped, v₀ = 0. Δx = 0 + ½(9.8 m/s²)(4 s)².</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">3. A train slows down from 40 m/s to 10 m/s over a distance of 150 m. What is its acceleration?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: -5 m/s². Use v² = v₀² + 2aΔx. (10² = 40² + 2 * a * 150). 100 = 1600 + 300a. -1500 = 300a.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">4. An airplane needs to reach a speed of 75 m/s to take off. If the runway is 1500 m long, what is the minimum constant acceleration required?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 1.875 m/s². Use v² = v₀² + 2aΔx. (75² = 0² + 2 * a * 1500). 5625 = 3000a.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">5. A ball is thrown vertically upward with an initial velocity of 25 m/s. How long does it take to reach its highest point? (Use g = 9.8 m/s²)</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 2.55 seconds. At the highest point, v = 0. Use v = v₀ + at. (0 = 25 m/s + (-9.8 m/s²)t).</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">6. A car traveling at 20 m/s accelerates at 3 m/s² for 5 seconds. What is its final velocity?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 35 m/s. Use v = v₀ + at. v = 20 m/s + (3 m/s² * 5 s).</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">7. How far does the car in the previous question travel during those 5 seconds?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 137.5 meters. Use Δx = v₀t + ½at². Δx = (20 m/s * 5 s) + ½(3 m/s²)(5 s)².</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">8. A cheetah can accelerate from 0 to 27 m/s in 3 seconds. What distance does it cover in this time?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 40.5 meters. First find acceleration: a = 27/3 = 9 m/s². Then use Δx = v₀t + ½at². Δx = 0 + ½(9)(3)².</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">9. A driver sees an obstacle 80 m away and applies the brakes, causing a deceleration of 5 m/s². If the car was initially traveling at 30 m/s, does it stop in time?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: No. The stopping distance is 90 meters. Use v² = v₀² + 2aΔx. (0² = 30² + 2(-5)Δx). 0 = 900 - 10Δx. Δx = 90 m.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">10. What is the maximum height reached by the ball in question 5? (v₀ = 25 m/s)</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 31.89 meters. Use v² = v₀² + 2aΔx. (0² = 25² + 2(-9.8)Δx). 0 = 625 - 19.6Δx.</p>
+                        </div>
+                    </div>
+
+                    <!-- MCQs -->
+                    <div id="mcqs" class="tab-content space-y-8">
+                        <!-- Questions will be populated here -->
+                        <div id="mcq-summary" class="text-center mt-10 hidden">
+                             <button id="check-score-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition-transform transform hover:scale-105">Check My Score</button>
+                             <div id="score-display" class="mt-6 text-2xl font-bold"></div>
+                             <p id="score-feedback" class="text-gray-400 mt-2"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips Section -->
+        <section class="py-20">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="text-3xl font-bold text-white mb-6 text-center">Key Tips for Kinematics</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg text-blue-400 mb-2">1. Watch Your Signs</h3>
+                        <p class="text-gray-400">Establish a coordinate system. Up and right are usually positive; down and left are negative. Velocity, displacement, and acceleration must have signs that match your system. Deceleration is just acceleration in the opposite direction of velocity.</p>
+                    </div>
+                     <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg text-blue-400 mb-2">2. List Your Knowns</h3>
+                        <p class="text-gray-400">Before starting a problem, write down all the variables you know (v₀, v, a, t, Δx) and the one you need to find. This makes it much easier to choose the correct kinematic equation.</p>
+                    </div>
+                     <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg text-blue-400 mb-2">3. Master the Graphs</h3>
+                        <p class="text-gray-400">Understand the relationships: the slope of a position-time graph is velocity, and the slope of a velocity-time graph is acceleration. The area under a velocity-time graph is displacement.</p>
+                    </div>
+                     <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg text-blue-400 mb-2">4. Free Fall Facts</h3>
+                        <p class="text-gray-400">For any object in free fall (thrown or dropped), the acceleration is always 'g' (approx. 9.8 m/s² or 10 m/s²) directed downwards. The velocity at the highest point of an object's trajectory is momentarily zero.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-400">
+            <p>&copy; 2024 Physics Universe. All rights reserved.</p>
+        </div>
+    </footer>
+
+<script>
+    // --- Tab Functionality ---
+    const tabButtons = document.getElementById('tab-buttons');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.addEventListener('click', (e) => {
+        if (e.target.classList.contains('tab-button')) {
+            const tabId = e.target.getAttribute('data-tab');
+            tabButtons.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            e.target.classList.add('active');
+            tabContents.forEach(content => {
+                content.id === tabId ? content.classList.add('active') : content.classList.remove('active');
+            });
+        }
+    });
+
+    // --- Answer Toggle for Conceptual and Numerical Problems ---
+    document.querySelectorAll('.answer-toggle').forEach(button => {
+        button.addEventListener('click', () => {
+            const answer = button.nextElementSibling;
+            const isHidden = answer.classList.contains('hidden');
+            if (isHidden) {
+                answer.classList.remove('hidden');
+                button.textContent = 'Hide Answer';
+            } else {
+                answer.classList.add('hidden');
+                button.textContent = 'Show Answer';
+            }
+        });
+    });
+
+    // --- MCQ Data and Functionality ---
+    const mcqData = [
+        { q: "1. A car travels 40 km East and then 30 km North. What is its displacement?", a: 1, o: ["70 km", "50 km", "10 km"] },
+        { q: "2. Which of the following is a vector quantity?", a: 2, o: ["Speed", "Distance", "Velocity"] },
+        { q: "3. An object is dropped from rest. Its acceleration is:", a: 2, o: ["Increasing", "Decreasing", "Constant"] },
+        { q: "4. A horizontal line on a velocity-time graph means the object is:", a: 1, o: ["At rest", "Moving with constant velocity", "Moving with constant acceleration"] },
+        { q: "5. The slope of a position-time graph gives:", a: 0, o: ["Velocity", "Acceleration", "Displacement"] },
+        { q: "6. If a car's velocity changes from 20 m/s to 30 m/s in 5 seconds, its acceleration is:", a: 1, o: ["5 m/s²", "2 m/s²", "10 m/s²"] },
+        { q: "7. A ball is thrown upwards. At its highest point, its velocity is:", a: 0, o: ["Zero", "9.8 m/s", "Maximum"] },
+        { q: "8. The area under an acceleration-time graph represents:", a: 2, o: ["Displacement", "Final velocity", "Change in velocity"] },
+        { q: "9. An object moving in a circle at a constant speed has:", a: 1, o: ["Constant velocity", "Constant acceleration", "Changing velocity"] },
+        { q: "10. Which kinematic equation is independent of time?", a: 2, o: ["v = v₀ + at", "Δx = v₀t + ½at²", "v² = v₀² + 2aΔx"] },
+        { q: "11. Deceleration means that the acceleration is in the ______ direction of the velocity.", a: 1, o: ["Same", "Opposite", "Perpendicular"] },
+        { q: "12. A runner completes one full lap around a 400m track. What is her displacement?", a: 0, o: ["0 m", "400 m", "200 m"] },
+        { q: "13. If you throw a ball upwards with a speed of 10 m/s, what will be its speed when you catch it again at the same height?", a: 1, o: ["0 m/s", "10 m/s", "20 m/s"] },
+        { q: "14. A steep slope on a position-time graph indicates:", a: 2, o: ["The object is at rest", "Low speed", "High speed"] },
+        { q: "15. Which of the following controls on a car can cause an acceleration?", a: 2, o: ["Gas pedal", "Brake pedal", "All of the above"] },
+        { q: "16. An object with negative velocity and negative acceleration is:", a: 0, o: ["Speeding up", "Slowing down", "Moving at a constant speed"] },
+        { q: "17. The SI unit for acceleration is:", a: 1, o: ["m/s", "m/s²", "m"] },
+        { q: "18. If a feather and an apple are dropped in a vacuum, which will have a greater acceleration?", a: 2, o: ["The apple", "The feather", "They will be the same"] },
+        { q: "19. A flat, horizontal line on a position-time graph means the object is:", a: 0, o: ["At rest", "Moving with constant velocity", "Accelerating"] },
+        { q: "20. A car accelerates from rest at 2 m/s². How far does it travel in the first 3 seconds?", a: 1, o: ["6 m", "9 m", "12 m"] },
+    ];
+
+    const mcqContainer = document.getElementById('mcqs');
+    const mcqSummary = document.getElementById('mcq-summary');
+    let score = 0;
+
+    mcqData.forEach((mcq, index) => {
+        const questionBlock = document.createElement('div');
+        questionBlock.className = 'bg-gray-800 p-6 rounded-lg';
+        
+        const questionText = document.createElement('p');
+        questionText.className = 'font-semibold text-gray-200 mb-4';
+        questionText.textContent = mcq.q;
+        questionBlock.appendChild(questionText);
+
+        const optionsContainer = document.createElement('div');
+        optionsContainer.className = 'space-y-3';
+        optionsContainer.dataset.answer = mcq.a;
+        
+        mcq.o.forEach((option, optionIndex) => {
+            const optionDiv = document.createElement('div');
+            optionDiv.className = 'mcq-option p-3 rounded-md cursor-pointer';
+            optionDiv.textContent = option;
+            optionDiv.dataset.index = optionIndex;
+            optionsContainer.appendChild(optionDiv);
+        });
+
+        questionBlock.appendChild(optionsContainer);
+        mcqContainer.insertBefore(questionBlock, mcqSummary);
+    });
+    
+    mcqSummary.classList.remove('hidden');
+
+    mcqContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('mcq-option')) {
+            const optionsDiv = e.target.parentElement;
+            if (optionsDiv.classList.contains('answered')) return;
+            
+            optionsDiv.classList.add('answered');
+            const selectedIndex = parseInt(e.target.dataset.index);
+            const correctIndex = parseInt(optionsDiv.dataset.answer);
+
+            if (selectedIndex === correctIndex) {
+                score++;
+            }
+
+            const allOptions = optionsDiv.querySelectorAll('.mcq-option');
+            allOptions.forEach((opt, idx) => {
+                if (idx === correctIndex) {
+                    opt.classList.add('correct');
+                } else if (idx === selectedIndex) {
+                    opt.classList.add('incorrect');
+                }
+            });
+        }
+    });
+
+    document.getElementById('check-score-btn').addEventListener('click', () => {
+        const scoreDisplay = document.getElementById('score-display');
+        const scoreFeedback = document.getElementById('score-feedback');
+        const totalQuestions = mcqData.length;
+        
+        scoreDisplay.textContent = `You scored ${score} out of ${totalQuestions}!`;
+        
+        const percentage = (score / totalQuestions) * 100;
+        if (percentage >= 90) {
+            scoreFeedback.textContent = "Outstanding! You have an excellent grasp of kinematics.";
+            scoreDisplay.style.color = '#4ade80'; // green-400
+        } else if (percentage >= 70) {
+            scoreFeedback.textContent = "Great work! Your understanding of the concepts is strong.";
+            scoreDisplay.style.color = '#60a5fa'; // blue-400
+        } else if (percentage >= 50) {
+            scoreFeedback.textContent = "Solid effort. Reviewing the kinematic equations and graph interpretations will be helpful.";
+            scoreDisplay.style.color = '#facc15'; // yellow-400
+        } else {
+            scoreFeedback.textContent = "Don't give up! Go through the core concepts again. Practice makes perfect.";
+            scoreDisplay.style.color = '#f87171'; // red-400
+        }
+    });
+
+</script>
+
+</body>
+</html>
