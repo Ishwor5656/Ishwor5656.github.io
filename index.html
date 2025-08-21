@@ -202,6 +202,31 @@
         #project-modal-content {
             transition: transform 0.3s ease;
         }
+
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #FBBF24;
+            color: #111827;
+            border-radius: 50%;
+            padding: 0.75rem;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
+            transition: all 0.3s ease-in-out;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+        }
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        #back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(251, 191, 36, 0.6);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -216,7 +241,8 @@
                 <a href="#" class="text-2xl font-bold">Ishwor<span class="accent-color">.</span>dev</a>
                 <nav class="hidden md:flex space-x-8 items-center">
                     <a href="#about" class="transition-colors">About</a>
-                    <a href="https://ishworsilwal.me/sub.html" class="transition-colors">Education</a>
+                    <!-- Updated href to an external link -->
+                    <a href="https://example.com/education" target="_blank" rel="noopener noreferrer" class="transition-colors">Education</a>
                     <a href="#projects" class="transition-colors">Projects</a>
                     <a href="#skills" class="transition-colors">Skills</a>
                     <a href="#contact" class="btn btn-primary text-sm px-4 py-2">Contact Me</a>
@@ -232,6 +258,8 @@
     <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-gray-900/95 z-40">
         <div class="flex flex-col items-center justify-center h-full space-y-8 text-xl">
             <a href="#about" class="mobile-menu-link hover:accent-color transition-colors">About</a>
+            <!-- Updated href to an external link -->
+            <a href="https://ishworsilwal.me/sub.html" class="mobile-menu-link hover:accent-color transition-colors">Education</a>
             <a href="#projects" class="mobile-menu-link hover:accent-color transition-colors">Projects</a>
             <a href="#skills" class="mobile-menu-link hover:accent-color transition-colors">Skills</a>
             <a href="#contact" class="mobile-menu-link btn btn-primary">Contact Me</a>
@@ -312,7 +340,7 @@
                             <h3 class="text-xl font-bold text-white">E-commerce Platform</h3>
                             <i class="fas fa-expand-alt text-gray-500"></i>
                         </div>
-                        <p class="text-gray-400 text-sm mb-4 h-16"/p>
+                        <p class="text-gray-400 text-sm mb-4 h-16"></p>
                         <div class="mb-4">
                             <span class="tag">React</span><span class="tag">Node.js</span><span class="tag">MongoDB</span>
                         </div>
@@ -417,6 +445,11 @@
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <a href="#hero" id="back-to-top" class="fixed bottom-4 right-4 md:bottom-8 md:right-8 p-3 rounded-full bg-amber-400 text-gray-900 shadow-lg transition-all duration-300 opacity-0 invisible hover:-translate-y-1">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
     <!-- Project Modal -->
     <div id="project-modal" class="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm z-[100] flex items-center justify-center p-4 opacity-0 invisible">
         <div id="project-modal-content" class="bg-gray-800 border border-amber-400/20 rounded-lg max-w-3xl w-full p-8 relative shadow-2xl shadow-amber-500/10 transform scale-95">
@@ -442,15 +475,23 @@
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
             document.getElementById('year').textContent = new Date().getFullYear();
+            const backToTopBtn = document.getElementById('back-to-top');
 
             // --- Mobile Menu Toggle ---
             mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
             mobileMenuLinks.forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
 
-            // --- Header Scroll Effect ---
+            // --- Header Scroll Effect & Back to Top Button ---
             window.addEventListener('scroll', () => {
                 header.classList.toggle('bg-gray-900/80', window.scrollY > 50);
                 header.classList.toggle('backdrop-blur-sm', window.scrollY > 50);
+                
+                // Show/hide Back to Top button
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.add('show', 'opacity-100', 'visible');
+                } else {
+                    backToTopBtn.classList.remove('show', 'opacity-100', 'visible');
+                }
             });
 
             // --- Typing Animation ---
@@ -626,44 +667,79 @@
             // --- Project Modal Logic ---
             const modal = document.getElementById('project-modal');
             const modalContent = document.getElementById('project-modal-content');
-            const closeBtn = document.getElementById('modal-close-btn');
-            const projectCards = document.querySelectorAll('.project-card');
+            const modalCloseBtn = document.getElementById('modal-close-btn');
+            const modalTitle = document.getElementById('modal-title');
+            const modalImage = document.getElementById('modal-image');
+            const modalTags = document.getElementById('modal-tags');
+            const modalDescription = document.getElementById('modal-description');
+            const modalLinks = document.getElementById('modal-links');
 
-            projectCards.forEach(card => {
+            document.querySelectorAll('.project-card').forEach(card => {
                 card.addEventListener('click', () => {
-                    const data = card.dataset;
-                    document.getElementById('modal-image').src = data.image;
-                    document.getElementById('modal-title').textContent = data.title;
-                    document.getElementById('modal-description').textContent = data.description;
+                    // Populate modal with data from the clicked card
+                    modalTitle.textContent = card.dataset.title;
+                    modalImage.src = card.dataset.image;
+                    modalImage.alt = card.dataset.title;
+                    modalDescription.textContent = card.dataset.description;
                     
-                    const tagsContainer = document.getElementById('modal-tags');
-                    tagsContainer.innerHTML = data.tags.split(',').map(tag => `<span class="tag">${tag}</span>`).join('');
+                    // Populate tags
+                    modalTags.innerHTML = '';
+                    const tags = card.dataset.tags ? card.dataset.tags.split(',') : [];
+                    tags.forEach(tagText => {
+                        const tagSpan = document.createElement('span');
+                        tagSpan.className = 'tag';
+                        tagSpan.textContent = tagText.trim();
+                        modalTags.appendChild(tagSpan);
+                    });
                     
-                    const linksContainer = document.getElementById('modal-links');
-                    linksContainer.innerHTML = '';
-                    if (data.github) {
-                        linksContainer.innerHTML += `<a href="${data.github}" target="_blank" class="btn btn-secondary"><i class="fab fa-github mr-2"></i>View Code</a>`;
+                    // Populate links
+                    modalLinks.innerHTML = '';
+                    const githubLink = card.dataset.github;
+                    const liveLink = card.dataset.live;
+                    if (githubLink) {
+                        const githubBtn = document.createElement('a');
+                        githubBtn.href = githubLink;
+                        githubBtn.target = '_blank';
+                        githubBtn.className = 'btn btn-secondary';
+                        githubBtn.innerHTML = '<i class="fab fa-github mr-2"></i> GitHub';
+                        modalLinks.appendChild(githubBtn);
                     }
-                    if (data.live) {
-                        linksContainer.innerHTML += `<a href="${data.live}" target="_blank" class="btn btn-primary"><i class="fas fa-external-link-alt mr-2"></i>Live Demo</a>`;
+                    if (liveLink) {
+                        const liveBtn = document.createElement('a');
+                        liveBtn.href = liveLink;
+                        liveBtn.target = '_blank';
+                        liveBtn.className = 'btn btn-primary';
+                        liveBtn.innerHTML = '<i class="fas fa-external-link-alt mr-2"></i> Live Demo';
+                        modalLinks.appendChild(liveBtn);
                     }
-                    
+
+                    // Show the modal
                     modal.classList.remove('invisible', 'opacity-0');
+                    modal.classList.add('visible', 'opacity-100');
                     modalContent.classList.remove('scale-95');
+                    modalContent.classList.add('scale-100');
                 });
             });
 
-            const closeModal = () => {
+            // Close the modal
+            modalCloseBtn.addEventListener('click', () => {
+                modal.classList.remove('visible', 'opacity-100');
                 modal.classList.add('invisible', 'opacity-0');
+                modalContent.classList.remove('scale-100');
                 modalContent.classList.add('scale-95');
-            };
-
-            closeBtn.addEventListener('click', closeModal);
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) closeModal();
             });
+            
+            // Close modal by clicking outside
+            modal.addEventListener('click', (e) => {
+                if (e.target.id === 'project-modal') {
+                    modal.classList.remove('visible', 'opacity-100');
+                    modal.classList.add('invisible', 'opacity-0');
+                    modalContent.classList.remove('scale-100');
+                    modalContent.classList.add('scale-95');
+                }
+            });
+
         });
     </script>
-
 </body>
 </html>
