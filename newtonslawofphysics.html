@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newton's Laws of Motion - Physics Universe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827;
+            color: #f3f4f6;
+        }
+        .law-card {
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .law-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            border: 2px solid transparent;
+        }
+        .tab-button.active {
+            background-color: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+        .tab-button:not(.active) {
+            background-color: #374151;
+            color: #d1d5db;
+        }
+        .tab-button:not(.active):hover {
+            background-color: #4b5563;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .answer-toggle {
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .mcq-option {
+            border: 2px solid #4b5563;
+            transition: all 0.2s ease-in-out;
+        }
+        .mcq-option:hover {
+            border-color: #3b82f6;
+            background-color: #1f2937;
+        }
+        .mcq-option.selected {
+            border-color: #3b82f6;
+        }
+        .mcq-option.correct {
+            background-color: #166534; /* Green-700 */
+            border-color: #22c55e; /* Green-500 */
+        }
+        .mcq-option.incorrect {
+            background-color: #991b1b; /* Red-700 */
+            border-color: #ef4444; /* Red-500 */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-gray-900/80 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="text-2xl font-bold text-white">
+                <a href="#" class="text-blue-400 hover:text-blue-500 transition">Physics</a> Universe
+            </div>
+            <a href="#" class="text-gray-300 hover:text-blue-400 transition">&larr; Back to Classical Mechanics</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Page Header -->
+        <section class="bg-gray-900 py-20 sm:py-24">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4">Newton's Laws of Motion</h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">The three pillars of classical mechanics that describe the relationship between an object and the forces acting upon it.</p>
+            </div>
+        </section>
+
+        <!-- The Three Laws Section -->
+        <section class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="grid lg:grid-cols-3 gap-10">
+                    <!-- First Law -->
+                    <div class="law-card flex flex-col">
+                        <h2 class="text-2xl font-bold text-blue-400 mb-4">I. The Law of Inertia</h2>
+                        <p class="font-semibold text-lg text-gray-200 mb-4">"An object at rest stays at rest and an object in motion stays in motion with the same speed and in the same direction unless acted upon by an unbalanced force."</p>
+                        <div class="text-gray-400 space-y-3 flex-grow">
+                            <p>This law is all about inertia - the resistance of any physical object to any change in its state of motion. Essentially, things keep doing what they're doing unless a force interferes.</p>
+                            <p><strong class="text-gray-200">Example:</strong> A hockey puck on frictionless ice will continue to slide forever. A soccer ball on a field eventually stops because of the unbalanced force of friction.</p>
+                        </div>
+                    </div>
+                    <!-- Second Law -->
+                    <div class="law-card flex flex-col">
+                        <h2 class="text-2xl font-bold text-green-400 mb-4">II. The Law of Acceleration</h2>
+                        <p class="font-semibold text-lg text-gray-200 mb-4">"The acceleration of an object as produced by a net force is directly proportional to the magnitude of the net force, in the same direction as the net force, and inversely proportional to the mass of the object."</p>
+                         <div class="text-gray-400 space-y-3 flex-grow">
+                            <p>This is famously summarized by the equation <span class="font-bold text-white">F = ma</span>. It's the link between force, mass, and acceleration.</p>
+                            <p><strong class="text-gray-200">Example:</strong> It's easier to push an empty shopping cart (less mass) than a full one. To make either cart accelerate faster, you must push it with more force.</p>
+                        </div>
+                    </div>
+                    <!-- Third Law -->
+                    <div class="law-card flex flex-col">
+                        <h2 class="text-2xl font-bold text-purple-400 mb-4">III. The Law of Action-Reaction</h2>
+                        <p class="font-semibold text-lg text-gray-200 mb-4">"For every action, there is an equal and opposite reaction."</p>
+                        <div class="text-gray-400 space-y-3 flex-grow">
+                            <p>This law states that forces always occur in pairs. If object A pushes on object B, object B pushes back on object A with the same force. These forces act on *different* objects.</p>
+                            <p><strong class="text-gray-200">Example:</strong> When you jump, your legs push down on the ground. The ground then pushes up on you with an equal force, propelling you into the air.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Practice Section -->
+        <section class="bg-gray-900 py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Test Your Knowledge</h2>
+                    <p class="text-gray-400 mt-2">Engage with concepts, solve problems, and master the laws.</p>
+                </div>
+
+                <!-- Tabs -->
+                <div class="flex justify-center space-x-2 md:space-x-4 mb-8" id="tab-buttons">
+                    <button class="tab-button active" data-tab="conceptual">Conceptual Questions</button>
+                    <button class="tab-button" data-tab="numericals">Numerical Problems</button>
+                    <button class="tab-button" data-tab="mcqs">MCQs</button>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="max-w-4xl mx-auto">
+                    <!-- Conceptual Questions -->
+                    <div id="conceptual" class="tab-content active space-y-6">
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">1. If you are in a car that is struck from behind, you can suffer a whiplash injury. How does Newton's law of inertia explain this?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: Your body is pushed forward by the car seat, but your head, due to inertia, tends to stay in its original position. This causes your head to snap back relative to your body, leading to whiplash.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">2. Can an object be in motion if the net force acting on it is zero? Explain.</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: Yes. According to the first law, if the net force is zero, an object in motion will stay in motion with a constant velocity (constant speed and direction). A car on cruise control on a straight road is a good approximation.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">3. A bug and the windshield of a fast-moving car collide. Which of them experiences a greater impact force? Which experiences greater acceleration?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: According to the third law, the forces are equal and opposite. However, according to the second law (a = F/m), the bug, having a much smaller mass, experiences a tremendously larger acceleration.</p>
+                        </div>
+                         <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">4. Why do you have to push harder on the pedals of a bicycle to start it moving than to keep it moving?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: This is due to inertia (first law) and static friction. You must apply enough force to overcome the bike's inertia (its resistance to changing from rest to motion) and the higher static friction. Once moving, you only need to overcome kinetic friction, which is typically lower.</p>
+                        </div>
+                         <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">5. A rocket expels gas in a downward direction to move upward. How does this demonstrate the law of action-reaction?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: The rocket exerts a downward force on the gas (action). In response, the gas exerts an equal and opposite upward force on the rocket (reaction), causing it to accelerate upwards.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">6. If an elephant and a feather are dropped in a vacuum, they fall at the same rate. How does Newton's second law (F=ma) explain this, considering gravity pulls much harder on the elephant?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: The force of gravity (F) on the elephant is much larger, but its mass (m) is also much larger. The ratio F/m (which equals acceleration, a) ends up being the same for both objects. The larger force is perfectly compensated by the larger inertia.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">7. Is it possible for an object to be traveling westward and simultaneously have a net force on it directed eastward? If so, give an example.</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: Yes. This happens when an object is decelerating (slowing down). For example, a car traveling westward that applies its brakes has a net force (from friction) directed eastward, causing it to slow down.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">8. When you walk, you push backward on the ground. What force actually pushes you forward?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: According to the third law, as you push backward on the ground (action), the ground pushes forward on you with an equal and opposite force (reaction). This forward force from the ground is what propels you.</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">9. Why is it more difficult to do a pull-up than it is to just hang from a bar?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: When hanging, your muscles exert a force equal to your weight to keep you stationary (zero net force). To do a pull-up, you must exert a force greater than your weight to create a net upward force, causing an upward acceleration (second law).</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">10. A book is sitting at rest on a table. What is the "reaction" force to the gravitational force pulling the book down?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: This is a classic trick question. The reaction force is NOT the table pushing up. The gravitational force is the Earth pulling the book down (action). Therefore, the reaction force is the book pulling the Earth up with an equal and opposite gravitational force.</p>
+                        </div>
+                    </div>
+
+                    <!-- Numerical Problems -->
+                    <div id="numericals" class="tab-content space-y-6">
+                        <!-- Problems will be generated here -->
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">1. A force of 20 N is applied to a 5 kg box. What is the acceleration of the box?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 4 m/s² (Using F=ma, a = F/m = 20N / 5kg)</p>
+                        </div>
+                         <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">2. A 1500 kg car accelerates from rest to 25 m/s in 10 seconds. What is the net force acting on the car?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 3750 N (First find acceleration: a = Δv/t = 25m/s / 10s = 2.5 m/s². Then use F=ma = 1500kg * 2.5m/s²)</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">3. A 60 kg person stands on a scale in an elevator. What does the scale read if the elevator is accelerating upwards at 2 m/s²? (Use g = 9.8 m/s²)</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 708 N (The scale reads the normal force. F_net = N - mg = ma. So, N = mg + ma = 60kg * (9.8m/s² + 2m/s²) )</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">4. A 0.5 kg ball is thrown with a force of 100 N. What is its initial acceleration?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 200 m/s² (a = F/m = 100N / 0.5kg)</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">5. Two boxes, 4 kg and 6 kg, are connected by a string and pulled by a force of 30 N on a frictionless surface. What is the acceleration of the system?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 3 m/s² (Treat as one system. Total mass = 10 kg. a = F_total / m_total = 30N / 10kg)</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">6. What is the weight of a 75 kg astronaut on the Moon, where the gravitational acceleration is 1.62 m/s²?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 121.5 N (Weight = mass * gravitational acceleration = 75kg * 1.62 m/s²)</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">7. A 10 kg block is pushed with 50 N of force, but a friction force of 10 N opposes it. What is the block's acceleration?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 4 m/s² (F_net = F_applied - F_friction = 50N - 10N = 40N. Then a = F_net / m = 40N / 10kg)</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">8. A 2 kg object moving at 5 m/s is brought to rest in 2 seconds. What force was required?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: -5 N (The negative sign indicates the force opposes the motion. a = (0-5)/2 = -2.5 m/s². F = 2kg * -2.5m/s²)</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">9. A 70 kg skateboarder pushes off a wall with a force of 35 N. What is the skateboarder's initial acceleration?</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 0.5 m/s² (a = F/m = 35N / 70kg)</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-lg">
+                            <p class="font-semibold text-gray-200 mb-3">10. A 1 kg bird is flying. If it pushes down on the air with a force of 12 N, what is its upward acceleration? (Use g = 9.8 m/s²)</p>
+                            <div class="answer-toggle bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md inline-block">Show Answer</div>
+                            <p class="text-green-400 mt-3 hidden">Answer: 2.2 m/s² (F_net = F_lift - Weight = 12N - (1kg * 9.8m/s²) = 2.2 N. Then a = F_net / m = 2.2N / 1kg)</p>
+                        </div>
+                    </div>
+
+                    <!-- MCQs -->
+                    <div id="mcqs" class="tab-content space-y-8">
+                        <!-- Questions will be populated here -->
+                        <div id="mcq-summary" class="text-center mt-10 hidden">
+                             <button id="check-score-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition-transform transform hover:scale-105">Check My Score</button>
+                             <div id="score-display" class="mt-6 text-2xl font-bold"></div>
+                             <p id="score-feedback" class="text-gray-400 mt-2"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips Section -->
+        <section class="py-20">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="text-3xl font-bold text-white mb-6 text-center">Key Tips for Success</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg text-blue-400 mb-2">1. Isolate the System</h3>
+                        <p class="text-gray-400">Always start by clearly defining the object or system you are analyzing. Draw a free-body diagram to identify ALL forces acting on that object.</p>
+                    </div>
+                     <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg text-blue-400 mb-2">2. Net Force is Key</h3>
+                        <p class="text-gray-400">Remember that F in F=ma is the *net* (or total) force. You must sum up all the forces (considering their directions) before calculating acceleration.</p>
+                    </div>
+                     <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg text-blue-400 mb-2">3. Forces Come in Pairs</h3>
+                        <p class="text-gray-400">For every force, there's a reaction force. Make sure you don't mix them up. The action and reaction forces act on *different* objects.</p>
+                    </div>
+                     <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg text-blue-400 mb-2">4. Mass vs. Weight</h3>
+                        <p class="text-gray-400">Mass is the amount of 'stuff' in an object (kg) and is constant everywhere. Weight is the force of gravity on that mass (N) and changes depending on the planet.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-400">
+            <p>&copy; 2024 Physics Universe. All rights reserved.</p>
+        </div>
+    </footer>
+
+<script>
+    // --- Tab Functionality ---
+    const tabButtons = document.getElementById('tab-buttons');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.addEventListener('click', (e) => {
+        if (e.target.classList.contains('tab-button')) {
+            const tabId = e.target.getAttribute('data-tab');
+            tabButtons.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            e.target.classList.add('active');
+            tabContents.forEach(content => {
+                content.id === tabId ? content.classList.add('active') : content.classList.remove('active');
+            });
+        }
+    });
+
+    // --- Answer Toggle for Conceptual and Numerical Problems ---
+    document.querySelectorAll('.answer-toggle').forEach(button => {
+        button.addEventListener('click', () => {
+            const answer = button.nextElementSibling;
+            const isHidden = answer.classList.contains('hidden');
+            if (isHidden) {
+                answer.classList.remove('hidden');
+                button.textContent = 'Hide Answer';
+            } else {
+                answer.classList.add('hidden');
+                button.textContent = 'Show Answer';
+            }
+        });
+    });
+
+    // --- MCQ Data and Functionality ---
+    const mcqData = [
+        { q: "1. Which law explains why you feel pushed back into your seat when a car accelerates?", a: 0, o: ["First Law", "Second Law", "Third Law"] },
+        { q: "2. An object with a constant mass is subjected to a constant net force. The object will:", a: 1, o: ["Move at a constant velocity", "Have a constant acceleration", "Gradually slow down"] },
+        { q: "3. 'F=ma' is the mathematical representation of which law?", a: 1, o: ["First Law", "Second Law", "Third Law"] },
+        { q: "4. A book is at rest on a tabletop. The force of gravity is pulling it down. What is the 'reaction' force?", a: 2, o: ["The table pushing up on the book", "The book pushing down on the table", "The book pulling up on the Earth"] },
+        { q: "5. If you double the net force on an object, what happens to its acceleration?", a: 0, o: ["It doubles", "It halves", "It stays the same"] },
+        { q: "6. Inertia is a measure of an object's:", a: 2, o: ["Weight", "Force", "Mass"] },
+        { q: "7. A cannon fires a cannonball. The force the cannon exerts on the cannonball is...", a: 2, o: ["Greater than the force the cannonball exerts on the cannon", "Less than the force the cannonball exerts on the cannon", "Equal to the force the cannonball exerts on the cannon"] },
+        { q: "8. An object in motion with no net force acting on it will:", a: 1, o: ["Eventually stop", "Continue moving at a constant velocity", "Accelerate"] },
+        { q: "9. A hockey puck sliding on perfectly frictionless ice is an example of:", a: 0, o: ["Newton's First Law", "Newton's Second Law", "Newton's Third Law"] },
+        { q: "10. If you push on a wall with a force of 100 N, the wall pushes back on you with a force of:", a: 2, o: ["0 N", "Less than 100 N", "100 N"] },
+        { q: "11. Which of the following has the most inertia?", a: 1, o: ["A feather", "A bowling ball", "A pencil"] },
+        { q: "12. The unit of force is the:", a: 0, o: ["Newton (N)", "Kilogram (kg)", "Meter per second squared (m/s²)"] },
+        { q: "13. If an object's mass is halved and the net force on it is doubled, its acceleration will be:", a: 2, o: ["Halved", "Doubled", "Quadrupled"] },
+        { q: "14. Action-reaction forces always act on:", a: 1, o: ["The same object", "Different objects", "Objects at rest"] },
+        { q: "15. A car travels at a constant velocity of 50 km/h. The net force on the car is:", a: 0, o: ["Zero", "Equal to its weight", "Pointing forward"] },
+        { q: "16. To accelerate a 2 kg object at 6 m/s², you need a net force of:", a: 1, o: ["3 N", "12 N", "8 N"] },
+        { q: "17. The tendency of an object to resist changes in its state of motion is called:", a: 2, o: ["Acceleration", "Force", "Inertia"] },
+        { q: "18. When a swimmer pushes water back, the water pushes the swimmer forward. This is an example of:", a: 2, o: ["First Law", "Second Law", "Third Law"] },
+        { q: "19. An object's weight is the force of gravity acting on its:", a: 0, o: ["Mass", "Volume", "Inertia"] },
+        { q: "20. If two opposite but equal forces act on an object, the net force is:", a: 1, o: ["Double the individual force", "Zero", "Half the individual force"] },
+    ];
+
+    const mcqContainer = document.getElementById('mcqs');
+    const mcqSummary = document.getElementById('mcq-summary');
+    let score = 0;
+
+    mcqData.forEach((mcq, index) => {
+        const questionBlock = document.createElement('div');
+        questionBlock.className = 'bg-gray-800 p-6 rounded-lg';
+        
+        const questionText = document.createElement('p');
+        questionText.className = 'font-semibold text-gray-200 mb-4';
+        questionText.textContent = mcq.q;
+        questionBlock.appendChild(questionText);
+
+        const optionsContainer = document.createElement('div');
+        optionsContainer.className = 'space-y-3';
+        optionsContainer.dataset.answer = mcq.a;
+        
+        mcq.o.forEach((option, optionIndex) => {
+            const optionDiv = document.createElement('div');
+            optionDiv.className = 'mcq-option p-3 rounded-md cursor-pointer';
+            optionDiv.textContent = option;
+            optionDiv.dataset.index = optionIndex;
+            optionsContainer.appendChild(optionDiv);
+        });
+
+        questionBlock.appendChild(optionsContainer);
+        mcqContainer.insertBefore(questionBlock, mcqSummary);
+    });
+    
+    mcqSummary.classList.remove('hidden');
+
+    mcqContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('mcq-option')) {
+            const optionsDiv = e.target.parentElement;
+            if (optionsDiv.classList.contains('answered')) return;
+            
+            optionsDiv.classList.add('answered');
+            const selectedIndex = parseInt(e.target.dataset.index);
+            const correctIndex = parseInt(optionsDiv.dataset.answer);
+
+            if (selectedIndex === correctIndex) {
+                score++;
+            }
+
+            const allOptions = optionsDiv.querySelectorAll('.mcq-option');
+            allOptions.forEach((opt, idx) => {
+                if (idx === correctIndex) {
+                    opt.classList.add('correct');
+                } else if (idx === selectedIndex) {
+                    opt.classList.add('incorrect');
+                }
+            });
+        }
+    });
+
+    document.getElementById('check-score-btn').addEventListener('click', () => {
+        const scoreDisplay = document.getElementById('score-display');
+        const scoreFeedback = document.getElementById('score-feedback');
+        const totalQuestions = mcqData.length;
+        
+        scoreDisplay.textContent = `You scored ${score} out of ${totalQuestions}!`;
+        
+        const percentage = (score / totalQuestions) * 100;
+        if (percentage >= 90) {
+            scoreFeedback.textContent = "Excellent! You have a strong command of Newton's Laws.";
+            scoreDisplay.style.color = '#4ade80'; // green-400
+        } else if (percentage >= 70) {
+            scoreFeedback.textContent = "Great job! You have a solid understanding of the concepts.";
+            scoreDisplay.style.color = '#60a5fa'; // blue-400
+        } else if (percentage >= 50) {
+            scoreFeedback.textContent = "Good effort. A little more review on the questions you missed will help.";
+            scoreDisplay.style.color = '#facc15'; // yellow-400
+        } else {
+            scoreFeedback.textContent = "Keep practicing! Reviewing the laws and trying the questions again will make a big difference.";
+            scoreDisplay.style.color = '#f87171'; // red-400
+        }
+    });
+
+</script>
+
+</body>
+</html>
