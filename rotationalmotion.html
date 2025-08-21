@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Rotational Motion | Physics Explorer</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content="In-depth module on rotational motion: torque, moment of inertia, angular momentum, rolling motion, conceptual questions, hard numericals, MCQs, and summaries." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #06080d;
+  --bg-alt: #0b1119;
+  --panel: #121b27;
+  --panel-alt: #162233;
+  --text: #d9e6f5;
+  --text-dim: #8ea2bb;
+  --accent: #63a1ff;
+  --accent-alt: #8f6bff;
+  --accent-grad: linear-gradient(135deg,#63a1ff,#8f6bff 55%,#d05bff);
+  --danger: #ff4d61;
+  --ok: #4ddf88;
+  --warn: #ffcc4d;
+  --radius-s: 6px;
+  --radius: 14px;
+  --shadow: 0 8px 28px -10px rgba(40,80,140,.4);
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: radial-gradient(circle at 20% 15%,#132033,#06080d 70%);
+  color: var(--text);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+}
+
+h1,h2,h3,h4 { font-family: var(--font-display); font-weight: 600; line-height: 1.15; margin: 0 0 .6em; letter-spacing: .5px; }
+p { margin: 0 0 1em; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.site-header { position: relative; padding-bottom: 3rem; overflow: hidden; }
+#bgCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+
+.nav-wrap {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .9rem clamp(1rem,3vw,2rem);
+}
+
+.logo { font-size: 1.25rem; font-weight: 700; letter-spacing: .5px; }
+.logo span {
+  background: var(--accent-grad);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.nav { display: flex; gap: 1.2rem; list-style: none; margin: 0; padding: 0; font-size: .9rem; }
+.nav a {
+  position: relative;
+  padding: .4rem .2rem;
+  font-weight: 500;
+}
+.nav li.active a:after,
+.nav a:focus-visible:after,
+.nav a:hover:after { width: 100%; }
+.nav a:after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  height: 2px; width: 0;
+  background: var(--accent-grad);
+  transition: width .35s;
+  border-radius: 2px;
+}
+
+.hero {
+  position: relative;
+  z-index: 2;
+  padding: 2rem clamp(1rem,3vw,2rem) 0;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.hero h1 { font-size: clamp(2.3rem,6vw,3.5rem); margin-top: 0; }
+.badge {
+  display: inline-block;
+  background: var(--panel);
+  padding: .4rem .8rem;
+  font-size: .55em;
+  border-radius: 999px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-right: .7rem;
+  box-shadow: 0 2px 8px -2px rgba(0,0,0,.3);
+}
+.lead { font-size: clamp(1.05rem,1.9vw,1.35rem); max-width: 820px; color: var(--text-dim); }
+.hero-actions { margin-top: 1.4rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.btn {
+  --btn-bg: var(--panel-alt);
+  --btn-color: var(--text);
+  border: 1px solid #203043;
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  padding: .85rem 1.25rem;
+  font-size: .85rem;
+  font-weight: 600;
+  letter-spacing: .6px;
+  border-radius: var(--radius-s);
+  cursor: pointer;
+  transition: background .35s, transform .25s, box-shadow .25s;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  text-decoration: none;
+  position: relative;
+}
+.btn.primary { --btn-bg: var(--accent-grad); color: #fff; box-shadow: var(--shadow); border: 0; }
+.btn.outline { background: transparent; border: 1px solid #324457; }
+.btn:hover { transform: translateY(-2px); }
+.btn.small { padding: .55rem .9rem; font-size: .7rem; letter-spacing: .8px; }
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.section { padding: clamp(3rem,7vw,5.5rem) clamp(1rem,3vw,2rem); max-width: 1180px; margin: 0 auto; }
+.section.alt {
+  background: linear-gradient(145deg,#0d1520,#08101a);
+  border-top: 1px solid #142233;
+  border-bottom: 1px solid #142233;
+}
+
+.theory-block {
+  background: var(--panel);
+  border: 1px solid #1d2a39;
+  padding: 1.2rem 1.3rem 1.4rem;
+  border-radius: var(--radius);
+  box-shadow: 0 6px 20px -8px rgba(0,0,0,.45);
+  margin-bottom: 1.3rem;
+  position: relative;
+  overflow: hidden;
+}
+.theory-block:before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(circle at 85% 20%,rgba(143,107,255,.16),transparent 60%);
+  opacity:.7;
+  pointer-events:none;
+}
+
+.dash { list-style: none; padding-left: 0; margin: .6rem 0 0; }
+.dash li {
+  position: relative;
+  padding-left: 1.05rem;
+  margin-bottom: .4rem;
+  font-size: .9rem;
+}
+.dash li:before { content:"–"; position:absolute; left:0; color: var(--accent); }
+
+.qa-list .qa, .problems .problem {
+  margin-bottom: .9rem;
+  border: 1px solid #1e2d3d;
+  border-radius: var(--radius-s);
+  background: var(--panel);
+  overflow: hidden;
+}
+
+.qa button.q,
+.problem button.q {
+  all: unset;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  padding: .85rem 1rem;
+  font-weight: 600;
+  letter-spacing: .4px;
+  font-size: .9rem;
+  background: linear-gradient(90deg,#162434,#132030);
+  position: relative;
+}
+.qa button.q:hover,
+.problem button.q:hover { background: linear-gradient(90deg,#1b2f44,#172a3b); }
+.qa .a,
+.problem .a {
+  display: none;
+  padding: .8rem 1rem 1rem;
+  font-size: .85rem;
+  color: var(--text-dim);
+  background: #121d29;
+  line-height: 1.55;
+}
+.qa.open .a,
+.problem.open .a { display: block; }
+.qa.open button.q:after,
+.problem.open button.q:after { transform: rotate(180deg); }
+
+.qa button.q:after,
+.problem button.q:after {
+  content:"⌄";
+  position:absolute;
+  right: 1rem;
+  top: 50%;
+  transform:translateY(-50%);
+  font-size: .9rem;
+  transition: transform .35s;
+  color: var(--accent);
+}
+
+.problems .problem ol { margin: 0 0 .6rem 1rem; padding-left: .6rem; }
+.problems .problem ul { margin: .3rem 0 .6rem 1rem; font-size: .8rem; }
+
+.mcq-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .9rem;
+  align-items: center;
+  background: var(--panel);
+  border: 1px solid #1d2d3d;
+  padding: .8rem .9rem;
+  border-radius: var(--radius-s);
+  margin: 1.2rem 0 1.5rem;
+  font-size: .75rem;
+}
+.mcq-controls label {
+  font-weight: 600;
+  letter-spacing: .6px;
+  display: flex;
+  gap: .4rem;
+  align-items: center;
+}
+.mcq-controls input {
+  width: 4rem;
+  background: #162332;
+  border: 1px solid #26394d;
+  color: var(--text);
+  padding: .35rem .4rem;
+  border-radius: var(--radius-s);
+  font: inherit;
+}
+
+.mcq-bottom-actions {
+  margin-top: 1.8rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.timer-display {
+  font-weight: 700;
+  letter-spacing: 1px;
+  min-width: 90px;
+  text-align: center;
+  padding: .4rem .6rem;
+  border-radius: var(--radius-s);
+  background: #162332;
+  border: 1px solid #223444;
+}
+.timer-warning { color: var(--warn); animation: pulseWarn 1s infinite; }
+.timer-expired { color: var(--danger); }
+@keyframes pulseWarn {
+  0%,100% { text-shadow: 0 0 4px rgba(255,204,77,.4); }
+  50% { text-shadow: 0 0 10px rgba(255,204,77,.9); }
+}
+
+.mcq-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  margin-top: 2rem;
+}
+
+.mcq {
+  background: var(--panel);
+  border: 1px solid #1e2d3d;
+  border-radius: var(--radius);
+  padding: .9rem .9rem 1rem;
+  font-size: .8rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.mcq:before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(circle at 75% 20%,rgba(99,161,255,.12),transparent 60%);
+  pointer-events:none;
+}
+.mcq .stem { font-weight: 600; margin-bottom: .5rem; font-size: .85rem; line-height: 1.3; }
+.mcq ol.options {
+  list-style: none;
+  margin: 0 0 .5rem;
+  padding: 0;
+  display: grid;
+  gap: .35rem;
+}
+.mcq ol.options li {
+  background: #162332;
+  padding: .45rem .55rem;
+  border-radius: var(--radius-s);
+  cursor: pointer;
+  position: relative;
+  transition: background .3s, transform .25s;
+}
+.mcq ol.options li:hover { background: #1d2e41; }
+.mcq.correct ol.options li.selected { background: linear-gradient(90deg,#0f3a24,#1a5537); }
+.mcq.incorrect ol.options li.selected { background: linear-gradient(90deg,#4e1e27,#5c1f2b); }
+.mcq.locked ol.options li { cursor: not-allowed; opacity: .65; }
+.mcq .explain {
+  font-size: .7rem;
+  color: var(--text-dim);
+  min-height: 1rem;
+  line-height: 1.4;
+  border-top: 1px dashed #223344;
+  padding-top: .4rem;
+}
+
+.mcq.correct:after,
+.mcq.incorrect:after {
+  position: absolute;
+  top: .6rem;
+  right: .6rem;
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .5px;
+}
+.mcq.correct:after { content: "✓"; color: var(--ok); }
+.mcq.incorrect:after { content: "✕"; color: var(--danger); }
+
+.mcq-final-summary {
+  margin-top: 2.5rem;
+  background: var(--panel);
+  border: 1px solid #1e2d3d;
+  padding: 1.2rem 1.3rem;
+  border-radius: var(--radius);
+  font-size: .85rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+.mcq-final-summary h3 { margin-top: 0; font-size: 1.05rem; color: var(--text); }
+
+.summary-grid {
+  display: grid;
+  gap: .6rem;
+  grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+  margin: .8rem 0 1.2rem;
+}
+.summary-grid .metric {
+  background: #162332;
+  border: 1px solid #223445;
+  padding: .6rem .7rem;
+  border-radius: var(--radius-s);
+  font-size: .7rem;
+  letter-spacing: .5px;
+}
+.summary-grid .metric strong { display: block; font-size: .95rem; color: var(--accent); margin-bottom: .25rem; }
+
+.incorrect-list {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: .55rem;
+  font-size: .7rem;
+}
+.incorrect-list li {
+  background: #151f2a;
+  border: 1px solid #223342;
+  padding: .55rem .6rem .65rem;
+  border-radius: var(--radius-s);
+}
+
+.mcq-summary-intro {
+  margin-top: 2.5rem;
+  background: var(--panel);
+  border: 1px solid #1e2d3d;
+  padding: 1.2rem 1.3rem;
+  border-radius: var(--radius);
+  font-size: .85rem;
+  color: var(--text-dim);
+}
+
+.tips-list {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: .65rem;
+  font-size: .85rem;
+}
+.tips-list li {
+  background: var(--panel);
+  padding: .7rem .85rem;
+  border: 1px solid #1d2b3b;
+  border-radius: var(--radius-s);
+  position: relative;
+  line-height: 1.4;
+}
+.tips-list li strong { color: var(--accent); }
+
+.site-footer {
+  padding: 2.5rem clamp(1rem,3vw,2rem) 2.8rem;
+  background: #05080d;
+  font-size: .7rem;
+  color: var(--text-dim);
+  border-top: 1px solid #121c27;
+}
+.footer-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.to-top {
+  background: #132030;
+  padding: .6rem .85rem;
+  border-radius: var(--radius-s);
+  text-decoration: none;
+  color: var(--text-dim);
+  font-weight: 600;
+  font-size: .7rem;
+  letter-spacing: 1px;
+}
+.to-top:hover { background: #1a2d40; }
+
+#themeToggle { backdrop-filter: blur(4px); }
+
+.light {
+  --bg: #f5f9ff;
+  --bg-alt: #e9f1fa;
+  --panel: #ffffff;
+  --panel-alt: #f1f6fb;
+  --text: #22303d;
+  --text-dim: #5a7288;
+  --accent: #316dff;
+  --accent-alt: #6942ff;
+  --accent-grad: linear-gradient(135deg,#316dff,#6942ff 55%,#a842ff);
+  background: #f2f7fc;
+  color: var(--text);
+}
+.light .section.alt { background: #eef4fa; }
+.light .theory-block,
+.light .qa button.q,
+.light .problem button.q,
+.light .qa .a,
+.light .problem .a,
+.light .mcq,
+.light .tips-list li,
+.light .mcq-controls,
+.light .mcq-final-summary,
+.light .mcq-summary-intro {
+  background: var(--panel);
+  border-color: #d3dfec;
+}
+.light .mcq ol.options li { background: #f1f6fb; }
+.light .mcq ol.options li:hover { background: #e3edf7; }
+.light .mcq.correct ol.options li.selected { background: #dff4ea; }
+.light .mcq.incorrect ol.options li.selected { background: #f9d9de; }
+.light .btn.outline { border-color: #c2d3e4; }
+.light .site-footer { background: #e2ecf6; border-top-color:#c5d6e4; }
+.light .timer-display { background: #e7f0f9; border-color:#c5d6e4; }
+
+@media (max-width: 760px) { .mcq-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) {
+  .mcq-grid { grid-template-columns: 1fr; }
+  .nav { display: none; }
+  .mcq-controls { flex-direction: column; align-items: stretch; }
+  .timer-display { width: 100%; }
+  .mcq-bottom-actions { justify-content: stretch; }
+}
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #0d1620; }
+::-webkit-scrollbar-thumb { background: #1d3042; border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: #28455f; }
+</style>
+</head>
+<body>
+<header class="site-header" id="top">
+  <div class="nav-wrap">
+    <div class="logo">Physics<span>Module</span></div>
+    <nav>
+      <ul class="nav">
+        <li><a href="index.html">Home</a></li>
+        <li class="active"><a href="#top">Rotational Motion</a></li>
+        <li><a href="#conceptual">Conceptual Qs</a></li>
+        <li><a href="#numericals">Numericals</a></li>
+        <li><a href="#mcqs">MCQs</a></li>
+        <li><a href="#tips">Tips</a></li>
+      </ul>
+    </nav>
+    <button id="themeToggle" class="btn small" aria-label="Toggle theme">☾</button>
+  </div>
+  <div class="hero">
+    <h1><span class="badge">Module</span> Rotational Motion</h1>
+    <p class="lead">Explore the dynamics of rotating bodies. This module covers torque, moment of inertia, angular momentum, conservation laws, rolling motion, rotational kinematics, and the equilibrium of rigid bodies in an interactive learning format.</p>
+    <div class="hero-actions">
+      <a href="#overview" class="btn primary">Start Learning ↓</a>
+      <a href="#mcqs" class="btn outline">Jump to MCQs</a>
+    </div>
+  </div>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+</header>
+
+<main id="mainContent">
+
+  <!-- Overview Section -->
+  <section id="overview" class="section">
+    <h2>1. Core Concepts & Theory</h2>
+
+    <article class="theory-block">
+      <h3>1.1 Angular Kinematics</h3>
+      <p>Rotation is described by angular displacement (θ), velocity (ω = dθ/dt), and acceleration (α = dω/dt). These are vector quantities with direction given by the right-hand rule.</p>
+    </article>
+
+    <article class="theory-block">
+      <h3>1.2 Relation Between Linear & Angular Quantities</h3>
+      <p>For a point at radius <code>r</code> from the axis: tangential velocity <code>vt = rω</code>, tangential acceleration <code>at = rα</code>, and centripetal acceleration <code>ac = vt²/r = rω²</code>.</p>
+    </article>
+    
+    <article class="theory-block">
+      <h3>1.3 Torque (τ)</h3>
+      <p>The rotational analog of force. Defined as <code>τ = r × F</code>, its magnitude is <code>τ = rFsin(θ)</code>. Net torque causes angular acceleration: <code>Στ = Iα</code>.</p>
+    </article>
+
+    <article class="theory-block">
+      <h3>1.4 Moment of Inertia (I)</h3>
+      <p>A measure of an object's resistance to angular acceleration, analogous to mass. It depends on mass and its distribution relative to the axis of rotation: <code>I = Σmᵢrᵢ²</code> for discrete masses, or <code>I = ∫r²dm</code> for continuous bodies.</p>
+    </article>
+
+    <article class="theory-block">
+      <h3>1.5 Radius of Gyration (k)</h3>
+      <p>The distance from the axis where all the mass could be concentrated without changing the moment of inertia. Defined by <code>I = Mk²</code>.</p>
+    </article>
+
+    <article class="theory-block">
+      <h3>1.6 Parallel & Perpendicular Axis Theorems</h3>
+      <ul class="dash">
+        <li><strong>Parallel Axis Theorem:</strong> <code>I = Icom + Md²</code>, relates inertia about an axis to a parallel one through the center of mass (distance <code>d</code> away).</li>
+        <li><strong>Perpendicular Axis Theorem:</strong> For a planar lamina, <code>Iz = Ix + Iy</code>, where x and y axes are in the plane and z is perpendicular to it.</li>
+      </ul>
+    </article>
+
+    <article class="theory-block">
+      <h3>1.7 Rotational Equations of Motion</h3>
+      <p>For constant angular acceleration (α), these are analogous to linear kinematics:
+      <code>ωf = ωi + αt</code>, <code>Δθ = ωi t + ½αt²</code>, <code>ωf² = ωi² + 2αΔθ</code>.</p>
+    </article>
+
+    <article class="theory-block">
+      <h3>1.8 Work, Power, and Rotational Kinetic Energy</h3>
+      <ul class="dash">
+          <li><strong>Work:</strong> <code>W = ∫τ dθ</code></li>
+          <li><strong>Power:</strong> <code>P = dW/dt = τω</code></li>
+          <li><strong>Rotational Kinetic Energy:</strong> <code>Krot = ½Iω²</code></li>
+      </ul>
+    </article>
+
+    <article class="theory-block">
+      <h3>1.9 Angular Momentum (L)</h3>
+      <p>The rotational analog of linear momentum. For a point mass, <code>L = r × p</code>. For a rigid body, <code>L = Iω</code>. The net external torque equals the rate of change of angular momentum: <code>Στext = dL/dt</code>.</p>
+    </article>
+
+    <article class="theory-block">
+      <h3>1.10 Conservation of Angular Momentum</h3>
+      <p>If the net external torque on a system is zero, its total angular momentum is conserved. <code>Linitial = Lfinal</code> or <code>Ii ωi = If ωf</code>. This explains why a spinning skater speeds up when they pull their arms in.</p>
+    </article>
+
+    <article class="theory-block">
+      <h3>1.11 Equilibrium of Rigid Bodies</h3>
+      <p>For an object to be in static equilibrium, two conditions must be met:
+      1. Net external force is zero (<code>ΣF = 0</code>, translational equilibrium).
+      2. Net external torque is zero about any axis (<code>Στ = 0</code>, rotational equilibrium).</p>
+    </article>
+    
+    <article class="theory-block">
+      <h3>1.12 Rolling Motion</h3>
+      <p>Rolling without slipping is a combination of translation and rotation. The condition for no slipping is <code>vcom = Rω</code>. The total kinetic energy is the sum of translational and rotational kinetic energies: <code>Ktotal = ½Mvcom² + ½Icomω²</code>.</p>
+    </article>
+
+  </section>
+
+  <!-- Conceptual Questions -->
+  <section id="conceptual" class="section alt">
+    <h2>2. Conceptual Questions (with Answers)</h2>
+    <p>Click each question to reveal the answer & explanation.</p>
+    <div class="qa-list">
+      <div class="qa">
+        <button class="q" aria-expanded="false">C1. Why does a solid cylinder win a race against a hollow cylinder down an incline?</button>
+        <div class="a" role="region" aria-hidden="true">
+          <p>The solid cylinder has a smaller moment of inertia (I=½MR²) compared to the hollow one (I=MR²). A smaller I means less of its potential energy is converted to rotational KE, leaving more for translational KE, resulting in a faster linear speed.</p>
+        </div>
+      </div>
+      <div class="qa">
+        <button class="q" aria-expanded="false">C2. Can an object have zero net torque but a non-zero net force acting on it?</button>
+        <div class="a" role="region" aria-hidden="true">
+          <p>Yes. If a net force is applied directly to the center of mass, it will cause linear acceleration but no angular acceleration (zero torque). For example, pushing the center of a floating box.</p>
+        </div>
+      </div>
+      <div class="qa">
+        <button class="q" aria-expanded="false">C3. How can a diver change their rotation speed mid-air without any external torque?</button>
+        <div class="a" role="region" aria-hidden="true">
+          <p>By changing their moment of inertia. In the air, angular momentum (L=Iω) is conserved. By pulling into a tuck (decreasing I), their angular velocity (ω) must increase to keep L constant. Extending for entry increases I and slows rotation.</p>
+        </div>
+      </div>
+      <div class="qa">
+        <button class="q" aria-expanded="false">C4. Is it easier to balance a long pole or a short stick vertically on your finger?</button>
+        <div class="a" role="region" aria-hidden="true">
+          <p>A long pole. It has a much larger moment of inertia, so for any given destabilizing torque (like gravity on a slight tilt), the resulting angular acceleration (α = τ/I) is smaller. This gives you more time to react and correct the balance.</p>
+        </div>
+      </div>
+      <div class="qa">
+        <button class="q" aria-expanded="false">C5. Where should you push on a door to open it most easily?</button>
+        <div class="a" role-region" aria-hidden="true">
+          <p>As far as possible from the hinges (the axis of rotation) and perpendicular to the door's surface. This maximizes the lever arm (r) and ensures sin(θ)=1 in the torque equation τ = rFsin(θ), giving the most torque for a given force.</p>
+        </div>
+      </div>
+      <div class="qa">
+        <button class="q" aria-expanded="false">C6. Does the center of mass of a rigid body have to be inside the body?</button>
+        <div class="a" role="region" aria-hidden="true">
+          <p>No. For objects with certain shapes, like a doughnut, a boomerang, or a hollow sphere, the center of mass is at the geometric center, which is in the empty space. An L-shaped object can also have its center of mass outside its physical body.</p>
+        </div>
+      </div>
+      <div class="qa">
+        <button class="q" aria-expanded="false">C7. A cat is dropped upside down and lands on its feet. How does it do this without violating conservation of angular momentum?</button>
+        <div class="a" role="region" aria-hidden="true">
+          <p>It doesn't violate the law because a cat is not a rigid body. Its total angular momentum remains zero. The cat initiates a turn by bending in the middle and rotating the front and back halves of its body in opposite directions. It manipulates its moment of inertia by extending and retracting its legs, allowing it to create a net rotation of its entire body to land upright.</p>
+        </div>
+      </div>
+      <div class="qa">
+        <button class="q" aria-expanded="false">C8. You have a raw egg and a hard-boiled egg. Without breaking them, how can you tell which is which?</button>
+        <div class="a" role="region" aria-hidden="true">
+          <p>Spin both on a flat surface. The hard-boiled egg will spin smoothly and for a longer time, behaving as a single rigid body. The raw egg will wobble and stop quickly. The liquid yolk and white inside have inertia and slosh around, creating internal friction that dissipates the rotational energy rapidly and makes the spin unstable.</p>
+        </div>
+      </div>
+      <div class="qa">
+        <button class="q" aria-expanded="false">C9. Why do helicopters need a tail rotor?</button>
+        <div class="a" role="region" aria-hidden="true">
+          <p>This is a direct consequence of the conservation of angular momentum. The engine applies a torque to the main rotor to make it spin. By Newton's third law, the rotor applies an equal and opposite torque on the helicopter's body. Without a counteracting force, this torque would cause the helicopter's body to spin in the opposite direction. The tail rotor provides a sideways thrust that creates a counter-torque to keep the helicopter stable.</p>
+        </div>
+      </div>
+      <div class="qa">
+        <button class="q" aria-expanded="false">C10. You stand on a frictionless spinning platform, initially at rest. You are holding a bicycle wheel spinning with its axis vertical. What happens if you flip the wheel upside down?</button>
+        <div class="a" role="region" aria-hidden="true">
+          <p>You and the platform will start to spin in the original direction of the wheel's spin. The total angular momentum of the system (you + platform + wheel) must be conserved (initially L_wheel). When you flip the wheel, its angular momentum vector is now -L_wheel. To maintain conservation, L_initial = L_final becomes L_wheel = -L_wheel + L_you. Therefore, your angular momentum must become L_you = 2 * L_wheel. You spin to compensate for the change.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hard Numericals -->
+  <section id="numericals" class="section">
+    <h2>3. Very Hard Numerical Problems (with Worked Solutions)</h2>
+    <p>Toggle each problem to reveal a structured solution.</p>
+    <div class="problems">
+      <div class="problem">
+        <button class="q" aria-expanded="false">N1. A 5 kg solid sphere (r=0.2m) rolls without slipping from rest down a 30° incline of length 10m. Find its final speed and angular velocity.</button>
+        <div class="a" role="region" aria-hidden="true">
+          <ol>
+            <li>Use conservation of energy: mgh = ½mv² + ½Iω². For a solid sphere, I=²/₅mr² and v=rω.</li>
+            <li>h = 10sin(30°) = 5m. Substitute I and ω: mgh = ½mv² + ½(²/₅mr²) (v/r)² = ½mv² + ¹/₅mv² = ⁷/₁₀mv².</li>
+            <li>Solve for v: v = √(¹⁰/₇gh) = √(¹⁰/₇ * 9.8 * 5) ≈ 8.37 m/s.</li>
+            <li>Find ω: ω = v/r = 8.37 / 0.2 ≈ 41.85 rad/s.</li>
+          </ol>
+          <p><strong>Answer:</strong> v ≈ 8.37 m/s, ω ≈ 41.85 rad/s.</p>
+        </div>
+      </div>
+      <div class="problem">
+        <button class="q" aria-expanded="false">N2. A 20 kg turntable (I=2.5 kg·m²) rotates at 10 rad/s. A 2 kg piece of clay is dropped 1.2m from the center. What is the new angular speed?</button>
+        <div class="a" role="region" aria-hidden="true">
+          <p>Use conservation of angular momentum: Li = Lf.
+          Li = Itable * ωi = 2.5 * 10 = 25 kg·m²/s.
+          Ifinal = Itable + Iclay = 2.5 + mr² = 2.5 + 2*(1.2)² = 5.38 kg·m².
+          ωf = Li / Ifinal = 25 / 5.38 ≈ 4.65 rad/s.</p>
+        </div>
+      </div>
+      <div class="problem">
+        <button class="q" aria-expanded="false">N3. A grinding wheel (I=0.6 kg·m²) slows from 900 rpm to rest in 15s due to friction. What is the frictional torque?</button>
+        <div class="a" role="region" aria-hidden="true">
+          <p>First, convert rpm to rad/s: ωi = 900 * 2π/60 ≈ 94.25 rad/s.
+          Find angular acceleration: α = (ωf - ωi)/t = (0 - 94.25)/15 ≈ -6.28 rad/s².
+          Find torque: τ = Iα = 0.6 * (-6.28) ≈ -3.77 N·m.</p>
+        </div>
+      </div>
+      <div class="problem">
+        <button class="q" aria-expanded="false">N4. A uniform 4.0 m, 50 kg ladder rests against a frictionless wall at a 60° angle with the ground. The coefficient of static friction between ladder and ground is 0.45. A 75 kg person climbs the ladder. How far up can they go before it slips?</button>
+        <div class="a" role="region" aria-hidden="true">
+          <ol>
+            <li><strong>Equilibrium Conditions:</strong> ΣFx = 0, ΣFy = 0, Στ = 0.</li>
+            <li><strong>Forces:</strong> Let N_g be normal force from ground, N_w from wall. W_l = 50*9.8=490N is ladder weight. W_p = 75*9.8=735N is person weight. f_s is static friction at ground.</li>
+            <li><strong>ΣFy = 0:</strong> N_g - W_l - W_p = 0 → N_g = 490 + 735 = 1225 N.</li>
+            <li><strong>Max Friction:</strong> Max static friction is f_s_max = μs * N_g = 0.45 * 1225 = 551.25 N.</li>
+            <li><strong>ΣFx = 0:</strong> f_s - N_w = 0 → N_w = f_s. At slipping, f_s = 551.25 N, so N_w = 551.25 N.</li>
+            <li><strong>Στ = 0 (about the base):</strong> Choose the base of the ladder as the pivot to eliminate torques from N_g and f_s. Let 'd' be the distance the person climbs along the ladder.
+            Torque from wall (counter-clockwise): τ_wall = N_w * (4.0 sin 60°).
+            Torque from ladder's weight (clockwise): τ_ladder = W_l * (2.0 cos 60°).
+            Torque from person (clockwise): τ_person = W_p * (d cos 60°).</li>
+            <li><strong>Set torques equal:</strong> τ_wall = τ_ladder + τ_person
+            551.25 * (4.0 * 0.866) = 490 * (2.0 * 0.5) + 735 * (d * 0.5)
+            1909.5 = 490 + 367.5d</li>
+            <li><strong>Solve for d:</strong> 1419.5 = 367.5d → d ≈ 3.86 m.</li>
+          </ol>
+          <p><strong>Answer:</strong> The person can climb approximately 3.86 meters up the ladder before it begins to slip.</p>
+        </div>
+      </div>
+      <div class="problem">
+        <button class="q" aria-expanded="false">N5. A solid 1.0 kg disk (radius 0.1 m) is at rest. A string is wrapped around it, and a 2.0 kg block is attached to the string. The block is released and falls, causing the disk to rotate. Find the acceleration of the block and the tension in the string.</button>
+        <div class="a" role="region" aria-hidden="true">
+          <ol>
+            <li><strong>System Analysis:</strong> This is a coupled system. The block's linear motion (F=ma) is linked to the disk's rotational motion (τ=Iα).</li>
+            <li><strong>For the Block (Linear):</strong> The net force is the block's weight minus the string tension (T). So, F_net = mg - T = ma. → 2*9.8 - T = 2a → 19.6 - T = 2a. (Eq 1)</li>
+            <li><strong>For the Disk (Rotational):</strong> The tension T provides the torque at radius R. τ = T*R. The disk is solid, so I = ½MR². The link between linear and rotational acceleration is a = Rα.</li>
+            <li><strong>τ = Iα:</strong> T*R = (½MR²)α. Substitute α = a/R → T*R = (½MR²)(a/R) → T = ½Ma.</li>
+            <li><strong>Solve for T:</strong> T = ½ * (1.0 kg) * a = 0.5a. (Eq 2)</li>
+            <li><strong>Combine Equations:</strong> Substitute Eq 2 into Eq 1:
+            19.6 - (0.5a) = 2a
+            19.6 = 2.5a
+            a = 19.6 / 2.5 = 7.84 m/s².</li>
+            <li><strong>Find Tension:</strong> Now use Eq 2 to find T:
+            T = 0.5 * 7.84 = 3.92 N.</li>
+          </ol>
+          <p><strong>Answer:</strong> The block's acceleration is 7.84 m/s², and the tension in the string is 3.92 N.</p>
+        </div>
+      </div>
+      <div class="problem">
+        <button class="q" aria-expanded="false">N6. A horizontal rod of length 1.2 m and mass 4.0 kg is pivoted at one end. A 0.5 kg ball of clay traveling at 10 m/s hits the rod at the other end and sticks to it. What is the angular speed of the rod-clay system just after the collision?</button>
+        <div class="a" role="region" aria-hidden="true">
+           <ol>
+            <li><strong>Conservation Law:</strong> Since there's a collision, we use conservation of angular momentum about the pivot. The pivot can exert an external force, so linear momentum is not conserved, but the pivot exerts no torque, so angular momentum is.</li>
+            <li><strong>Initial Angular Momentum (L_initial):</strong> This is just the angular momentum of the clay ball before impact. L_clay = r × p = r*m*v (since it hits perpendicularly).
+            L_initial = (1.2 m) * (0.5 kg) * (10 m/s) = 6.0 kg·m²/s.</li>
+            <li><strong>Final Angular Momentum (L_final):</strong> After the collision, the rod and clay rotate together. L_final = I_total * ω_final.</li>
+            <li><strong>Calculate Total Moment of Inertia (I_total):</strong> I_total = I_rod + I_clay.
+            The rod rotates about its end, so I_rod = ⅓ML² = ⅓ * (4.0 kg) * (1.2 m)² = 1.92 kg·m².
+            The clay is a point mass at the end, so I_clay = mr² = (0.5 kg) * (1.2 m)² = 0.72 kg·m².
+            I_total = 1.92 + 0.72 = 2.64 kg·m².</li>
+            <li><strong>Apply Conservation:</strong> L_initial = L_final
+            6.0 kg·m²/s = (2.64 kg·m²) * ω_final.</li>
+            <li><strong>Solve for ω_final:</strong> ω_final = 6.0 / 2.64 ≈ 2.27 rad/s.</li>
+          </ol>
+          <p><strong>Answer:</strong> The angular speed of the system just after the collision is approximately 2.27 rad/s.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MCQs -->
+  <section id="mcqs" class="section alt">
+    <h2>4. Multiple Choice Questions (20)</h2>
+    <p>Set a timer (optional), answer MCQs. The Finish & Summary button is at the end of the MCQ list.</p>
+
+    <div class="mcq-controls">
+      <label>Timer (minutes):
+        <input type="number" id="mcqMinutes" min="1" value="10" />
+      </label>
+      <button id="startMcqTimer" class="btn small primary">Start Timer</button>
+      <span id="mcqTimerDisplay" class="timer-display" aria-live="polite"></span>
+    </div>
+
+    <div class="mcq-grid">
+      <div class="mcq" data-answer="b">
+        <div class="stem">MCQ1. The rotational analog of mass is:</div>
+        <ol class="options">
+          <li data-opt="a">Torque</li>
+          <li data-opt="b">Moment of Inertia</li>
+          <li data-opt="c">Angular Momentum</li>
+          <li data-opt="d">Angular Velocity</li>
+        </ol>
+        <div class="explain"></div>
+      </div>
+      <div class="mcq" data-answer="d">
+        <div class="stem">MCQ2. If the net external torque on a system is zero, which quantity is conserved?</div>
+        <ol class="options">
+          <li data-opt="a">Rotational Kinetic Energy</li>
+          <li data-opt="b">Moment of Inertia</li>
+          <li data-opt="c">Angular Acceleration</li>
+          <li data-opt="d">Angular Momentum</li>
+        </ol>
+        <div class="explain"></div>
+      </div>
+      <div class="mcq" data-answer="a">
+        <div class="stem">MCQ3. A solid sphere and a hollow sphere of the same mass and radius roll down an incline. Which reaches the bottom first?</div>
+        <ol class="options">
+          <li data-opt="a">Solid sphere</li>
+          <li data-opt="b">Hollow sphere</li>
+          <li data-opt="c">They tie</li>
+          <li data-opt="d">Depends on the angle</li>
+        </ol>
+        <div class="explain"></div>
+      </div>
+      <div class="mcq" data-answer="c">
+        <div class="stem">MCQ4. The Parallel Axis Theorem is given by:</div>
+        <ol class="options">
+          <li data-opt="a">I = Icom - Md²</li>
+          <li data-opt="b">I = Icom + M²d</li>
+          <li data-opt="c">I = Icom + Md²</li>
+          <li data-opt="d">Iz = Ix - Iy</li>
+        </ol>
+        <div class="explain"></div>
+      </div>
+      <div class="mcq" data-answer="b">
+        <div class="stem">MCQ5. Torque is defined as:</div>
+        <ol class="options">
+          <li data-opt="a">r · F</li>
+          <li data-opt="b">r × F</li>
+          <li data-opt="c">I × α</li>
+          <li data-opt="d">F / r</li>
+        </ol>
+        <div class="explain"></div>
+      </div>
+      <div class="mcq" data-answer="d">
+        <div class="stem">MCQ6. Rotational power can be calculated as:</div>
+        <ol class="options">
+          <li data-opt="a">τ / ω</li>
+          <li data-opt="b">Iω</li>
+          <li data-opt="c">½Iω²</li>
+          <li data-opt="d">τω</li>
+        </ol>
+        <div class="explain"></div>
+      </div>
+      <div class="mcq" data-answer="a">
+        <div class="stem">MCQ7. For a body to be in complete static equilibrium:</div>
+        <ol class="options">
+          <li data-opt="a">ΣF=0 and Στ=0</li>
+          <li data-opt="b">Only ΣF=0</li>
+          <li data-opt="c">Only Στ=0</li>
+          <li data-opt="d">v=0 and ω=0</li>
+        </ol>
+        <div class="explain"></div>
+      </div>
+      <div class="mcq" data-answer="c">
+        <div class="stem">MCQ8. The condition for rolling without slipping is:</div>
+        <ol class="options">
+          <li data-opt="a">vcom > Rω</li>
+          <li data-opt="b">vcom < Rω</li>
+          <li data-opt="c">vcom = Rω</li>
+          <li data-opt="d">acom = Rω</li>
+        </ol>
+        <div class="explain"></div>
+      </div>
+      <div class="mcq" data-answer="b">
+        <div class="stem">MCQ9. An ice skater spins faster by pulling their arms in. This is an example of:</div>
+        <ol class="options">
+          <li data-opt="a">Conservation of Energy</li>
+          <li data-opt="b">Conservation of Angular Momentum</li>
+          <li data-opt="c">Conservation of Linear Momentum</li>
+          <li data-opt="d">Increasing Torque</li>
+        </ol>
+        <div class="explain"></div>
+      </div>
+      <div class="mcq" data-answer="d">
+        <div class="stem">MCQ10. The Perpendicular Axis Theorem applies to:</div>
+        <ol class="options">
+          <li data-opt="a">All rigid bodies</li>
+          <li data-opt="b">Spheres only</li>
+          <li data-opt="c">3D objects</li>
+          <li data-opt="d">Planar laminas (2D objects)</li>
+        </ol>
+        <div class="explain"></div>
+      </div>
+       <div class="mcq" data-answer="a">
+        <div class="stem">MCQ11. Units of angular momentum can be:</div>
+        <ol class="options">
+          <li data-opt="a">kg·m²/s</li>
+          <li data-opt="b">kg·m/s</li>
+          <li data-opt="c">N·m/s</li>
+          <li data-opt="d">rad/s²</li>
+        </ol>
+        <div class="explain"></div>
+      </div>
+      <div class="mcq" data-answer="c">
+        <div class="stem">MCQ12. What does Moment of Inertia depend on?</div>
+        <ol class="options">
+          <li data-opt="a">Angular velocity only</li>
+          <li data-opt="b">Mass only</li>
+          <li data-opt="c">Mass and its distribution about an axis</li>
+          <li data-opt="d">Torque and angular acceleration</li>
+        </ol>
+        <div class="explain"></div>
+      </div>
+      <div class="mcq" data-answer="b">
+        <div class="stem">MCQ13. Rotational kinetic energy is given by the formula:</div>
+        <ol class="options">
+          <li data-opt="a">½mv²</li>
+          <li data-opt="b">½Iω²</li>
+          <li data-opt="c">Iω</li>
+          <li data-opt="d">τω</li>
+        </ol>
+        <div class="explain"></div>
+      </div>
+      <div class="mcq" data-answer="d">
+        <div class="stem">MCQ14. If you double the distance of a mass from its axis of rotation, its contribution to the moment of inertia changes by a factor of:</div>
+        <ol class="options">
+          <li data-opt="a">½</li>
+          <li data-opt="b">1 (no change)</li>
+          <li data-opt="c">2</li>
+          <li data-opt="d">4</li>
+        </ol>
+        <div class="explain"></div>
+      </div>
+      <div class="mcq" data-answer="a">
+        <div class="stem">MCQ15. The right-hand rule is used to determine the direction of:</div>
+        <ol class="options">
+          <li data-opt="a">Angular velocity vector</li>
+          <li data-opt="b">Centripetal force</li>
+          <li data-opt="c">Tangential velocity</li>
+          <li data-opt="d">Radius of gyration</li>
+        </ol>
+        <div class="explain"></div>
+      </div>
+      <div class="mcq" data-answer="c">
+        <div class="stem">MCQ16. The center of gravity and center of mass coincide if:</div>
+        <ol class="options">
+          <li data-opt="a">The object is symmetric</li>
+          <li data-opt="b">The object is at rest</li>
+          <li data-opt="c">The gravitational field is uniform</li>
+          <li data-opt="d">They never coincide</li>
+        </ol>
+        <div class="explain"></div>
+      </div>
+      <div class="mcq" data-answer="b">
+        <div class="stem">MCQ17. The equation Στ = Iα is the rotational analog of:</div>
+        <ol class="options">
+          <li data-opt="a">p = mv</li>
+          <li data-opt="b">F = ma</li>
+          <li data-opt="c">W = Fd</li>
+          <li data-opt="d">K = ½mv²</li>
+        </ol>
+        <div class="explain"></div>
+      </div>
+      <div class="mcq" data-answer="d">
+        <div class="stem">MCQ18. A flywheel is a good energy storage device because it has a large:</div>
+        <ol class="options">
+          <li data-opt="a">Angular acceleration</li>
+          <li data-opt="b">Mass</li>
+          <li data-opt="c">Torque</li>
+          <li data-opt="d">Moment of Inertia</li>
+        </ol>
+        <div class="explain"></div>
+      </div>
+      <div class="mcq" data-answer="a">
+        <div class="stem">MCQ19. Angular acceleration has units of:</div>
+        <ol class="options">
+          <li data-opt="a">rad/s²</li>
+          <li data-opt="b">rad/s</li>
+          <li data-opt="c">rev/s</li>
+          <li data-opt="d">m/s²</li>
+        </ol>
+        <div class="explain"></div>
+      </div>
+      <div class="mcq" data-answer="c">
+        <div class="stem">MCQ20. When a rolling object's total kinetic energy is calculated, what is I?</div>
+        <ol class="options">
+          <li data-opt="a">Moment of inertia about the point of contact</li>
+          <li data-opt="b">Moment of inertia about a parallel axis</li>
+          <li data-opt="c">Moment of inertia about the center of mass</li>
+          <li data-opt="d">Zero, because it's moving</li>
+        </ol>
+        <div class="explain"></div>
+      </div>
+    </div>
+
+    <div class="mcq-bottom-actions">
+      <button id="finishMcq" class="btn primary" disabled>Finish & Summary</button>
+    </div>
+
+    <div id="mcqFinalSummary" class="mcq-final-summary" hidden></div>
+
+    <div class="mcq-summary-intro">
+      <h3>MCQ Conceptual Coverage Summary</h3>
+      <p>These MCQs test your understanding of the fundamental analogs between linear and rotational motion, the definitions of key quantities (I, τ, L), the powerful conservation laws, and the application of theorems like the Parallel Axis Theorem. Use the results to pinpoint areas for review.</p>
+    </div>
+  </section>
+
+  <!-- Tips -->
+  <section id="tips" class="section">
+    <h2>5. Strategic Tips & Exam Insights</h2>
+    <ul class="tips-list">
+      <li><strong>Analogy is Key:</strong> Always relate rotational concepts (I, τ, ω, α, L) back to their linear counterparts (m, F, v, a, p). The equations have the same form.</li>
+      <li><strong>Choose Your Axis Wisely:</strong> When calculating torques for static equilibrium, pick an axis of rotation that eliminates one or more unknown forces.</li>
+      <li><strong>Conserve Everything Possible:</strong> First check for conservation of energy. If non-conservative forces (like friction) do work, check for conservation of angular momentum (if Στext = 0).</li>
+      <li><strong>Draw Free-Body Diagrams:</strong> Don't just draw forces, draw *where* they are applied. This is crucial for calculating torques.</li>
+      <li><strong>Check Moment of Inertia:</strong> Use the correct formula for the shape and axis. Remember to use the Parallel Axis Theorem if the rotation is not about the center of mass.</li>
+      <li><strong>Rolling is Two Motions:</strong> Remember that total KE for a rolling object is Ktrans + Krot. Don't forget one of them!</li>
+      <li><strong>Direction Matters:</strong> Use the right-hand rule consistently to assign directions to ω, α, τ, and L. Define a positive direction for rotation and stick with it.</li>
+      <li><strong>Units Check:</strong> Rotational quantities have specific units (rad/s, rad/s², N·m, kg·m²). A quick unit check can catch simple mistakes.</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p>&copy; <span id="year"></span> Rotational Motion. All rights reserved.</p>
+    <a href="#top" class="to-top">↑ Top</a>
+  </div>
+</footer>
+
+<script>
+/* Initialization */
+document.addEventListener('DOMContentLoaded', () => {
+  setYear();
+  initToggles();
+  initMCQs();
+  initTheme();
+  initParticles();
+});
+
+/* Year */
+function setYear() {
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+}
+
+/* Toggle Q/A & Problems */
+function initToggles() {
+  const toggleButtons = document.querySelectorAll('.qa button.q, .problem button.q');
+  toggleButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const wrapper = btn.parentElement;
+      const answer = wrapper.querySelector('.a');
+      const open = wrapper.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (answer) answer.setAttribute('aria-hidden', open ? 'false' : 'true');
+    });
+  });
+}
+
+/* MCQs with Timer + Summary */
+function initMCQs() {
+  const mcqCards = document.querySelectorAll('.mcq');
+  const startBtn = document.getElementById('startMcqTimer');
+  const finishBtn = document.getElementById('finishMcq');
+  const minutesInput = document.getElementById('mcqMinutes');
+  const timerDisplay = document.getElementById('mcqTimerDisplay');
+  const summaryBox = document.getElementById('mcqFinalSummary');
+
+  let timerActive = false;
+  let timerId = null;
+  let remainingSeconds = 0;
+  let startTime = null;
+  let ended = false;
+
+  const reasoning = {
+    1: "Moment of Inertia (I) is resistance to angular acceleration, just as mass (m) is resistance to linear acceleration.",
+    2: "If net external torque is zero, the rate of change of angular momentum is zero, so L is conserved.",
+    3: "The solid sphere has a smaller moment of inertia, so more of its potential energy becomes translational kinetic energy.",
+    4: "The theorem states I = Icom + Md², where d is the distance between the parallel axes.",
+    5: "Torque is the cross product of the position vector (r) and the force vector (F).",
+    6: "Rotational power is torque multiplied by angular velocity, analogous to P=Fv.",
+    7: "Static equilibrium requires both net force and net torque to be zero.",
+    8: "This condition ensures that the point of contact with the surface is instantaneously at rest.",
+    9: "By pulling arms in, she decreases her moment of inertia (I), so her angular velocity (ω) must increase to conserve L=Iω.",
+    10: "The theorem Iz = Ix + Iy applies only to 2D objects (laminas) where the axes are in the plane and z is perpendicular.",
+    11: "L = Iω, with units (kg·m²)(rad/s). Since rad is dimensionless, this is kg·m²/s.",
+    12: "I = Σmr², so it depends on the mass of each particle and how far it is from the axis of rotation.",
+    13: "This is the rotational analog of translational kinetic energy, K = ½mv².",
+    14: "Moment of inertia is proportional to r². If r doubles, r² quadruples.",
+    15: "Curling your fingers in the direction of rotation, your thumb points in the direction of the angular velocity vector.",
+    16: "Center of mass is a geometric property. Center of gravity depends on the gravitational field. They are the same only if g is uniform.",
+    17: "This is Newton's Second Law for rotation, directly analogous to F=ma for linear motion.",
+    18: "A large moment of inertia allows a flywheel to store a large amount of rotational kinetic energy (½Iω²) without needing extreme speeds.",
+    19: "Angular acceleration (α) is the rate of change of angular velocity (rad/s) per second.",
+    20: "The total KE is Ktrans + Krot = ½Mvcom² + ½Icomω². The rotational part uses the moment of inertia about the center of mass."
+  };
+
+  mcqCards.forEach((card, idx) => {
+    const answer = card.dataset.answer;
+    const opts = card.querySelectorAll('ol.options li');
+    opts.forEach(opt => {
+      opt.addEventListener('click', () => {
+        if (ended) return;
+        if (card.classList.contains('answered')) return;
+        card.classList.add('answered');
+        opt.classList.add('selected');
+        const exp = card.querySelector('.explain');
+        const correctOptElem = Array.from(opts).find(o => o.dataset.opt === answer);
+        const correctText = correctOptElem ? correctOptElem.textContent.trim() : '';
+        if (opt.dataset.opt === answer) {
+          card.classList.add('correct');
+          exp.innerHTML = `<strong>Correct.</strong> (${answer}) ${correctText}<br>${reasoning[idx+1] || ''}`;
+        } else {
+          card.classList.add('incorrect');
+          correctOptElem?.style.setProperty('outline','2px solid var(--ok)');
+          exp.innerHTML = `<strong>Incorrect.</strong> Correct: (${answer}) ${correctText}<br>${reasoning[idx+1] || ''}`;
+        }
+      });
+    });
+  });
+
+  startBtn?.addEventListener('click', () => {
+    if (timerActive) return;
+    let mins = parseInt(minutesInput.value, 10);
+    if (isNaN(mins) || mins < 1) mins = 10;
+    remainingSeconds = mins * 60;
+    startTime = Date.now();
+    timerActive = true;
+    finishBtn.disabled = false;
+    minutesInput.disabled = true;
+    startBtn.disabled = true;
+    updateTimerDisplay();
+    timerId = setInterval(tick, 1000);
+  });
+
+  finishBtn?.addEventListener('click', () => {
+    if (ended) return;
+    endSession(false);
+  });
+
+  function tick() {
+    remainingSeconds--;
+    updateTimerDisplay();
+    if (remainingSeconds <= 0) {
+      endSession(true);
+    }
+  }
+
+  function updateTimerDisplay() {
+    if (!timerDisplay) return;
+    if (!timerActive) {
+      timerDisplay.textContent = '';
+      return;
+    }
+    const m = Math.floor(remainingSeconds / 60);
+    const s = remainingSeconds % 60;
+    timerDisplay.textContent = `${m}:${s.toString().padStart(2,'0')}`;
+    timerDisplay.classList.toggle('timer-warning', remainingSeconds <= 60 && remainingSeconds > 0);
+    timerDisplay.classList.toggle('timer-expired', remainingSeconds <= 0);
+  }
+
+  function endSession(expired) {
+    ended = true;
+    clearInterval(timerId);
+    timerActive = false;
+    lockMCQs();
+    const timeUsedSec = startTime ? Math.round((Date.now() - startTime)/1000) : 0;
+    renderSummary(timeUsedSec, expired);
+    finishBtn.disabled = true;
+  }
+
+  function lockMCQs() {
+    mcqCards.forEach(card => card.classList.add('locked'));
+  }
+
+  function renderSummary(timeUsedSec, expired) {
+    if (!summaryBox) return;
+    const total = mcqCards.length;
+    let correct = 0, incorrect = 0, attempted = 0;
+    const incorrectDetails = [];
+    mcqCards.forEach((card, i) => {
+      const answer = card.dataset.answer;
+      const selected = card.querySelector('ol.options li.selected');
+      if (selected) {
+        attempted++;
+        if (card.classList.contains('correct')) {
+          correct++;
+        } else if (card.classList.contains('incorrect')) {
+          incorrect++;
+          const opts = card.querySelectorAll('ol.options li');
+          const correctOpt = Array.from(opts).find(o => o.dataset.opt === answer);
+          incorrectDetails.push({
+            number: i+1,
+            correct: `${answer}) ${correctOpt ? correctOpt.textContent.trim() : ''}`,
+            reasoning: card.querySelector('.explain')?.textContent.trim() || ''
+          });
+        }
+      }
+    });
+    const unattempted = total - attempted;
+    const accuracy = attempted ? ((correct / attempted) * 100).toFixed(1) : '0.0';
+    const timeUsedStr = formatTime(timeUsedSec);
+    const expiredNote = expired ? `<p><strong>Timer Expired.</strong> Remaining questions locked.</p>` : '';
+
+    summaryBox.hidden = false;
+    summaryBox.innerHTML = `
+      <h3>MCQ Performance Summary</h3>
+      ${expiredNote}
+      <div class="summary-grid">
+        <div class="metric"><strong>${total}</strong>Total Qs</div>
+        <div class="metric"><strong>${attempted}</strong>Attempted</div>
+        <div class="metric"><strong>${correct}</strong>Correct</div>
+        <div class="metric"><strong>${incorrect}</strong>Incorrect</div>
+        <div class="metric"><strong>${unattempted}</strong>Unattempted</div>
+        <div class="metric"><strong>${accuracy}%</strong>Accuracy</div>
+        <div class="metric"><strong>${timeUsedStr}</strong>Time Used</div>
+      </div>
+      ${incorrectDetails.length ? `
+        <h4>Review Incorrect Answers</h4>
+        <ul class="incorrect-list">
+          ${incorrectDetails.map(d => `<li><strong>Q${d.number}:</strong> Correct: ${escapeHTML(d.correct)}<br><em>${escapeHTML(d.reasoning)}</em></li>`).join('')}
+        </ul>` : `<p>No incorrect answers—great job! 🎉</p>`}
+      <p><em>Tip:</em> Revisit the theory sections for any topics you found difficult to solidify your understanding.</p>
+    `;
+  }
+}
+
+/* Theme Toggle */
+function initTheme() {
+  const toggleBtn = document.getElementById('themeToggle');
+  toggleBtn?.addEventListener('click', () => {
+    document.documentElement.classList.toggle('light');
+    toggleBtn.textContent = document.documentElement.classList.contains('light') ? '☀' : '☾';
+  });
+}
+
+/* Particle Background */
+function initParticles() {
+  const canvas = document.getElementById('bgCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w, h;
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    const header = document.querySelector('.site-header');
+    h = canvas.height = (header ? header.offsetHeight : 500) + 60;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+  const count = 70;
+  const particles = Array.from({length: count}, () => ({
+    x: Math.random()*w,
+    y: Math.random()*h,
+    r: Math.random()*2 + 0.6,
+    vx: (Math.random()*0.4 -0.2),
+    vy: (Math.random()*0.4 -0.2)
+  }));
+  function step() {
+    ctx.clearRect(0,0,w,h);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x<0||p.x>w) p.vx*=-1;
+      if (p.y<0||p.y>h) p.vy*=-1;
+      ctx.globalAlpha = 0.85;
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fill();
+    });
+    for (let i=0;i<count;i++){
+      for (let j=i+1;j<count;j++){
+        const a=particles[i], b=particles[j];
+        const dx=a.x-b.x, dy=a.y-b.y;
+        const dist = Math.hypot(dx,dy);
+        if (dist<110){
+          ctx.globalAlpha = 1 - dist/110;
+          const grd = ctx.createLinearGradient(a.x,a.y,b.x,b.y);
+          grd.addColorStop(0,'rgba(99,161,255,0.7)');
+          grd.addColorStop(1,'rgba(143,107,255,0.7)');
+          ctx.strokeStyle = grd;
+          ctx.lineWidth = 0.6;
+          ctx.beginPath();
+          ctx.moveTo(a.x,a.y);
+          ctx.lineTo(b.x,b.y);
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(step);
+  }
+  step();
+}
+
+/* Utilities */
+function escapeHTML(str=''){
+  return str.replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[c]));
+}
+function formatTime(sec){
+  const m = Math.floor(sec/60);
+  const s = sec % 60;
+  return `${m}m ${s}s`;
+}
+</script>
+</body>
+</html>
