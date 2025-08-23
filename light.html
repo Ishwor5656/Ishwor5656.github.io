@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light - Physics Universe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* All the CSS for this page is inside this <style> block */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Dark blue-gray background */
+            color: #f3f4f6; /* Light gray text */
+        }
+        .concept-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .concept-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        /* This rule sets the background for the header. */
+        .page-header {
+            background: linear-gradient(rgba(17, 24, 39, 0.9), rgba(17, 24, 39, 0.9)), url('https://images.unsplash.com/photo-1599228143289-28739c140564?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-gray-900/80 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-2xl font-bold text-white">
+                    <a href="#" class="text-blue-400 hover:text-blue-500 transition">Physics</a> Universe
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <!-- In a real multi-page site, the first link would go to index.html -->
+                    <a href="https://ishworsilwal.me/physics.html" class="text-gray-300 hover:text-blue-400 transition">&larr; Back to Home</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-white focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Page Header -->
+        <section class="page-header py-20 sm:py-28">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4">
+                    Light
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
+                    The electromagnetic radiation within the portion of the electromagnetic spectrum that is perceived by the human eye.
+                </p>
+            </div>
+        </section>
+
+        <!-- Core Concepts Section -->
+        <section id="concepts" class="py-20 bg-gray-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Core Concepts</h2>
+                    <p class="text-gray-400 mt-2">The fundamental principles of optics and the nature of light.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <!-- Properties of Light -->
+                    <div class="concept-card bg-gray-800 rounded-xl">
+                        <a href="#" class="block p-8 h-full">
+                            <h3 class="text-xl font-bold text-blue-400 mb-3">Properties of Light</h3>
+                            <p class="text-gray-400">Light travels in straight lines, can be reflected and refracted, and exhibits wave-particle duality.</p>
+                        </a>
+                    </div>
+                    
+                    <!-- Color -->
+                    <div class="concept-card bg-gray-800 rounded-xl">
+                        <a href="#" class="block p-8 h-full">
+                            <h3 class="text-xl font-bold text-blue-400 mb-3">Color</h3>
+                            <p class="text-gray-400">The perception of different wavelengths of light. White light is a mixture of all colors, as seen in a rainbow.</p>
+                        </a>
+                    </div>
+
+                    <!-- Reflection and Refraction -->
+                    <div class="concept-card bg-gray-800 rounded-xl">
+                        <a href="#" class="block p-8 h-full">
+                            <h3 class="text-xl font-bold text-blue-400 mb-3">Reflection and Refraction</h3>
+                            <p class="text-gray-400">Reflection is the bouncing of light off a surface. Refraction is the bending of light as it passes through different media.</p>
+                        </a>
+                    </div>
+
+                    <!-- Light Waves -->
+                    <div class="concept-card bg-gray-800 rounded-xl">
+                        <a href="#" class="block p-8 h-full">
+                            <h3 class="text-xl font-bold text-blue-400 mb-3">Light Waves</h3>
+                            <p class="text-gray-400">Light behaves as a transverse electromagnetic wave, characterized by its wavelength, frequency, and speed.</p>
+                        </a>
+                    </div>
+
+                    <!-- Light Emission -->
+                    <div class="concept-card bg-gray-800 rounded-xl">
+                        <a href="#" class="block p-8 h-full">
+                            <h3 class="text-xl font-bold text-blue-400 mb-3">Light Emission</h3>
+                            <p class="text-gray-400">Light is produced by atoms when electrons transition between energy levels, releasing energy as photons.</p>
+                        </a>
+                    </div>
+
+                    <!-- Light Quanta (Photons) -->
+                    <div class="concept-card bg-gray-800 rounded-xl">
+                        <a href="#" class="block p-8 h-full">
+                            <h3 class="text-xl font-bold text-blue-400 mb-3">Light Quanta (Photons)</h3>
+                            <p class="text-gray-400">Light also behaves as a particle, a discrete packet of energy called a photon, which is the basis of quantum optics.</p>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Explanation -->
+        <section class="py-20 bg-gray-800/50">
+            <div class="container mx-auto px-6 max-w-4xl">
+                 <h2 class="text-3xl font-bold text-white mb-6">The Illuminated Universe</h2>
+                 <div class="space-y-6 text-gray-300 leading-relaxed">
+                    <p>
+                        Light is central to our experience of the world, from the sunlight that powers life on Earth to the starlight that reveals the vastness of the cosmos. As a form of electromagnetic radiation, it is a fascinating subject that bridges classical optics and modern quantum physics. Its study has led to profound discoveries about the nature of reality itself.
+                    </p>
+                    <p>
+                        The dual nature of light—behaving as both a continuous wave and a discrete particle (photon)—was a key puzzle that led to the development of quantum mechanics. Understanding light is fundamental to nearly every field of science and technology, from creating lenses and lasers to building fiber-optic networks and exploring the universe with powerful telescopes.
+                    </p>
+                 </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-400">
+            <p>&copy; 2024 Physics Universe. All rights reserved.</p>
+            <p class="mt-2">Exploring the fundamental laws of nature.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
