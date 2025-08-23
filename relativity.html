@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theory of Relativity - Physics Universe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Dark blue-gray background */
+            color: #f3f4f6; /* Light gray text */
+        }
+        .concept-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .concept-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        .page-header {
+            background: linear-gradient(rgba(17, 24, 39, 0.9), rgba(17, 24, 39, 0.9)), url('https://images.unsplash.com/photo-1614726365902-141829672691?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-gray-900/80 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-2xl font-bold text-white">
+                    <a href="#" class="text-blue-400 hover:text-blue-500 transition">Physics</a> Universe
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <!-- In a real multi-page site, the first link would go to index.html -->
+                    <a href="https://ishworsilwal.me/physics.html" class="text-gray-300 hover:text-blue-400 transition">&larr; Back to Home</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-white focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Page Header -->
+        <section class="page-header py-20 sm:py-28">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4">
+                    Theory of Relativity
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
+                    Einstein's revolutionary theories that reshaped our understanding of space, time, gravity, and the universe.
+                </p>
+            </div>
+        </section>
+
+        <!-- Core Concepts Section -->
+        <section id="concepts" class="py-20 bg-gray-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Core Concepts</h2>
+                    <p class="text-gray-400 mt-2">The foundational ideas of Special and General Relativity.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
+                    <!-- Special Theory of Relativity -->
+                    <div class="concept-card bg-gray-800 rounded-xl">
+                        <a href="#" class="block p-8 h-full">
+                            <h3 class="text-xl font-bold text-blue-400 mb-3">Special Theory of Relativity</h3>
+                            <p class="text-gray-400">Describes the relationship between space and time for objects moving at constant speeds, in the absence of gravity.</p>
+                        </a>
+                    </div>
+                    
+                    <!-- General Theory of Relativity -->
+                    <div class="concept-card bg-gray-800 rounded-xl">
+                        <a href="#" class="block p-8 h-full">
+                            <h3 class="text-xl font-bold text-blue-400 mb-3">General Theory of Relativity</h3>
+                            <p class="text-gray-400">A theory of gravitation where gravity is a geometric property of spacetime, which is curved by mass and energy.</p>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Explanation -->
+        <section class="py-20 bg-gray-800/50">
+            <div class="container mx-auto px-6 max-w-4xl">
+                 <h2 class="text-3xl font-bold text-white mb-6">Reshaping the Cosmos</h2>
+                 <div class="space-y-6 text-gray-300 leading-relaxed">
+                    <p>
+                        Albert Einstein's theory of relativity, presented in two parts, fundamentally altered our perception of the universe. Special relativity (1905) unified space and time into a single entity, spacetime, and showed that measurements of time and distance are not absolute but depend on the observer's motion. It also introduced the most famous equation in physics, E=mc², revealing the deep connection between mass and energy.
+                    </p>
+                    <p>
+                        General relativity (1915) went further, describing gravity not as a force, but as the curvature of spacetime caused by the mass and energy within it. This elegant theory explains the orbits of planets, the bending of light from distant stars, and the existence of cosmic phenomena like black holes and gravitational waves. Together, these theories form one of the most significant intellectual achievements in human history.
+                    </p>
+                 </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-400">
+            <p>&copy; 2024 Physics Universe. All rights reserved.</p>
+            <p class="mt-2">Exploring the fundamental laws of nature.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
